@@ -61,7 +61,7 @@ namespace BridgeTimer
             if (viewmodel.HideControlPanel)
                 viewmodel.ShowControlPanel();
             else
-                this.Close();
+                return;
         }
     }
 }

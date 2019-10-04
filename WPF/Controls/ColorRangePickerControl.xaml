@@ -18,7 +18,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="{Binding ElementName=RangePickerRoot,Path=Label}"
-               Background="White" Foreground="Black" BorderThickness="0"/>
+               Background="White" Foreground="Black" BorderThickness="0"
+               Visibility="Collapsed"/>
         <ListBox Grid.Column="1"
                  SelectedItem="{Binding ElementName=RangePickerRoot,Path=SelectedColor,Mode=TwoWay}"
                  ItemsSource="{Binding ElementName=RangePickerRoot,Path=Colors}">

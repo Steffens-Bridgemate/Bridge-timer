@@ -29,7 +29,7 @@ namespace BridgeTimer.WPF.Controls
             var blueColors = new[] {Colors.Blue, Colors.LightBlue,Colors.DarkBlue,Colors.LightSkyBlue,Colors.SkyBlue,Colors.DeepSkyBlue, Colors.Transparent };
             var greenColors = new[] {Colors.Green, Colors.LightGreen,Colors.DarkGreen,Colors.YellowGreen , Colors.Olive, Colors.Transparent };
             var yellowColors = new[] {Colors.Yellow, Colors.LightYellow, Colors.Gold,Colors.LightGoldenrodYellow,Colors.Goldenrod,Colors.DarkGoldenrod, Colors.Transparent };
-            var orangeColors = new[] {Colors.Orange,Colors.DarkOrange, Colors.Transparent };
+            var orangeColors = new[] {Colors.Orange,Colors.DarkOrange,Colors.SandyBrown, Colors.Brown,Colors.SaddleBrown, Colors.Transparent };
 
             this.RedColors = redColors.ToList();
             this.PurpleColors = purpleColors.ToList();

@@ -154,7 +154,7 @@
     <value>Changement fond:</value>
   </data>
   <data name="Label_ChangeTimeForeground" xml:space="preserve">
-    <value>Changement lettres:</value>
+    <value>Changement chifres:</value>
   </data>
   <data name="Label_NumberOfRounds" xml:space="preserve">
     <value>Nombre de tours:</value>
@@ -163,7 +163,7 @@
     <value>Jeux fond:</value>
   </data>
   <data name="Label_PlayTimeForeground" xml:space="preserve">
-    <value>Jeux lettres:</value>
+    <value>Jeux chifres:</value>
   </data>
   <data name="Label_TotalPlayingTime" xml:space="preserve">
     <value>Période de jeux:</value>
@@ -175,7 +175,7 @@
     <value>Avertissement fond:</value>
   </data>
   <data name="Label_WarningTimeForeground" xml:space="preserve">
-    <value>Avertissement lettres:</value>
+    <value>Avertissement chifres:</value>
   </data>
   <data name="Message_TakeYourSeats" xml:space="preserve">
     <value>Veuillez s'assoir pour le tour prochain</value>

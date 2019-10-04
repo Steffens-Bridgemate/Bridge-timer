@@ -169,7 +169,7 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wisseltijd letters:.
+        ///   Looks up a localized string similar to Wisseltijd cijfers:.
         /// </summary>
         public static string Label_ChangeTimeForeground {
             get {
@@ -196,7 +196,7 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Speeltijd letters:.
+        ///   Looks up a localized string similar to Speeltijd cijfers:.
         /// </summary>
         public static string Label_PlayTimeForeground {
             get {
@@ -232,7 +232,7 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aflooptijd letters:.
+        ///   Looks up a localized string similar to Aflooptijd cijfers:.
         /// </summary>
         public static string Label_WarningTimeForeground {
             get {

@@ -11,7 +11,9 @@
         xmlns:resx="clr-namespace:BridgeTimer.Properties"
         mc:Ignorable="d"
         Title="{Binding Source={x:Static resx:Resources.Caption_Settings}}" 
-        Height="720" Width="800">
+        Height="720" Width="950"
+        ResizeMode="NoResize"
+        Name="SettingsRoot">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Label">
@@ -108,28 +110,225 @@
                     <Button Content="{Binding Source={x:Static resx:Resources.Caption_RestoreDefaults}}"
                             Command="{Binding RestoreColorDefaultsCommand}"
                             HorizontalAlignment="Left"/>
-                    <UniformGrid Columns="2" Grid.Row="1">
-                        <UniformGrid.Resources>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
                             <Style TargetType="controls:ColorPicker">
                                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Margin" Value="4"/>
                             </Style>
-                        </UniformGrid.Resources>
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayTimeBackground}}"/>
-                        <controls:ColorPicker SelectedColor="{Binding PlayingTimeBackground,Mode=TwoWay}"/>
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayTimeForeground}}"/>
-                        <controls:ColorPicker SelectedColor="{Binding PlayingTimeForeground,Mode=TwoWay}"/>
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_WarningTimeBackground}}"/>
-                        <controls:ColorPicker SelectedColor="{Binding WarningTimeBackground,Mode=TwoWay}"/>
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_WarningTimeForeground}}"/>
-                        <controls:ColorPicker SelectedColor="{Binding WarningTimeForeground,Mode=TwoWay}"/>
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_ChangeTimeBackgroud}}"/>
-                        <controls:ColorPicker SelectedColor="{Binding ChangeTimeBackground,Mode=TwoWay}"/>
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_ChangeTimeForeground}}"/>
-                        <controls:ColorPicker SelectedColor="{Binding ChangeTimeForeground,Mode=TwoWay}"/>
-                    </UniformGrid>
+                        </Grid.Resources>
+                        <UniformGrid Grid.Row="0" Grid.Column="0" Rows="1">
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayTimeBackground}}"/>
+                            <controls:ColorPicker SelectedColor="{Binding PlayingTimeBackground,Mode=TwoWay}"/>
+                        </UniformGrid>
+                        <UniformGrid Grid.Row="1" Grid.Column="0" Rows="1">
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayTimeForeground}}"/>
+                            <controls:ColorPicker SelectedColor="{Binding PlayingTimeForeground,Mode=TwoWay}"/>
+                        </UniformGrid>
+                        <Viewbox Stretch="Uniform"  Margin="2" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" >
+                            <Grid>
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{Binding PlayingTimeBackground}"/>
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <UniformGrid Rows="1" Grid.Column="0">
+                                    <Grid>
+                                        <TextBlock Text="0" FontFamily="{StaticResource LED}"
+                                   Visibility="Hidden"/>
+                                        <TextBlock Text="2"
+                                                   FontFamily="{StaticResource LED}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{Binding PlayingTimeForeground}"/>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Grid>
+                                    <TextBlock Text="9"
+                               FontFamily="{StaticResource LED}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding PlayingTimeForeground}"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </UniformGrid>
+                                <TextBlock Grid.Column="1" Text=":"
+                           FontFamily="{StaticResource LED}">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{Binding PlayingTimeForeground}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+
+                                <UniformGrid Rows="1" Grid.Column="2">
+                                    <Grid>
+                                        <TextBlock Text="0"  FontFamily="{StaticResource LED}"
+                                   Visibility="Hidden"/>
+                                        <TextBlock Text="5"
+                                   FontFamily="{StaticResource LED}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{Binding PlayingTimeForeground}"/>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Grid>
+                                    <TextBlock Text="8"
+                               FontFamily="{StaticResource LED}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding PlayingTimeForeground}"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </UniformGrid>
+                            </Grid>
+                        </Viewbox>
+                        <UniformGrid Grid.Row="2" Grid.Column="0" Rows="1">
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_WarningTimeBackground}}"/>
+                            <controls:ColorPicker SelectedColor="{Binding WarningTimeBackground,Mode=TwoWay}"/>
+                        </UniformGrid>
+                        <UniformGrid Grid.Row="3" Grid.Column="0" Rows="1">
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_WarningTimeForeground}}"/>
+                            <controls:ColorPicker SelectedColor="{Binding WarningTimeForeground,Mode=TwoWay}"/>
+                        </UniformGrid>
+                        <Viewbox Stretch="Uniform"  Margin="2" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" >
+                            <Grid>
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{Binding WarningTimeBackground}"/>
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <UniformGrid Rows="1" Grid.Column="0">
+                                    <Grid>
+                                        <TextBlock Text="0" FontFamily="{StaticResource LED}"
+                                   Visibility="Hidden"/>
+                                        <TextBlock Text="0"
+                                                   FontFamily="{StaticResource LED}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{Binding WarningTimeForeground}"/>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Grid>
+                                    <TextBlock Text="4"
+                               FontFamily="{StaticResource LED}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding WarningTimeForeground}"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </UniformGrid>
+                                <TextBlock Grid.Column="1" Text=":"
+                           FontFamily="{StaticResource LED}">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{Binding WarningTimeForeground}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+
+                                <UniformGrid Rows="1" Grid.Column="2">
+                                    <Grid>
+                                        <TextBlock Text="0"  FontFamily="{StaticResource LED}"
+                                   Visibility="Hidden"/>
+                                        <TextBlock Text="3"
+                                   FontFamily="{StaticResource LED}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{Binding WarningTimeForeground}"/>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Grid>
+                                    <TextBlock Text="2"
+                               FontFamily="{StaticResource LED}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding WarningTimeForeground}"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </UniformGrid>
+                            </Grid>
+                        </Viewbox>
+                        <UniformGrid Grid.Row="4" Grid.Column="0" Rows="1">
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_ChangeTimeBackgroud}}"/>
+                            <controls:ColorPicker SelectedColor="{Binding ChangeTimeBackground,Mode=TwoWay}"/>
+                        </UniformGrid>
+                        <UniformGrid Grid.Row="5" Grid.Column="0" Rows="1">
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_ChangeTimeForeground}}"/>
+                            <controls:ColorPicker SelectedColor="{Binding ChangeTimeForeground,Mode=TwoWay}"/>
+                        </UniformGrid>
+                        <Viewbox Stretch="Uniform"  Margin="2" Grid.Row="4" Grid.Column="1" Grid.RowSpan="2" >
+                            <Grid>
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{Binding ChangeTimeBackground}"/>
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <UniformGrid Rows="1" Grid.Column="0">
+                                    <Grid>
+                                        <TextBlock Text="0" FontFamily="{StaticResource LED}"
+                                                   Visibility="Hidden"/>
+                                        <TextBlock Text="0"
+                                                   FontFamily="{StaticResource LED}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{Binding ChangeTimeForeground}"/>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Grid>
+                                    <TextBlock Text="0"
+                                               FontFamily="{StaticResource LED}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding ChangeTimeForeground}"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </UniformGrid>
+                                <TextBlock Grid.Column="1" Text=":"
+                                           FontFamily="{StaticResource LED}">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{Binding ChangeTimeForeground}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+
+                                <UniformGrid Rows="1" Grid.Column="2">
+                                    <Grid>
+                                        <TextBlock Text="0"  FontFamily="{StaticResource LED}"
+                                                   Visibility="Hidden"/>
+                                        <TextBlock Text="2"
+                                                   FontFamily="{StaticResource LED}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{Binding ChangeTimeForeground}"/>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Grid>
+                                    <TextBlock Text="6"
+                                               FontFamily="{StaticResource LED}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding ChangeTimeForeground}"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </UniformGrid>
+                            </Grid>
+                        </Viewbox>
+                    </Grid>
                 </Grid>
             
             </TabItem>

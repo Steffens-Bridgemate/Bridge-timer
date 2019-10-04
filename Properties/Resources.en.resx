@@ -154,7 +154,7 @@
     <value>Change period background:</value>
   </data>
   <data name="Label_ChangeTimeForeground" xml:space="preserve">
-    <value>Change period letters:</value>
+    <value>Change period digits:</value>
   </data>
   <data name="Label_NumberOfRounds" xml:space="preserve">
     <value>Number of rounds:</value>
@@ -163,7 +163,7 @@
     <value>Playing period background:</value>
   </data>
   <data name="Label_PlayTimeForeground" xml:space="preserve">
-    <value>Playing period letters:</value>
+    <value>Playing period digits:</value>
   </data>
   <data name="Label_TotalPlayingTime" xml:space="preserve">
     <value>Total playing time:</value>
@@ -175,7 +175,7 @@
     <value>Warning period background:</value>
   </data>
   <data name="Label_WarningTimeForeground" xml:space="preserve">
-    <value>Warning period letters:</value>
+    <value>Warning period digits:</value>
   </data>
   <data name="Message_TakeYourSeats" xml:space="preserve">
     <value>Please be seated for the next round</value>

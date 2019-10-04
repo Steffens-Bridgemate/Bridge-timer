@@ -1,7 +1,8 @@
 ﻿<Application x:Class="BridgeTimer.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:BridgeTimer">
+             xmlns:local="clr-namespace:BridgeTimer"
+             x:Name="AppRoot">
     <Application.Resources>
         <FontFamily x:Key="LED">pack://application:,,,/Fonts/#DS-DIGITAL</FontFamily>
         <Style TargetType="Button">
