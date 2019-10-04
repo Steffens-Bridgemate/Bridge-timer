@@ -121,6 +121,7 @@ namespace BridgeTimer
             if(string.IsNullOrWhiteSpace(seconds)) return;
 
             timer.IncreasePlaytime(TimeSpan.FromSeconds(int.Parse( seconds)));
+            ShowControlPanel();
         }
 
         public RelayCommand<string> DecreasePlaytimeCommand { get; }
@@ -130,6 +131,7 @@ namespace BridgeTimer
             if (string.IsNullOrWhiteSpace(seconds)) return;
 
             timer.DecreasePlaytime(TimeSpan.FromSeconds(int.Parse( seconds)));
+            ShowControlPanel();
         }
 
         public RelayCommand<object> ToggleSoundCommand { get; }
@@ -137,6 +139,7 @@ namespace BridgeTimer
         private void ToggleSound(object obj)
         {
             IsMuted = !IsMuted;
+            ShowControlPanel();
         }
 
         public RelayCommand<object> StartOrPauseCommand { get; }
@@ -150,6 +153,7 @@ namespace BridgeTimer
 
             OnPropertyChanged(nameof(StartOrPauseCaption));
             OnPropertyChanged(nameof(StopOrCloseCaption));
+            ShowControlPanel();
         }
 
         private bool _isStopped;
@@ -168,12 +172,14 @@ namespace BridgeTimer
             HideControlPanel = false;
             OnPropertyChanged(nameof(StartOrPauseCaption));
             OnPropertyChanged(nameof(StopOrCloseCaption));
+            ShowControlPanel();
         }
 
         public RelayCommand<object> SettingsCommand { get; }
         private void EditSettings(object obj)
         {
             SettingsRequested?.Invoke(this, new SettingsRequestedEventArgs());
+            ShowControlPanel();
         }
         public RelayCommand<object> ConfirmSettingsCommand { get; }
 
