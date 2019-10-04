@@ -1,0 +1,141 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>André Steffens</Authors>
+    <Description>Open source, free Bridge timer</Description>
+    <ApplicationIcon>clock.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+    <None Remove="Bridgemate_logo.jpg" />
+    <None Remove="Bridgemate_logo_black.gif" />
+    <None Remove="Bridgemate_logo_white.gif" />
+    <None Remove="Fonts\DS-DIGI-Bold.TTF" />
+    <None Remove="Fonts\DS-DIGI-Italic.TTF" />
+    <None Remove="Fonts\DS-DIGI-Regular.TTF" />
+    <None Remove="Fonts\DS-DIGIT.TTF" />
+    <None Remove="Images\Bridgemate_logo.jpg" />
+    <None Remove="Images\nosound.ico" />
+    <None Remove="Images\nosound1.ico" />
+    <None Remove="Images\nosound2.ico" />
+    <None Remove="Images\sound.ico" />
+    <None Remove="Images\sound1.ico" />
+    <None Remove="Sounds\62860__benboncan__bronze-bell-3.wav" />
+    <None Remove="Sounds\66952__benboncan__boxing-bell-1.wav" />
+    <None Remove="Sounds\69349__benboncan__stainless-steel-bowl-2.wav" />
+    <None Remove="Sounds\69353__benboncan__stainless-steel-lid-1.wav" />
+    <None Remove="Sounds\69354__benboncan__stainless-steel-lid-2.wav" />
+    <None Remove="Sounds\bronzebell1.wav" />
+    <None Remove="Sounds\bronzebell2.wav" />
+    <None Remove="Sounds\eightbells.wav" />
+    <None Remove="Sounds\fivebells.wav" />
+    <None Remove="Sounds\nepalesebowl.wav" />
+    <None Remove="Sounds\roundended.wav" />
+    <None Remove="Sounds\roundstarted.wav" />
+    <None Remove="Sounds\sixbells.wav" />
+    <None Remove="Sounds\threebells.wav" />
+    <None Remove="Sounds\twobells.wav" />
+    <None Remove="Sounds\warning.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Bridgemate_logo_black.gif" />
+    <Resource Include="Bridgemate_logo_white.gif" />
+    <Resource Include="Bridgemate_logo.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\DS-DIGI-Regular.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\DS-DIGI-Bold.TTF" />
+    <Resource Include="Fonts\DS-DIGI-Italic.TTF" />
+    <Resource Include="Fonts\DS-DIGIT.TTF" />
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\Bridgemate_logo.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Images\nosound.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\nosound1.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\nosound2.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\sound.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\sound1.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\bronzebell1.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\bronzebell2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\roundended.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\roundstarted.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\warning.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Sounds\62860__benboncan__bronze-bell-3.wav" />
+    <Resource Include="Sounds\66952__benboncan__boxing-bell-1.wav" />
+    <Resource Include="Sounds\69349__benboncan__stainless-steel-bowl-2.wav" />
+    <Resource Include="Sounds\69353__benboncan__stainless-steel-lid-1.wav" />
+    <Resource Include="Sounds\69354__benboncan__stainless-steel-lid-2.wav" />
+    <Content Include="Sounds\eightbells.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\fivebells.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\sixbells.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\threebells.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\twobells.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\nepalesebowl.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

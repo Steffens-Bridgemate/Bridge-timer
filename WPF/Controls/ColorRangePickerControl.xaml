@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="BridgeTimer.WPF.Controls.ColorRangePickerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BridgeTimer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Name="RangePickerRoot">
+    <Grid>
+        <Grid.Resources>
+            <local:ColorToVisibilityConverter x:Key="colorToVisibilityConverter"
+                                             TrueValue="Collapsed"
+                                             FalseValue="Visible"/>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="{Binding ElementName=RangePickerRoot,Path=Label}"
+               Background="White" Foreground="Black" BorderThickness="0"/>
+        <ListBox Grid.Column="1"
+                 SelectedItem="{Binding ElementName=RangePickerRoot,Path=SelectedColor,Mode=TwoWay}"
+                 ItemsSource="{Binding ElementName=RangePickerRoot,Path=Colors}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Width="20" Height="20" Stroke="Black" StrokeThickness="1"
+                               Visibility="{Binding Converter={StaticResource colorToVisibilityConverter}}">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{Binding}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

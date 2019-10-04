@@ -1,0 +1,199 @@
+﻿<Window x:Class="BridgeTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BridgeTimer"
+        xmlns:resx="clr-namespace:BridgeTimer.Properties"
+        mc:Ignorable="d"
+        Title="{Binding Source={x:Static resx:Resources.Title}}"
+        WindowState="Normal"
+        MouseDown="Window_MouseDown"
+        KeyDown="Window_KeyDown"
+        Name="Root"
+        MinWidth="910"
+        Width="910"
+        MinHeight="600"
+        Height="600"
+        >
+    <Window.Resources>
+        <local:ThresholdToColorConverter x:Key="backgroundConverter"
+                                         RoundStartedValue="{Binding Source={x:Reference Root},
+                                                                     Path=DataContext.PlayingTimeBackground}"
+                                         RoundEndedValue="{Binding Source={x:Reference Root},
+                                                                     Path=DataContext.ChangeTimeBackground}"
+                                         WarningGivenValue="{Binding Source={x:Reference Root},
+                                                                     Path=DataContext.WarningTimeBackground}"/>
+        <local:ThresholdToColorConverter x:Key="foregroundConverter"
+                                         RoundStartedValue="{Binding Source={x:Reference Root},
+                                                                     Path=DataContext.PlayingTimeForeground}"
+                                         RoundEndedValue="{Binding Source={x:Reference Root},
+                                                                     Path=DataContext.ChangeTimeForeground}"
+                                         WarningGivenValue="{Binding Source={x:Reference Root},
+                                                                     Path=DataContext.WarningTimeForeground}"/>
+        <local:BoolToWindowStyleConverter x:Key="windowStyleConverter"
+                                          TrueValue="None"
+                                          FalseValue="ThreeDBorderWindow"/>
+        <local:BoolToCursorConverter x:Key="cursorConverter"
+                                     TrueValue="None"
+                                     FalseValue="Arrow"/>
+        <local:BoolToStringConverter x:Key="soundIconUriConverter"
+                                     TrueValue="Images\nosound1.ico"
+                                     FalseValue="Images\sound1.ico"/>
+        <local:BackgroundToStringConverter x:Key="logoConverter"
+                                     TrueValue="Bridgemate_logo_white.gif"
+                                     FalseValue="Bridgemate_logo_black.gif"/>
+    </Window.Resources>
+    <Window.WindowStyle>
+        <Binding Path="HideControlPanel" Converter="{StaticResource windowStyleConverter}"/>
+    </Window.WindowStyle>
+    <Window.Cursor>
+        <Binding Path="HideControlPanel" Converter="{StaticResource cursorConverter}"/>
+    </Window.Cursor>
+    <Window.Background>
+        <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource backgroundConverter}}"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Row="2" Stretch="Uniform" Margin="4,2,8,2">
+            <Grid Name="grdMessage">
+                <TextBlock Text="{Binding Source={x:Static resx:Resources.Message_TakeYourSeats}}"
+                       TextAlignment="Center"
+                       FontSize="20">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HideMessage}"
+                                     Value="True">
+                                <Setter Property="Height" Value="0"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+            </Grid>
+        </Viewbox>
+
+        <Viewbox Grid.Row="0" Stretch="Uniform" HorizontalAlignment="Left">
+            <Image Source="{Binding ElementName=Root,Path=Background.Color,Converter={StaticResource logoConverter}}"
+                   Margin="20,20,2,2"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        </Viewbox>
+        
+        <Grid Grid.Row="2" Name="grdControlPanel"
+              Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" 
+                    Content="{Binding Source={x:Static resx:Resources.Caption_Settings}}" 
+                    Command="{Binding SettingsCommand}"/>
+            <Button Grid.Column="1"
+                    Content="{Binding StartOrPauseCaption}"
+                    Command="{Binding StartOrPauseCommand}"/>
+            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="+30s" Command="{Binding IncreasePlaytimeCommand}" CommandParameter="30"/>
+                <Button Content="-30s" Command="{Binding DecreasePlaytimeCommand}" CommandParameter="30"/>
+            </StackPanel>
+            <StackPanel Grid.Column="5" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding ToggleSoundCommand}">
+                    <Button.Content>
+                        <Image Source="{Binding IsMuted,
+                               Converter={StaticResource soundIconUriConverter}}"/>
+                    </Button.Content>
+                </Button>
+                <Button Content="{Binding StopOrCloseCaption}"
+                        Command="{Binding StopOrCloseCommand}"/>
+            </StackPanel>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HideControlPanel}"
+                                     Value="True">
+                            <Setter Property="Height" Value="0"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+       
+        <Viewbox Stretch="Uniform"  Margin="0" Grid.Row="1" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="TextAlignment" Value="Center"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.Background>
+                    <SolidColorBrush Color="{Binding CurrentStage,
+                                                     Converter={StaticResource backgroundConverter }}"/>
+                </Grid.Background>
+                <UniformGrid Rows="1" Grid.Column="0">
+                    <Grid>
+                        <TextBlock Text="0" FontFamily="{StaticResource LED}"
+                                   Visibility="Hidden"/>
+                        <TextBlock Text="{Binding MinutesLeft[0]}"
+                                   FontFamily="{StaticResource LED}">
+                            <TextBlock.Foreground>
+                                <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                    </Grid>
+                    <TextBlock Text="{Binding MinutesLeft[1]}"
+                               FontFamily="{StaticResource LED}">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </UniformGrid>
+
+                <TextBlock Grid.Column="1" Text=":"
+                           FontFamily="{StaticResource LED}">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+
+                <UniformGrid Rows="1" Grid.Column="2">
+                    <Grid>
+                        <TextBlock Text="0"  FontFamily="{StaticResource LED}"
+                                   Visibility="Hidden"/>
+                        <TextBlock Text="{Binding SecondsLeft[0]}"
+                                   FontFamily="{StaticResource LED}">
+                            <TextBlock.Foreground>
+                                <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                    </Grid>
+                    <TextBlock Text="{Binding SecondsLeft[1]}"
+                               FontFamily="{StaticResource LED}">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </UniformGrid>
+            </Grid>
+        </Viewbox>
+
+    </Grid>
+</Window>
