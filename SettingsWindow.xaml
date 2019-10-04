@@ -158,7 +158,7 @@
                                 <UniformGrid Rows="1" Grid.Column="0">
                                     <Grid>
                                         <TextBlock Text="0" FontFamily="{StaticResource LED}"
-                                   Visibility="Hidden"/>
+                                                   Visibility="Hidden"/>
                                         <TextBlock Text="2"
                                                    FontFamily="{StaticResource LED}">
                                             <TextBlock.Foreground>
