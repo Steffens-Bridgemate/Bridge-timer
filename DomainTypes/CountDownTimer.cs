@@ -24,13 +24,17 @@ namespace BridgeTimer
         }
         public class CurrentTimeArgs : EventArgs
         {
-            public CurrentTimeArgs(int minutes, int seconds,
+            public CurrentTimeArgs(int hours, int minutes, int seconds,
                 ThresholdReached threshold = ThresholdReached.NotSet)
             {
+                this.Hours = hours;
                 this.Minutes = minutes;
                 this.Seconds = seconds;
                 this.Threshold = threshold;
             }
+
+            public int Hours { get; }
+
             public int Minutes { get; }
             public int Seconds { get; }
 
@@ -96,7 +100,10 @@ namespace BridgeTimer
             else
                 return;
 
-            CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Minutes, timeToPublish.Seconds, threshold));
+            CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Hours, 
+                                                          timeToPublish.Minutes, 
+                                                          timeToPublish.Seconds,
+                                                          threshold));
         }
 
         public void DecreasePlaytime(TimeSpan duration)
@@ -125,7 +132,10 @@ namespace BridgeTimer
             }
             
 
-            CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Minutes, timeToPublish.Seconds, threshold));
+            CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Hours,
+                                                          timeToPublish.Minutes,
+                                                          timeToPublish.Seconds,
+                                                          threshold));
         }
 
         private void InitializeTimeSpans()
@@ -136,7 +146,10 @@ namespace BridgeTimer
             warningGiven = false;
             totalTime = TimeSpan.FromMinutes(this.TotalPlayTime);
             this.changeTime = TimeSpan.FromMinutes(this.ChangeTime);
-            CurrentTime?.Invoke(this, new CurrentTimeArgs(totalTime.Minutes, totalTime.Seconds,ThresholdReached.RoundStarted));
+            CurrentTime?.Invoke(this, new CurrentTimeArgs(totalTime.Hours, 
+                                                          totalTime.Minutes, 
+                                                          totalTime.Seconds,
+                                                          ThresholdReached.RoundStarted));
         }
 
         /// <summary>
@@ -201,8 +214,9 @@ namespace BridgeTimer
         {
             totalTime= totalTime.SubtractSecond();
             TimeSpan timeToPublish;
+            var hoursInUse = totalTime.AddMinute().Hours >0;
 
-            if (totalTime.AddMinute().Minutes <= 0)
+            if (totalTime.AddMinute().Minutes <= 0 && !hoursInUse)
             {
                 changeTime = changeTime.SubtractSecond();
                 if (changeTime.AddMinute().Minutes <= 0)
@@ -221,12 +235,12 @@ namespace BridgeTimer
                 
 
             ThresholdReached threshold = ThresholdReached.NotSet;
-            if (totalTime.AddMinute().Minutes <= WarningMoment && !warningGiven)
+            if (totalTime.AddMinute().Minutes <= WarningMoment && !warningGiven && !hoursInUse)
             {
                 threshold = ThresholdReached.EndOfRoundWarning;
                 warningGiven = true;
             }
-            else if(totalTime.AddMinute().Minutes<=0 && ! endOfRoundGiven)
+            else if(totalTime.AddMinute().Minutes<=0 && ! endOfRoundGiven && !hoursInUse)
             {
                 threshold = ThresholdReached.RoundEnded;
                 endOfRoundGiven = true;
@@ -237,7 +251,10 @@ namespace BridgeTimer
                 startOfRoundGiven = true;
             }
 
-            CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Minutes,timeToPublish.Seconds, threshold));
+            CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Hours, 
+                                                          timeToPublish.Minutes,
+                                                          timeToPublish.Seconds, 
+                                                          threshold));
 
         }
     }

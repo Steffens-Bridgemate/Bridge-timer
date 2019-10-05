@@ -75,10 +75,32 @@ namespace BridgeTimer
         private void OnCurrentTime(object? sender, CountDownTimer.CurrentTimeArgs e)
         {
             TimeLeft = $"{e.Minutes}:{e.Seconds}";
-            MinutesLeft = $"{string.Format("{0:00}", e.Minutes)}";
-            SecondsLeft = $"{string.Format("{0:00}", e.Seconds)}";
-            OnPropertyChanged(nameof(MinutesLeft));
-            OnPropertyChanged(nameof(SecondsLeft));
+            var moreThan60Minutes = e.Hours > 0;
+
+            if(moreThan60Minutes)
+            {
+                AreSecondsHidden = true;
+                var hours = e.Hours.ToString("00");
+                string minutes;
+                if(e.Seconds>0)
+                    minutes = (e.Minutes + 1).ToString("00");
+                else
+                    minutes = e.Minutes.ToString("00");
+                FirstDigit =char.MinValue ; //hours[0];
+                SecondDigit = hours[1];
+                ThirdDigit = minutes[0];
+                FourthDigit = minutes[1];
+            }
+            else
+            {
+                AreSecondsHidden = false;
+                var minutes = e.Minutes.ToString("00");
+                var seconds = e.Seconds.ToString("00");
+                FirstDigit = minutes[0];
+                SecondDigit = minutes[1];
+                ThirdDigit = seconds[0];
+                FourthDigit = seconds[1];
+            }
 
             if (e.Threshold != CountDownTimer.ThresholdReached.NotSet)
             {
@@ -416,8 +438,70 @@ namespace BridgeTimer
             }
         }
 
-        public string? MinutesLeft { get; set; }
-        public string? SecondsLeft { get; set; }
+        private char _firstDigit;
+
+        public char FirstDigit
+        {
+            get { return _firstDigit; }
+            set
+            {
+                _firstDigit = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private char _secondDigit;
+
+        public char SecondDigit
+        {
+            get { return _secondDigit; }
+            set
+            {
+                _secondDigit = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private char _thirdDigit;
+
+        public char ThirdDigit
+        {
+            get { return _thirdDigit; }
+            set
+            {
+                _thirdDigit = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private char _fourthDigit;
+
+        public char FourthDigit
+        {
+            get { return _fourthDigit; }
+            set
+            {
+                _fourthDigit = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _areSecondsHidden;
+
+        public bool AreSecondsHidden
+        {
+            get { return _areSecondsHidden && timer.RunningState== CountDownTimer.State.Started; }
+            set
+            {
+
+                _areSecondsHidden = value;
+                OnPropertyChanged();
+   
+            }
+        }
+
+
+
 
         private CountDownTimer.ThresholdReached _currentStage;
         public CountDownTimer.ThresholdReached CurrentStage

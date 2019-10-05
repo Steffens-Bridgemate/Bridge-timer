@@ -97,6 +97,26 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HideControlPanel}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard x:Name="hideControlPanel">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:.2"
+                                                         To="0"
+                                                         Storyboard.TargetProperty="(Button.Height)"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="hideControlPanel"/>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
             <Button Grid.Column="0" 
                     Content="{Binding Source={x:Static resx:Resources.Caption_Settings}}" 
                     Command="{Binding SettingsCommand}"/>
@@ -119,12 +139,12 @@
             </StackPanel>
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Style.Triggers>
+                    <!--<Style.Triggers>
                         <DataTrigger Binding="{Binding HideControlPanel}"
                                      Value="True">
                             <Setter Property="Height" Value="0"/>
                         </DataTrigger>
-                    </Style.Triggers>
+                    </Style.Triggers>-->
                 </Style>
             </Grid.Style>
         </Grid>
@@ -152,14 +172,14 @@
                     <Grid>
                         <TextBlock Text="0" FontFamily="{StaticResource LED}"
                                    Visibility="Hidden"/>
-                        <TextBlock Text="{Binding MinutesLeft[0]}"
+                        <TextBlock Text="{Binding FirstDigit}"
                                    FontFamily="{StaticResource LED}">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
                             </TextBlock.Foreground>
                         </TextBlock>
                     </Grid>
-                    <TextBlock Text="{Binding MinutesLeft[1]}"
+                    <TextBlock Text="{Binding SecondDigit}"
                                FontFamily="{StaticResource LED}">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
@@ -170,22 +190,47 @@
                 <TextBlock Grid.Column="1" Text=":"
                            FontFamily="{StaticResource LED}">
                     <TextBlock.Foreground>
-                        <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
+                        <SolidColorBrush x:Name="txtSeparator" 
+                                         Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
                     </TextBlock.Foreground>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextAlignment" Value="Center"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding AreSecondsHidden}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Name="colonAnimation">
+                                            <Storyboard >
+                                                <ColorAnimation To="Transparent"  Duration="0:0:1"
+                                                                RepeatBehavior="Forever"
+                                                                AutoReverse="True"
+                                                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="colonAnimation"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
                 </TextBlock>
 
                 <UniformGrid Rows="1" Grid.Column="2">
                     <Grid>
                         <TextBlock Text="0"  FontFamily="{StaticResource LED}"
                                    Visibility="Hidden"/>
-                        <TextBlock Text="{Binding SecondsLeft[0]}"
+                        <TextBlock Text="{Binding ThirdDigit}"
                                    FontFamily="{StaticResource LED}">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
                             </TextBlock.Foreground>
                         </TextBlock>
                     </Grid>
-                    <TextBlock Text="{Binding SecondsLeft[1]}"
+                    <TextBlock Text="{Binding FourthDigit}"
                                FontFamily="{StaticResource LED}">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
