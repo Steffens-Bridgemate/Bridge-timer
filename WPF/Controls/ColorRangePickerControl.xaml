@@ -31,6 +31,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Rectangle Width="20" Height="20" Stroke="Black" StrokeThickness="1"
+                               RadiusX="4" RadiusY="4"
                                Visibility="{Binding Converter={StaticResource colorToVisibilityConverter}}">
                         <Rectangle.Fill>
                             <SolidColorBrush Color="{Binding}"/>

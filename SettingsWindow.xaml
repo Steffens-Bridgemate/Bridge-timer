@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BridgeTimer"
         xmlns:controls="clr-namespace:BridgeTimer.WPF.Controls"
-        WindowStyle="ToolWindow"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Background="LightGray"
         xmlns:resx="clr-namespace:BridgeTimer.Properties"
         mc:Ignorable="d"
         Title="{Binding Source={x:Static resx:Resources.Caption_Settings}}" 
-        Height="720" Width="950"
+        Height="720" Width="968"
         ResizeMode="NoResize"
         Name="SettingsRoot">
-    <Grid>
+    <Grid Margin="8">
         <Grid.Resources>
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="20"/>
@@ -62,7 +62,8 @@
                     Click="Button_Click"
                     IsDefault="True"/>
                 <Button Content="{Binding Source={x:Static resx:Resources.Caption_Cancel}}" 
-                    IsCancel="True"
+                        IsCancel="True"
+                        Visibility="Collapsed"
                         VerticalAlignment="Top"/>
             </UniformGrid>
         </Grid>

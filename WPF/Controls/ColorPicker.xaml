@@ -21,10 +21,17 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
             <RadioButton x:Name="tbColorPicker" GroupName="ColorPickers"
+                         VerticalAlignment="Center"
+                         Padding="0"
+                         MouseDown="tbColorPicker_MouseDown"
                          Opacity="{Binding RelativeSource={RelativeSource Self},
                                            Path=IsChecked,
                                            Converter={StaticResource opacityConverter}}">
-                <Rectangle x:Name="rEx" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="50" Height="50" Stroke="Black" StrokeThickness="2">
+                <Rectangle x:Name="rEx" 
+                           VerticalAlignment="Stretch" HorizontalAlignment="Center" 
+                           Width="50" Height="50" 
+                           Stroke="Black" StrokeThickness="2"
+                           MouseDown="tbColorPicker_MouseDown">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="{Binding ElementName=ColorPickerRoot,
                                                  Path=SelectedColor}"/>

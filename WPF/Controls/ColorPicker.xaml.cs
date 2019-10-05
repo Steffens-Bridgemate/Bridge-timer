@@ -24,12 +24,12 @@ namespace BridgeTimer.WPF.Controls
             InitializeComponent();
             var blackColors = new[] {Colors.Black, Colors.LightGray, Colors.Gray, Colors.DarkGray,Colors.Navy,Colors.MidnightBlue,Colors.Transparent };
             var whiteColors = new[] {Colors.White,Colors.GhostWhite,Colors.MintCream, Colors.Transparent };
-            var redColors = new[] {Colors.Red, Colors.OrangeRed, Colors.Tomato,Colors.Crimson, Colors.Transparent };
-            var purpleColors = new[] {Colors.Purple, Colors.MediumPurple, Colors.Plum,Colors.Pink, Colors.Transparent };
-            var blueColors = new[] {Colors.Blue, Colors.LightBlue,Colors.DarkBlue,Colors.LightSkyBlue,Colors.SkyBlue,Colors.DeepSkyBlue, Colors.Transparent };
-            var greenColors = new[] {Colors.Green, Colors.LightGreen,Colors.DarkGreen,Colors.YellowGreen , Colors.Olive, Colors.Transparent };
-            var yellowColors = new[] {Colors.Yellow, Colors.LightYellow, Colors.Gold,Colors.LightGoldenrodYellow,Colors.Goldenrod,Colors.DarkGoldenrod, Colors.Transparent };
-            var orangeColors = new[] {Colors.Orange,Colors.DarkOrange,Colors.SandyBrown, Colors.Brown,Colors.SaddleBrown, Colors.Transparent };
+            var redColors = new[] {Colors.Red, Colors.OrangeRed, Colors.Tomato,Colors.Crimson,Colors.Firebrick, Colors.Transparent };
+            var purpleColors = new[] {Colors.Purple, Colors.MediumPurple, Colors.Plum,Colors.Pink,Colors.Fuchsia,Colors.Violet,Colors.DarkViolet, Colors.PaleVioletRed,Colors.MediumVioletRed, Colors.Transparent };
+            var blueColors = new[] {Colors.Blue, Colors.LightBlue,Colors.DarkBlue,Colors.LightSkyBlue,Colors.SkyBlue,Colors.DeepSkyBlue,Colors.Turquoise,Colors.MediumTurquoise,Colors.DarkTurquoise, Colors.Transparent };
+            var greenColors = new[] {Colors.Green, Colors.LightGreen,Colors.DarkGreen,Colors.YellowGreen , Colors.Olive,Colors.SpringGreen,Colors.MediumSpringGreen, Colors.Honeydew, Colors.Transparent };
+            var yellowColors = new[] {Colors.Yellow, Colors.LightYellow, Colors.Gold,Colors.LightGoldenrodYellow,Colors.Goldenrod,Colors.DarkGoldenrod,  Colors.Transparent };
+            var orangeColors = new[] {Colors.Orange,Colors.DarkOrange,Colors.SandyBrown, Colors.Brown,Colors.SaddleBrown, (Color)ColorConverter.ConvertFromString("#EB9605"), Colors.Transparent };
 
             this.RedColors = redColors.ToList();
             this.PurpleColors = purpleColors.ToList();
@@ -309,5 +309,14 @@ namespace BridgeTimer.WPF.Controls
 
         }
         #endregion
+
+        private void tbColorPicker_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (tbColorPicker.IsChecked.Value)
+            {
+                tbColorPicker.IsChecked = false;
+                e.Handled = true;
+            }
+        }
     }
 }
