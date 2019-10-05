@@ -55,8 +55,10 @@ namespace BridgeTimer.Settings
         public Color ChangeTimeBackground { get; set; }
         public static string GetFullPath()
         {
-            var appName = Assembly.GetExecutingAssembly().GetName().Name;
-            var settingsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), appName);
+            var appName = Assembly.GetExecutingAssembly().GetName().Name ?? 
+                          throw new NullReferenceException($"No name for the executing assembly found.");
+            var settingsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                              appName);
          
             var settingsFileName = $"{appName}.settings";
 

@@ -21,16 +21,16 @@ namespace BridgeTimer
     /// </summary>
     public partial class App : Application
     {
-        public IServiceProvider ServiceProvider { get; private set; }
+        public IServiceProvider? ServiceProvider { get; private set; }
 
-        public IConfiguration Configuration { get; private set; }
+        public IConfiguration? Configuration { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
          
-            var fullPath = AppSettings.GetFullPath();
+            var fullPath = AppSettings.GetFullPath() ?? throw new NullReferenceException("No path for the settings file was defined.");
 
-            var settingsFolder = Path.GetDirectoryName(fullPath);
+            var settingsFolder = Path.GetDirectoryName(fullPath) ?? throw new NullReferenceException(nameof(fullPath));
             var settingsFileName = Path.GetFileName(fullPath);
 
             if (!Directory.Exists(settingsFolder))
@@ -62,7 +62,7 @@ namespace BridgeTimer
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<AppSettings>(Configuration.GetSection(nameof(AppSettings)));
+            services.Configure<AppSettings>(Configuration?.GetSection(nameof(AppSettings)));
             services.AddScoped<ITimeProvision, TimeProvider>();
 
             services.AddTransient(typeof(MainWindow));

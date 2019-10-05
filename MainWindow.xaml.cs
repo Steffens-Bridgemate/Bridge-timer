@@ -34,7 +34,7 @@ namespace BridgeTimer
             this.DataContext = viewmodel;
         }
 
-        private void EditSettings(object sender, Viewmodel.SettingsRequestedEventArgs e)
+        private void EditSettings(object? sender, Viewmodel.SettingsRequestedEventArgs e)
         {
             var window = new SettingsWindow();
             window.DataContext = sender as Viewmodel;

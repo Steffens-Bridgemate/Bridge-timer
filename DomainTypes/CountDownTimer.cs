@@ -37,7 +37,7 @@ namespace BridgeTimer
             public ThresholdReached Threshold { get; }
         }
 
-        public event EventHandler<CurrentTimeArgs> CurrentTime;
+        public event EventHandler<CurrentTimeArgs>? CurrentTime;
 
         private Timer timer;
         private TimeSpan totalTime;

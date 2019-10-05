@@ -21,8 +21,8 @@ namespace BridgeTimer
             bool IsMuted { get; set; }
         }
 
-        public event EventHandler<SettingsRequestedEventArgs> SettingsRequested;
-        public event EventHandler CloseRequested;
+        public event EventHandler<SettingsRequestedEventArgs>? SettingsRequested;
+        public event EventHandler? CloseRequested;
 
         private CountDownTimer timer;
         private Timer controlPanelTimer;
@@ -72,7 +72,7 @@ namespace BridgeTimer
             DetermineControlPanelState();
         }
 
-        private void OnCurrentTime(object sender, CountDownTimer.CurrentTimeArgs e)
+        private void OnCurrentTime(object? sender, CountDownTimer.CurrentTimeArgs e)
         {
             TimeLeft = $"{e.Minutes}:{e.Seconds}";
             MinutesLeft = $"{string.Format("{0:00}", e.Minutes)}";
@@ -405,8 +405,8 @@ namespace BridgeTimer
             get => _isStopped ? Properties.Resources.Caption_Close : Properties.Resources.Caption_Stop;
         }
 
-        private string timeLeft;
-        public string TimeLeft
+        private string? timeLeft;
+        public string? TimeLeft
         {
             get => timeLeft;
             set
@@ -416,8 +416,8 @@ namespace BridgeTimer
             }
         }
 
-        public string MinutesLeft { get; set; }
-        public string SecondsLeft { get; set; }
+        public string? MinutesLeft { get; set; }
+        public string? SecondsLeft { get; set; }
 
         private CountDownTimer.ThresholdReached _currentStage;
         public CountDownTimer.ThresholdReached CurrentStage

@@ -9,8 +9,8 @@ namespace BridgeTimer
     {
         #region Fields
 
-        readonly Action<T> _execute = null;
-        readonly Predicate<T> _canExecute = null;
+        readonly Action<T> _execute ;
+        readonly Predicate<T> _canExecute;
 
         #endregion
 
@@ -22,9 +22,8 @@ namespace BridgeTimer
         /// <param name="execute">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
         /// <remarks><seealso cref="CanExecute"/> will always return true.</remarks>
         public RelayCommand(Action<T> execute)
-            : this(execute, null)
-        {
-        }
+            : this(execute,(x)=>true)
+        {}
 
         /// <summary>
         /// Creates a new command.

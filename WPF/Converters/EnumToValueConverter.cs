@@ -28,7 +28,7 @@ namespace BridgeTimer
                                         new PropertyMetadata(defaultValue:new Dictionary<TEnum,TValue>()));
 
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!typeof(TEnum).IsEnum)
                 throw new ArgumentException($"The value is not an enum.");

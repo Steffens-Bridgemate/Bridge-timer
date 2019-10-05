@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace BridgeTimer
 {
-    public class BoolToValueConverter<TValue> :DependencyObject, IValueConverter
+    public class BoolToValueConverter<TValue> :DependencyObject, IValueConverter 
     {
 
         public TValue TrueValue
@@ -20,7 +20,7 @@ namespace BridgeTimer
             DependencyProperty.Register(nameof(TrueValue),
                                         typeof(TValue),
                                         typeof(BoolToValueConverter<TValue>),
-                                        new PropertyMetadata(default(TValue)));
+                                        new PropertyMetadata(default(TValue)!));
 
         public TValue FalseValue
         {
@@ -32,10 +32,10 @@ namespace BridgeTimer
             DependencyProperty.Register(nameof(FalseValue),
                                         typeof(TValue),
                                         typeof(BoolToValueConverter<TValue>),
-                                        new PropertyMetadata(default(TValue)));
+                                        new PropertyMetadata(default(TValue)!));
 
 
-        public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var booleanValue = (bool)value;
             return booleanValue ? TrueValue : FalseValue;

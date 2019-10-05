@@ -7,7 +7,7 @@ namespace BridgeTimer
 {
     public class NullToValueConverter<TValue>:BoolToValueConverter<TValue>
     {
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return value == null ? TrueValue : FalseValue;
         }

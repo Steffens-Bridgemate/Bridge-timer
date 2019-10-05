@@ -24,7 +24,7 @@ namespace BridgeTimer
             DependencyProperty.Register(nameof(RoundStartedValue),
                 typeof(TValue),
                 typeof(ThresholdConverter<TValue>),
-                new PropertyMetadata(defaultValue: default(TValue),
+                new PropertyMetadata(defaultValue: default(TValue)!,
                                      propertyChangedCallback: OnRoundStartedValueChanged));
 
         private static void OnRoundStartedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -49,7 +49,7 @@ namespace BridgeTimer
             DependencyProperty.Register(nameof(WarningGivenValue),
                                         typeof(TValue), 
                                         typeof(ThresholdConverter<TValue>), 
-                                        new PropertyMetadata(defaultValue:default(TValue),
+                                        new PropertyMetadata(defaultValue:default(TValue)!,
                                                              propertyChangedCallback:OnWarningGivenValueChanged));
 
 
@@ -73,7 +73,7 @@ namespace BridgeTimer
             DependencyProperty.Register(nameof(RoundEndedValue),
                 typeof(TValue),
                 typeof(ThresholdConverter<TValue>),
-                new PropertyMetadata(defaultValue:default(TValue),
+                new PropertyMetadata(defaultValue:default(TValue)!,
                                      propertyChangedCallback: OnRoundEndedValueChanged));
 
         private static void OnRoundEndedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

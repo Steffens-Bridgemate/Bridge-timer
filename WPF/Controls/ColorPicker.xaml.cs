@@ -310,13 +310,16 @@ namespace BridgeTimer.WPF.Controls
         }
         #endregion
 
+#nullable disable
         private void tbColorPicker_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (tbColorPicker.IsChecked.Value)
+
+            if (tbColorPicker.IsChecked.Value==true)
             {
                 tbColorPicker.IsChecked = false;
                 e.Handled = true;
             }
         }
+#nullable enable
     }
 }

@@ -6,6 +6,7 @@
     <Authors>André Steffens</Authors>
     <Description>Open source, free Bridge timer</Description>
     <ApplicationIcon>clock.ico</ApplicationIcon>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="appsettings.json" />
