@@ -46,7 +46,8 @@ namespace BridgeTimer
 
             ToggleSoundCommand = new RelayCommand<object>(ToggleSound);
             StartOrPauseCommand = new RelayCommand<object>(ToggleTimer);
-            StopOrCloseCommand = new RelayCommand<object>(StopOrClose);
+            StopOrCloseCommand = new RelayCommand<object>(StopOrClose,
+                                    (x) =>timer.RunningState!= CountDownTimer.State.Started);
             IncreasePlaytimeCommand = new RelayCommand<string>(IncreasePlaytime,s=>timer.RunningState!= CountDownTimer.State.Stopped);
             DecreasePlaytimeCommand = new RelayCommand<string>(DecreasePlaytime, s => timer.RunningState != CountDownTimer.State.Stopped);
             SettingsCommand = new RelayCommand<object>(EditSettings, obj => timer.RunningState == CountDownTimer.State.Stopped);
