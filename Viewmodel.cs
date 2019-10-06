@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace BridgeTimer
@@ -131,7 +132,11 @@ namespace BridgeTimer
             {
                 DetermineControlPanelState();
                 CurrentStage = CountDownTimer.ThresholdReached.RoundStarted;
+                _isStopped = true;
                 OnPropertyChanged(nameof(StartOrPauseCaption));
+                OnPropertyChanged(nameof(StopOrCloseCaption));
+                DoNothingCommand.Execute(null);
+                App.Current.Dispatcher.Invoke(() => CommandManager.InvalidateRequerySuggested());
                 return;
             }
 
@@ -175,6 +180,14 @@ namespace BridgeTimer
         #endregion
 
         #region Commands
+
+        public RelayCommand<object?> DoNothingCommand
+        {
+            get
+            {
+                return new RelayCommand<object?>((x) => x = null);
+            }
+        }
     
         public RelayCommand<string> IncreasePlaytimeCommand { get; }
 
@@ -438,9 +451,9 @@ namespace BridgeTimer
 
         #endregion
 
-        private string _roundDescription;
+        private string? _roundDescription;
 
-        public string RoundDescription
+        public string? RoundDescription
         {
             get { return _roundDescription; }
             set 
