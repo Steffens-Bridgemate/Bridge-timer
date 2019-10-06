@@ -70,7 +70,9 @@ namespace BridgeTimer
         ///<param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
         public void Execute(object? parameter)
         {
+#nullable disable
             _execute((T)parameter);
+#nullable enable
         }
 
         #endregion

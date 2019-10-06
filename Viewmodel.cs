@@ -146,7 +146,12 @@ namespace BridgeTimer
                 CurrentStage = e.Threshold;
                 
                 HideMessage = (e.Threshold != CountDownTimer.ThresholdReached.RoundEnded);
-                RoundDescription =!HideMessage? string.Empty: $"Ronde {e.CurrentRound}";
+                RoundDescription = timer.NumberOfRounds>0  && 
+                                   e.CurrentRound<=timer.NumberOfRounds && 
+                                   e.Threshold!= CountDownTimer.ThresholdReached.RoundEnded ? 
+                                        $"Ronde {e.CurrentRound}":
+                                        string.Empty;
+
                 if (e.CurrentRound <= 0)
                     ChangeMessage = Properties.Resources.Message_TakeYourSeats;
                 else
@@ -275,6 +280,7 @@ namespace BridgeTimer
         {
             _settings.RestoreTimingDefaults();
             _settings.Save();
+            OnPropertyChanged(nameof(SelectedHours));
             OnPropertyChanged(nameof(SelectedMinutes));
             OnPropertyChanged(nameof(SelectedWarningMinutes));
             OnPropertyChanged(nameof(SelectedChangeMinutes));
