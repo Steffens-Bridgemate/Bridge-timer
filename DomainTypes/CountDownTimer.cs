@@ -257,6 +257,7 @@ namespace BridgeTimer
                         threshold = ThresholdReached.EventEnded;
                         RunningState = State.Stopped;
                         timer.Stop();
+                        CurrentRound = NumberOfRounds == 0 ? 0 : 1;
                     }
                        
 
