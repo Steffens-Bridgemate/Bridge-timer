@@ -131,7 +131,9 @@ namespace BridgeTimer
                 var doNotNotify = CurrentStage == CountDownTimer.ThresholdReached.EndOfRoundWarning &&
                                   e.Threshold == CountDownTimer.ThresholdReached.RoundStarted;
                 CurrentStage = e.Threshold;
+                
                 HideMessage = (e.Threshold != CountDownTimer.ThresholdReached.RoundEnded);
+                RoundDescription =!HideMessage? string.Empty: $"Ronde {e.CurrentRound}";
                 if (e.CurrentRound <= 0)
                     ChangeMessage = Properties.Resources.Message_TakeYourSeats;
                 else
@@ -426,6 +428,18 @@ namespace BridgeTimer
         }
 
         #endregion
+
+        private string _roundDescription;
+
+        public string RoundDescription
+        {
+            get { return _roundDescription; }
+            set 
+            { 
+                _roundDescription = value;
+                OnPropertyChanged();
+            }
+        }
 
         private bool _hideControlPanel;
 

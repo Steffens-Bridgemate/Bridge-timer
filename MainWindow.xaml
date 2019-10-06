@@ -40,9 +40,12 @@
         <local:BoolToStringConverter x:Key="soundIconUriConverter"
                                      TrueValue="Images\nosound1.ico"
                                      FalseValue="Images\sound1.ico"/>
-        <local:BackgroundToStringConverter x:Key="logoConverter"
+        <local:ColorToStringConverter x:Key="logoConverter"
                                      TrueValue="Bridgemate_logo_white.gif"
                                      FalseValue="Bridgemate_logo_black.gif"/>
+        <local:ColorToColorConverter x:Key="roundLabelConverter"
+                                     TrueValue="White"
+                                     FalseValue="Black"/>
     </Window.Resources>
     <Window.WindowStyle>
         <Binding Path="HideControlPanel" Converter="{StaticResource windowStyleConverter}"/>
@@ -81,12 +84,22 @@
             </Grid>
         </Viewbox>
 
-        <Viewbox x:Name="vbLogo" Grid.Row="0" 
+        <UniformGrid Rows="1" Grid.Row="0">
+            <Viewbox x:Name="vbLogo" 
                  Stretch="Uniform" HorizontalAlignment="Left">
-            <Image Source="{Binding ElementName=Root,Path=Foreground.Color,Converter={StaticResource logoConverter}}"
+                <Image Source="{Binding ElementName=Root,Path=Foreground.Color,Converter={StaticResource logoConverter}}"
                    Margin="20,20,2,2"
                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        </Viewbox>
+            </Viewbox>
+            <Viewbox x:Name="vbRound" Stretch="Uniform" HorizontalAlignment="Right">
+                <TextBlock  Text="{Binding RoundDescription}" Margin="2,2,8,2">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{Binding ElementName=Root, Path=Foreground.Color, Converter={StaticResource roundLabelConverter}}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+            </Viewbox>
+        </UniformGrid>
+       
         
         <Grid Grid.Row="2" Name="grdControlPanel"
               Background="White">
