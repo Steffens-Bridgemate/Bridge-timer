@@ -133,7 +133,7 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kleuren:.
+        ///   Looks up a localized string similar to Kleuren.
         /// </summary>
         public static string Header_Colors {
             get {
@@ -142,7 +142,7 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tijden:.
+        ///   Looks up a localized string similar to Tijden.
         /// </summary>
         public static string Header_Timings {
             get {
