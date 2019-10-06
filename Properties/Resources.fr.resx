@@ -159,14 +159,17 @@
   <data name="Label_NumberOfRounds" xml:space="preserve">
     <value>Nombre de tours:</value>
   </data>
+  <data name="Label_PlayingTimeHours" xml:space="preserve">
+    <value>Jeux minutes:</value>
+  </data>
+  <data name="Label_PlayingTimeMinutes" xml:space="preserve">
+    <value>Jeux heurs:</value>
+  </data>
   <data name="Label_PlayTimeBackground" xml:space="preserve">
     <value>Jeux fond:</value>
   </data>
   <data name="Label_PlayTimeForeground" xml:space="preserve">
     <value>Jeux chifres:</value>
-  </data>
-  <data name="Label_TotalPlayingTime" xml:space="preserve">
-    <value>Période de jeux:</value>
   </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Avertissement de fin de tour á:</value>

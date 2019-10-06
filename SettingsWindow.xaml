@@ -28,10 +28,10 @@
                         <DataTemplate>
                             <Label Content="{Binding}"
                                    FontSize="28"
-                                   Margin="24,44,4,4"
+                                   Margin="24,16,4,4"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Right"
-                                   HorizontalContentAlignment="Center"
+                                   HorizontalContentAlignment="Right"
                                    VerticalContentAlignment="Center"/>
                         </DataTemplate>
                     </Setter.Value>
@@ -81,20 +81,21 @@
                             Command="{Binding RestoreTimingDefaultsCommand}"
                             HorizontalAlignment="Left"/>
                     <UniformGrid Columns="2" Grid.Row="1">
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_TotalPlayingTime}}"/>
+                        <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayingTimeHours}}"/>
+                        <ComboBox ItemsSource="{Binding Hours}"
+                                  SelectedItem="{Binding SelectedHours}"/>
+                        <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayingTimeMinutes}}"/>
                         <ComboBox ItemsSource="{Binding Minutes}"
-                      SelectedItem="{Binding SelectedMinutes}"/>
+                                  SelectedItem="{Binding SelectedMinutes}"/>
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_WarningMoment}}"/>
                         <ComboBox ItemsSource="{Binding WarningMinutes}"
-                      SelectedItem="{Binding SelectedWarningMinutes}"/>
+                                  SelectedItem="{Binding SelectedWarningMinutes}"/>
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_ChangeTime}}"/>
                         <ComboBox ItemsSource="{Binding ChangeMinutes}"
-                      SelectedItem="{Binding SelectedChangeMinutes}"/>
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_NumberOfRounds}}"
-                   Visibility="Collapsed"/>
+                                  SelectedItem="{Binding SelectedChangeMinutes}"/>
+                        <Label Content="{Binding Source={x:Static resx:Resources.Label_NumberOfRounds}}"/>
                         <ComboBox ItemsSource="{Binding NumbersOfRounds}"
-                      SelectedItem="{Binding SelectedNumberOfRounds}"
-                      Visibility="Collapsed"/>
+                                  SelectedItem="{Binding SelectedNumberOfRounds}"/>
                     </UniformGrid>
                 </Grid>
              

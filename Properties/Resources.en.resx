@@ -159,14 +159,17 @@
   <data name="Label_NumberOfRounds" xml:space="preserve">
     <value>Number of rounds:</value>
   </data>
+  <data name="Label_PlayingTimeHours" xml:space="preserve">
+    <value>Playing time hours:</value>
+  </data>
+  <data name="Label_PlayingTimeMinutes" xml:space="preserve">
+    <value>Playing time minutes:</value>
+  </data>
   <data name="Label_PlayTimeBackground" xml:space="preserve">
     <value>Playing period background:</value>
   </data>
   <data name="Label_PlayTimeForeground" xml:space="preserve">
     <value>Playing period digits:</value>
-  </data>
-  <data name="Label_TotalPlayingTime" xml:space="preserve">
-    <value>Total playing time:</value>
   </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Warn for end of round at:</value>

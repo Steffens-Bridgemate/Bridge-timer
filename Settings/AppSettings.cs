@@ -22,30 +22,41 @@ namespace BridgeTimer.Settings
     {
         public static AppSettings Default()
         {
-            return new AppSettings() { TotalTime = DefaultTimings.total,
-                                       WarningTime = DefaultTimings.warn, 
-                                       ChangeTime=DefaultTimings.change,
-                                       PlayingTimeBackground=DefaultBackgrounds.total,
-                                       WarningTimeBackground= DefaultBackgrounds.warn,
-                                       ChangeTimeBackground=DefaultBackgrounds.change,
-                                       PlayingTimeForeground=DefaultForegrounds.total,
-                                       WarningTimeForeground=DefaultForegrounds.warn,
-                                       ChangeTimeForeground=DefaultForegrounds.change};
+            return new AppSettings() 
+            { 
+                PlayTimeHours=DefaultTimings.hours,
+                PlayTimeMinutes = DefaultTimings.minutes,
+                WarningTime = DefaultTimings.warn,
+                ChangeTime = DefaultTimings.change,
+                NumberOfRounds=DefaultNumberOfRounds,
+                PlayingTimeBackground = DefaultBackgrounds.total,
+                WarningTimeBackground = DefaultBackgrounds.warn,
+                ChangeTimeBackground = DefaultBackgrounds.change,
+                PlayingTimeForeground = DefaultForegrounds.total,
+                WarningTimeForeground = DefaultForegrounds.warn,
+                ChangeTimeForeground = DefaultForegrounds.change 
+            };
         }
 
-        public static (int total, int warn, int change) DefaultTimings => (30, 5, 2);
+        public static (int hours, int minutes, int warn, int change) DefaultTimings => (0,30, 5, 2);
+
+        public static int DefaultNumberOfRounds = 6;
+
         public static (Color total, Color warn, Color change) DefaultBackgrounds => (Colors.DarkGreen,
                                                                                     (Color)ColorConverter.ConvertFromString("#EB9605"),
                                                                                      Colors.DarkRed);
         public static (Color total, Color warn, Color change) DefaultForegrounds => (Colors.White,
                                                                                      Colors.White,
                                                                                      Colors.White);
+        public int PlayTimeHours { get; set; }
 
-        public int TotalTime { get; set; }
+        public int PlayTimeMinutes { get; set; }
 
         public int WarningTime { get; set; }
 
         public int ChangeTime { get; set; }
+
+        public int NumberOfRounds { get; set; }
 
         public Color WarningTimeForeground { get; set; }
         public Color PlayingTimeForeground { get; set; }
@@ -68,9 +79,11 @@ namespace BridgeTimer.Settings
 
         public void RestoreTimingDefaults()
         {
-            TotalTime = DefaultTimings.total;
+            PlayTimeHours = DefaultTimings.hours;
+            PlayTimeMinutes = DefaultTimings.minutes;
             WarningTime = DefaultTimings.warn;
             ChangeTime = DefaultTimings.change;
+            NumberOfRounds = DefaultNumberOfRounds;
         }
 
         public void RestoreColorDefaults()

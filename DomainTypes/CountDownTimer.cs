@@ -49,27 +49,32 @@ namespace BridgeTimer
         private bool warningGiven;
         private bool endOfRoundGiven;
         private bool startOfRoundGiven;
-        public CountDownTimer(int totalPlayTime, int warningMoment, int changeTime)
+        public CountDownTimer(int playTimeHours, int playTimeMinutes, int warningMoment, int changeTime, int numberOfRounds)
         {
-            this.TotalPlayTime = totalPlayTime;          
-            this.WarningMoment = warningMoment;
-            this.ChangeTime = changeTime;
-            this.RunningState = State.Stopped;
+            Init(playTimeHours, playTimeMinutes, warningMoment, changeTime,numberOfRounds);
 
             timer = new Timer(1000);
             timer.Elapsed += OnTimerTick;
-            InitializeTimeSpans();
+            InitializeTimeSpans(ThresholdReached.NotSet);
+            RunningState = State.Stopped;
+        }
+
+        private void Init(int playTimeHours, int playTimeMinutes, int warningMoment, int changeTime, int numberOfRounds)
+        {
+            this.TotalPlayTime = playTimeHours * 60 + playTimeMinutes;
+            this.WarningMoment = warningMoment;
+            this.ChangeTime = changeTime;
+            this.NumberOfRounds = numberOfRounds;
         }
 
         public void Reinit()
         {
             InitializeTimeSpans();
         }
-        public void Reinit(int totalPlayTime, int warningMoment, int changeTime)
+        public void Reinit(int playTimeHours, int playTimeMinutes, int warningMoment, int changeTime,int numberOfRounds)
         {
-            this.TotalPlayTime = totalPlayTime;
-            this.WarningMoment = warningMoment;
-            this.ChangeTime = changeTime;
+
+            Init(playTimeHours, playTimeMinutes, warningMoment, changeTime, numberOfRounds);
             Reinit();
             
         }
@@ -138,7 +143,7 @@ namespace BridgeTimer
                                                           threshold));
         }
 
-        private void InitializeTimeSpans()
+        private void InitializeTimeSpans(ThresholdReached threshold=ThresholdReached.RoundStarted)
         {
             timer.Stop();
             startOfRoundGiven = false;
@@ -149,7 +154,7 @@ namespace BridgeTimer
             CurrentTime?.Invoke(this, new CurrentTimeArgs(totalTime.Hours, 
                                                           totalTime.Minutes, 
                                                           totalTime.Seconds,
-                                                          ThresholdReached.RoundStarted));
+                                                          threshold));
         }
 
         /// <summary>
@@ -162,6 +167,7 @@ namespace BridgeTimer
         /// </summary>
         public int WarningMoment { get; private set; }
         public int ChangeTime { get; private set; }
+        public int NumberOfRounds { get; private set; }
 
         public State RunningState { get; private set; }
 
@@ -251,9 +257,9 @@ namespace BridgeTimer
                 startOfRoundGiven = true;
             }
 
-            CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Hours, 
+            CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Hours,
                                                           timeToPublish.Minutes,
-                                                          timeToPublish.Seconds, 
+                                                          timeToPublish.Seconds,
                                                           threshold));
 
         }

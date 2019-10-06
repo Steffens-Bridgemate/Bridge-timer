@@ -187,6 +187,24 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Speeltijd uren:.
+        /// </summary>
+        public static string Label_PlayingTimeHours {
+            get {
+                return ResourceManager.GetString("Label_PlayingTimeHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speeltijd minuten:.
+        /// </summary>
+        public static string Label_PlayingTimeMinutes {
+            get {
+                return ResourceManager.GetString("Label_PlayingTimeMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Speeltijd achtergrond:.
         /// </summary>
         public static string Label_PlayTimeBackground {
@@ -201,15 +219,6 @@ namespace BridgeTimer.Properties {
         public static string Label_PlayTimeForeground {
             get {
                 return ResourceManager.GetString("Label_PlayTimeForeground", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Speeltijd per ronde:.
-        /// </summary>
-        public static string Label_TotalPlayingTime {
-            get {
-                return ResourceManager.GetString("Label_TotalPlayingTime", resourceCulture);
             }
         }
         

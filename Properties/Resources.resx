@@ -159,14 +159,17 @@
   <data name="Label_NumberOfRounds" xml:space="preserve">
     <value>Aantal ronden:</value>
   </data>
+  <data name="Label_PlayingTimeHours" xml:space="preserve">
+    <value>Speeltijd uren:</value>
+  </data>
+  <data name="Label_PlayingTimeMinutes" xml:space="preserve">
+    <value>Speeltijd minuten:</value>
+  </data>
   <data name="Label_PlayTimeBackground" xml:space="preserve">
     <value>Speeltijd achtergrond:</value>
   </data>
   <data name="Label_PlayTimeForeground" xml:space="preserve">
     <value>Speeltijd cijfers:</value>
-  </data>
-  <data name="Label_TotalPlayingTime" xml:space="preserve">
-    <value>Speeltijd per ronde:</value>
   </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Waarschuwen voor einde ronde:</value>

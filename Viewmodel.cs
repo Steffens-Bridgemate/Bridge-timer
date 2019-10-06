@@ -36,7 +36,11 @@ namespace BridgeTimer
             _isStopped = true;
             notificators = new List<IThresholdNotification>();
 
-            timer = new CountDownTimer(_settings.TotalTime, _settings.WarningTime, _settings.ChangeTime);
+            timer = new CountDownTimer(_settings.PlayTimeHours,
+                                       _settings.PlayTimeMinutes,
+                                       _settings.WarningTime,
+                                       _settings.ChangeTime,
+                                       _settings.NumberOfRounds);
             timer.CurrentTime += OnCurrentTime;
             timer.Reinit();
 
@@ -57,12 +61,18 @@ namespace BridgeTimer
 
             TimeLeft = "0:00";
             notificators = thresholdNotificators.ToList();
-            Minutes = new ObservableCollection<int>(Enumerable.Range(1, 99));
-            SelectedMinutes = settings.TotalTime;
+
+            Hours = new ObservableCollection<int>(Enumerable.Range(0, 10));
+            SelectedHours = _settings.PlayTimeHours;
+            Minutes = new ObservableCollection<int>(Enumerable.Range(1, 59));
+            SelectedMinutes = settings.PlayTimeMinutes;
             WarningMinutes = new ObservableCollection<int>(Enumerable.Range(1, 30));
             SelectedWarningMinutes = settings.WarningTime;
             ChangeMinutes = new ObservableCollection<int>(Enumerable.Range(1, 30));
             SelectedChangeMinutes = settings.ChangeTime;
+            NumbersOfRounds = new ObservableCollection<int>(Enumerable.Range(0, 21));
+            SelectedNumberOfRounds = settings.NumberOfRounds;
+
             HideMessage = true;
           
         }
@@ -80,14 +90,27 @@ namespace BridgeTimer
             if(moreThan60Minutes)
             {
                 AreSecondsHidden = true;
-                var hours = e.Hours.ToString("00");
+                var numberOfHours = e.Hours;
+                
                 string minutes;
-                if(e.Seconds>0)
-                    minutes = (e.Minutes + 1).ToString("00");
+                if(e.Seconds > 0)
+                {
+                    var numberOfMinutes = e.Minutes;
+                    if (numberOfMinutes == 59)
+                    {
+                        numberOfMinutes = 0;
+                        numberOfHours += 1;
+                    }
+                    else
+                        numberOfMinutes += 1;
+                    minutes = numberOfMinutes.ToString("00");
+                }
                 else
                     minutes = e.Minutes.ToString("00");
-                FirstDigit =char.MinValue ; //hours[0];
-                SecondDigit = hours[1];
+
+                var hours = numberOfHours.ToString("00");
+                FirstDigit =hours[1];
+                SecondDigit = '-';
                 ThirdDigit = minutes[0];
                 FourthDigit = minutes[1];
             }
@@ -208,7 +231,7 @@ namespace BridgeTimer
 
         private void HandleNewSettings(object parameter)
         {
-            timer.Reinit(SelectedMinutes, SelectedWarningMinutes, SelectedChangeMinutes);
+            timer.Reinit(SelectedHours, SelectedMinutes, SelectedWarningMinutes, SelectedChangeMinutes,SelectedNumberOfRounds);
             OnPropertyChanged(nameof(CurrentStage));
         }
 
@@ -330,21 +353,34 @@ namespace BridgeTimer
             }
         }
 
+        public ObservableCollection<int> Hours { get; set; }
 
+        public int SelectedHours
+        {
+            get => _settings.PlayTimeHours;
+            set
+            {
+                if (value == _settings.PlayTimeHours) return;
+                _settings.PlayTimeHours = value;
+                _settings.Save();
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<int> Minutes { get; set; }
       
         public int SelectedMinutes
         {
-            get => _settings.TotalTime;
+            get => _settings.PlayTimeMinutes;
             set
             {
-                if (value == _settings.TotalTime) return;
-                _settings.TotalTime = value;
+                if (value == _settings.PlayTimeMinutes) return;
+                _settings.PlayTimeMinutes = value;
                 _settings.Save();
                 OnPropertyChanged();
             }
         }
+
         public ObservableCollection<int> WarningMinutes { get; set; }
         public int SelectedWarningMinutes
         {
@@ -370,6 +406,19 @@ namespace BridgeTimer
             }
         }
 
+        public ObservableCollection<int> NumbersOfRounds { get; set; }
+
+        public int SelectedNumberOfRounds
+        {
+            get => _settings.NumberOfRounds;
+            set
+            {
+                if (value == _settings.NumberOfRounds) return;
+                _settings.NumberOfRounds = value;
+                _settings.Save();
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
