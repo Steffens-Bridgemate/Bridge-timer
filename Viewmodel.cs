@@ -65,7 +65,7 @@ namespace BridgeTimer
 
             Hours = new ObservableCollection<int>(Enumerable.Range(0, 10));
             SelectedHours = _settings.PlayTimeHours;
-            Minutes = new ObservableCollection<int>(Enumerable.Range(1, 59));
+            Minutes = new ObservableCollection<int>(Enumerable.Range(0, 60));
             SelectedMinutes = settings.PlayTimeMinutes;
             WarningMinutes = new ObservableCollection<int>(Enumerable.Range(1, 30));
             SelectedWarningMinutes = settings.WarningTime;
@@ -135,7 +135,6 @@ namespace BridgeTimer
                 _isStopped = true;
                 OnPropertyChanged(nameof(StartOrPauseCaption));
                 OnPropertyChanged(nameof(StopOrCloseCaption));
-                DoNothingCommand.Execute(null);
                 App.Current.Dispatcher.Invoke(() => CommandManager.InvalidateRequerySuggested());
                 return;
             }
@@ -151,7 +150,13 @@ namespace BridgeTimer
                 if (e.CurrentRound <= 0)
                     ChangeMessage = Properties.Resources.Message_TakeYourSeats;
                 else
-                    ChangeMessage = string.Format(Properties.Resources.Message_TakeSeatsForRound, e.CurrentRound);
+                {
+                    if (timer.CurrentRound > timer.NumberOfRounds)
+                        ChangeMessage = Properties.Resources.Message_EventEnded;
+                    else
+                        ChangeMessage = string.Format(Properties.Resources.Message_TakeSeatsForRound, e.CurrentRound);
+                }
+                    
 
                 if (timer.RunningState == CountDownTimer.State.Stopped || doNotNotify   ) return;
 

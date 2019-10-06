@@ -180,6 +180,9 @@
   <data name="Label_WarningTimeForeground" xml:space="preserve">
     <value>Avertissement chifres:</value>
   </data>
+  <data name="Message_EventEnded" xml:space="preserve">
+    <value>Ceci était le tour final</value>
+  </data>
   <data name="Message_TakeSeatsForRound" xml:space="preserve">
     <value>Veuillez s'assoir pour tour {0}</value>
   </data>

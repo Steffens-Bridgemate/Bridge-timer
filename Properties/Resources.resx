@@ -180,6 +180,9 @@
   <data name="Label_WarningTimeForeground" xml:space="preserve">
     <value>Aflooptijd cijfers:</value>
   </data>
+  <data name="Message_EventEnded" xml:space="preserve">
+    <value>Dit was de laatste ronde</value>
+  </data>
   <data name="Message_TakeSeatsForRound" xml:space="preserve">
     <value>U kunt wisselen voor ronde {0}</value>
   </data>

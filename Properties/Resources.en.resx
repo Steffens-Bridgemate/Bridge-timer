@@ -180,6 +180,9 @@
   <data name="Label_WarningTimeForeground" xml:space="preserve">
     <value>Warning period digits:</value>
   </data>
+  <data name="Message_EventEnded" xml:space="preserve">
+    <value>This was the last round</value>
+  </data>
   <data name="Message_TakeSeatsForRound" xml:space="preserve">
     <value>Please be seated for round {0}</value>
   </data>

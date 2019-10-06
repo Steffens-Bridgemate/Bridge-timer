@@ -250,6 +250,15 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dit was de laatste ronde.
+        /// </summary>
+        public static string Message_EventEnded {
+            get {
+                return ResourceManager.GetString("Message_EventEnded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to U kunt wisselen voor ronde {0}.
         /// </summary>
         public static string Message_TakeSeatsForRound {
