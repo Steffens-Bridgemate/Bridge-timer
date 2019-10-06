@@ -85,6 +85,14 @@ namespace BridgeTimer
 
         private void OnCurrentTime(object? sender, CountDownTimer.CurrentTimeArgs e)
         {
+            if(e.Threshold== CountDownTimer.ThresholdReached.EventEnded)
+            {
+                DetermineControlPanelState();
+                CurrentStage = CountDownTimer.ThresholdReached.RoundStarted;
+                OnPropertyChanged(nameof(StartOrPauseCaption));
+                return;
+            }
+
             TimeLeft = $"{e.Minutes}:{e.Seconds}";
             var moreThan60Minutes = e.Hours > 0;
 
