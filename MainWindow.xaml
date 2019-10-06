@@ -61,7 +61,7 @@
         </Grid.RowDefinitions>
         <Viewbox Grid.Row="2" Stretch="Uniform" Margin="4,2,8,2">
             <Grid Name="grdMessage">
-                <TextBlock Text="{Binding Source={x:Static resx:Resources.Message_TakeYourSeats}}"
+                <TextBlock Text="{Binding ChangeMessage}"
                        TextAlignment="Center"
                        FontSize="20">
                     <TextBlock.Foreground>

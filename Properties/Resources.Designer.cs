@@ -250,6 +250,15 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to U kunt wisselen voor ronde {0}.
+        /// </summary>
+        public static string Message_TakeSeatsForRound {
+            get {
+                return ResourceManager.GetString("Message_TakeSeatsForRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to U kunt wisselen voor de volgende ronde.
         /// </summary>
         public static string Message_TakeYourSeats {

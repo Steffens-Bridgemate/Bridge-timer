@@ -24,12 +24,13 @@ namespace BridgeTimer
         }
         public class CurrentTimeArgs : EventArgs
         {
-            public CurrentTimeArgs(int hours, int minutes, int seconds,
-                ThresholdReached threshold = ThresholdReached.NotSet)
+            public CurrentTimeArgs(int hours, int minutes, int seconds,int currentRound,
+                                   ThresholdReached threshold = ThresholdReached.NotSet)
             {
                 this.Hours = hours;
                 this.Minutes = minutes;
                 this.Seconds = seconds;
+                this.CurrentRound = currentRound;
                 this.Threshold = threshold;
             }
 
@@ -37,6 +38,7 @@ namespace BridgeTimer
 
             public int Minutes { get; }
             public int Seconds { get; }
+            public int CurrentRound { get; }
 
             public ThresholdReached Threshold { get; }
         }
@@ -65,6 +67,7 @@ namespace BridgeTimer
             this.WarningMoment = warningMoment;
             this.ChangeTime = changeTime;
             this.NumberOfRounds = numberOfRounds;
+            this.CurrentRound = NumberOfRounds == 0 ? 0 : 1;
         }
 
         public void Reinit()
@@ -108,6 +111,7 @@ namespace BridgeTimer
             CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Hours, 
                                                           timeToPublish.Minutes, 
                                                           timeToPublish.Seconds,
+                                                          CurrentRound,
                                                           threshold));
         }
 
@@ -140,6 +144,7 @@ namespace BridgeTimer
             CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Hours,
                                                           timeToPublish.Minutes,
                                                           timeToPublish.Seconds,
+                                                          CurrentRound,
                                                           threshold));
         }
 
@@ -154,6 +159,7 @@ namespace BridgeTimer
             CurrentTime?.Invoke(this, new CurrentTimeArgs(totalTime.Hours, 
                                                           totalTime.Minutes, 
                                                           totalTime.Seconds,
+                                                          CurrentRound,
                                                           threshold));
         }
 
@@ -168,6 +174,7 @@ namespace BridgeTimer
         public int WarningMoment { get; private set; }
         public int ChangeTime { get; private set; }
         public int NumberOfRounds { get; private set; }
+        public int CurrentRound { get; private set; }
 
         public State RunningState { get; private set; }
 
@@ -230,6 +237,8 @@ namespace BridgeTimer
                     InitializeTimeSpans();
                     timer.Start();
                     timeToPublish = totalTime;
+                    if(CurrentRound>0)
+                        CurrentRound+=1;
                 }
                 else
                     timeToPublish = changeTime;
@@ -260,6 +269,7 @@ namespace BridgeTimer
             CurrentTime?.Invoke(this, new CurrentTimeArgs(timeToPublish.Hours,
                                                           timeToPublish.Minutes,
                                                           timeToPublish.Seconds,
+                                                          CurrentRound,
                                                           threshold));
 
         }

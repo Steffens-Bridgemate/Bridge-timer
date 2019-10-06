@@ -73,6 +73,7 @@ namespace BridgeTimer
             NumbersOfRounds = new ObservableCollection<int>(Enumerable.Range(0, 21));
             SelectedNumberOfRounds = settings.NumberOfRounds;
 
+            ChangeMessage = "Hello World!";
             HideMessage = true;
           
         }
@@ -131,6 +132,10 @@ namespace BridgeTimer
                                   e.Threshold == CountDownTimer.ThresholdReached.RoundStarted;
                 CurrentStage = e.Threshold;
                 HideMessage = (e.Threshold != CountDownTimer.ThresholdReached.RoundEnded);
+                if (e.CurrentRound <= 0)
+                    ChangeMessage = Properties.Resources.Message_TakeYourSeats;
+                else
+                    ChangeMessage = string.Format(Properties.Resources.Message_TakeSeatsForRound, e.CurrentRound);
 
                 if (timer.RunningState == CountDownTimer.State.Stopped || doNotNotify   ) return;
 
@@ -546,6 +551,18 @@ namespace BridgeTimer
                 _areSecondsHidden = value;
                 OnPropertyChanged();
    
+            }
+        }
+
+        private string? _changeMessage;
+
+        public string? ChangeMessage
+        {
+            get { return _changeMessage; }
+            set
+            {
+                _changeMessage = value;
+                OnPropertyChanged();
             }
         }
 

@@ -180,6 +180,9 @@
   <data name="Label_WarningTimeForeground" xml:space="preserve">
     <value>Aflooptijd cijfers:</value>
   </data>
+  <data name="Message_TakeSeatsForRound" xml:space="preserve">
+    <value>U kunt wisselen voor ronde {0}</value>
+  </data>
   <data name="Message_TakeYourSeats" xml:space="preserve">
     <value>U kunt wisselen voor de volgende ronde</value>
   </data>

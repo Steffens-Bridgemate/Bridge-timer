@@ -41,6 +41,7 @@ namespace BridgeTimer
             return new GridLengthAnimation();
         }
 
+#nullable disable
         public override object GetCurrentValue(object defaultOriginValue, object defaultDestinationValue, AnimationClock animationClock)
         {
             double fromValue = this.From.Value;
@@ -56,5 +57,6 @@ namespace BridgeTimer
                 return new GridLength((animationClock.CurrentProgress.Value) * (toValue - fromValue) + fromValue, this.To.IsStar ? GridUnitType.Star : GridUnitType.Pixel);
             }
         }
+#nullable enable
     }
 }
