@@ -237,8 +237,6 @@ namespace BridgeTimer
                     InitializeTimeSpans();
                     timer.Start();
                     timeToPublish = totalTime;
-                    if(CurrentRound>0)
-                        CurrentRound+=1;
                 }
                 else
                     timeToPublish = changeTime;
@@ -259,6 +257,8 @@ namespace BridgeTimer
             {
                 threshold = ThresholdReached.RoundEnded;
                 endOfRoundGiven = true;
+                if (CurrentRound > 0)
+                    CurrentRound += 1;
             }
             else if(totalTime.Minutes<=this.TotalPlayTime && ! startOfRoundGiven)
             {

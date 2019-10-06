@@ -81,8 +81,9 @@
             </Grid>
         </Viewbox>
 
-        <Viewbox Grid.Row="0" Stretch="Uniform" HorizontalAlignment="Left">
-            <Image Source="{Binding ElementName=Root,Path=Background.Color,Converter={StaticResource logoConverter}}"
+        <Viewbox x:Name="vbLogo" Grid.Row="0" 
+                 Stretch="Uniform" HorizontalAlignment="Left">
+            <Image Source="{Binding ElementName=Root,Path=Foreground.Color,Converter={StaticResource logoConverter}}"
                    Margin="20,20,2,2"
                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
         </Viewbox>
@@ -98,7 +99,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.Resources>
-                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                <!--<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding HideControlPanel}" Value="True">
                             <DataTrigger.EnterActions>
@@ -115,7 +116,7 @@
                             </DataTrigger.ExitActions>
                         </DataTrigger>
                     </Style.Triggers>
-                </Style>
+                </Style>-->
             </Grid.Resources>
             <Button Grid.Column="0" 
                     Content="{Binding Source={x:Static resx:Resources.Caption_Settings}}" 
@@ -139,12 +140,12 @@
             </StackPanel>
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <!--<Style.Triggers>
+                    <Style.Triggers>
                         <DataTrigger Binding="{Binding HideControlPanel}"
                                      Value="True">
                             <Setter Property="Height" Value="0"/>
                         </DataTrigger>
-                    </Style.Triggers>-->
+                    </Style.Triggers>
                 </Style>
             </Grid.Style>
         </Grid>
