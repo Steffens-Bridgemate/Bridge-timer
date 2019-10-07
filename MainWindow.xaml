@@ -41,11 +41,11 @@
                                      TrueValue="Images\nosound1.ico"
                                      FalseValue="Images\sound1.ico"/>
         <local:ColorToStringConverter x:Key="logoConverter"
-                                     TrueValue="Bridgemate_logo_white.gif"
-                                     FalseValue="Bridgemate_logo_black.gif"/>
+                                     TrueValue="Bridgemate_logo_black.gif"
+                                     FalseValue="Bridgemate_logo_white.gif"/>
         <local:ColorToColorConverter x:Key="roundLabelConverter"
-                                     TrueValue="White"
-                                     FalseValue="Black"/>
+                                     TrueValue="Black"
+                                     FalseValue="White"/>
     </Window.Resources>
     <Window.WindowStyle>
         <Binding Path="HideControlPanel" Converter="{StaticResource windowStyleConverter}"/>
@@ -87,14 +87,15 @@
         <UniformGrid Rows="1" Grid.Row="0">
             <Viewbox x:Name="vbLogo" 
                  Stretch="Uniform" HorizontalAlignment="Left">
-                <Image Source="{Binding ElementName=Root,Path=Foreground.Color,Converter={StaticResource logoConverter}}"
+                <Image Source="{Binding ElementName=txtFirstDigit,Path=Foreground.Color,Converter={StaticResource logoConverter}}"
                    Margin="20,20,2,2"
                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
             </Viewbox>
             <Viewbox x:Name="vbRound" Stretch="Uniform" HorizontalAlignment="Right">
                 <TextBlock  Text="{Binding RoundDescription}" Margin="2,2,8,2">
                     <TextBlock.Foreground>
-                        <SolidColorBrush Color="{Binding ElementName=Root, Path=Foreground.Color, Converter={StaticResource roundLabelConverter}}"/>
+                        <SolidColorBrush Color="{Binding ElementName=txtFirstDigit,Path=Foreground.Color, 
+                                                         Converter={StaticResource roundLabelConverter}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
             </Viewbox>
@@ -163,7 +164,7 @@
             </Grid.Style>
         </Grid>
        
-        <Viewbox Stretch="Uniform"  Margin="0" Grid.Row="1" >
+        <Viewbox x:Name="vbDigits" Stretch="Uniform"  Margin="0" Grid.Row="1" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -186,7 +187,7 @@
                     <Grid>
                         <TextBlock Text="0" FontFamily="{StaticResource LED}"
                                    Visibility="Hidden"/>
-                        <TextBlock Text="{Binding FirstDigit}"
+                        <TextBlock x:Name="txtFirstDigit" Text="{Binding FirstDigit}"
                                    FontFamily="{StaticResource LED}">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
