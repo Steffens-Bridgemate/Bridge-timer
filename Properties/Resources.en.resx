@@ -144,6 +144,12 @@
   <data name="Header_Colors" xml:space="preserve">
     <value>Colors</value>
   </data>
+  <data name="Header_Sounds" xml:space="preserve">
+    <value>Sounds</value>
+  </data>
+  <data name="Header_Texts" xml:space="preserve">
+    <value>Texts</value>
+  </data>
   <data name="Header_Timings" xml:space="preserve">
     <value>Timings</value>
   </data>

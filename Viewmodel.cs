@@ -157,13 +157,13 @@ namespace BridgeTimer
                                         string.Empty;
 
                 if (e.CurrentRound <= 0)
-                    ChangeMessage = Properties.Resources.Message_TakeYourSeats;
+                    ChangeMessage = CustomChangeText;
                 else
                 {
                     if (timer.CurrentRound > timer.NumberOfRounds)
-                        ChangeMessage = Properties.Resources.Message_EventEnded;
+                        ChangeMessage =CustomTextAfterLastRound;
                     else
-                        ChangeMessage = string.Format(Properties.Resources.Message_TakeSeatsForRound, e.CurrentRound);
+                        ChangeMessage = string.Format(CustomChangeTextForRound, e.CurrentRound);
                 }
                     
 
@@ -308,6 +308,61 @@ namespace BridgeTimer
         #endregion
 
         #region Settings
+        
+        public string CustomTextAfterLastRound
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_settings.CustomEndOfEventMessage))
+                    return Properties.Resources.Message_EventEnded;
+                else
+                    return _settings.CustomEndOfEventMessage;
+            }
+            set
+            {
+                _settings.CustomEndOfEventMessage = value;
+            }
+        }
+
+        public string CustomChangeText
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_settings.CustomChangeMessage))
+                    return Properties.Resources.Message_TakeYourSeats;
+                else
+                    return _settings.CustomChangeMessage;
+            }
+            set
+            {
+                _settings.CustomChangeMessage = value;
+            }
+        }
+
+
+        public string CustomChangeTextForRound
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(_settings.CustomChangeMessageForRound))
+                    return Properties.Resources.Message_TakeSeatsForRound;
+                else
+                    return _settings.CustomChangeMessageForRound;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    _settings.CustomChangeMessageForRound= string.Empty;
+                    return;
+                }
+                if (!value.Contains("{0}"))
+                    value += " {0}";
+                _settings.CustomChangeMessageForRound = value;
+                _settings.Save();
+                OnPropertyChanged();
+            }
+        }
 
         public Color PlayingTimeForeground
         {

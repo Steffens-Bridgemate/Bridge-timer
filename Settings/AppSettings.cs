@@ -65,7 +65,10 @@ namespace BridgeTimer.Settings
         public Color PlayingTimeBackground { get; set; }
         public Color ChangeTimeBackground { get; set; }
         public bool IsMuted { get; set; }
-
+        public string? CustomChangeMessageForRound { get; set; }
+        public string? CustomChangeMessage { get; set; }
+        public string? CustomEndOfEventMessage { get; set; }
+       
         public static string GetFullPath()
         {
             var appName = Assembly.GetExecutingAssembly().GetName().Name ?? 

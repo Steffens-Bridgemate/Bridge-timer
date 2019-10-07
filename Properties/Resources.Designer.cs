@@ -142,6 +142,24 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Geluiden.
+        /// </summary>
+        public static string Header_Sounds {
+            get {
+                return ResourceManager.GetString("Header_Sounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teksten.
+        /// </summary>
+        public static string Header_Texts {
+            get {
+                return ResourceManager.GetString("Header_Texts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tijden.
         /// </summary>
         public static string Header_Timings {
