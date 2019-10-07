@@ -469,6 +469,10 @@ namespace BridgeTimer
             get { return _roundDescription; }
             set 
             { 
+                if(value==string.Empty)
+                {
+                    var x = 1;
+                }
                 _roundDescription = value;
                 OnPropertyChanged();
             }
@@ -488,17 +492,16 @@ namespace BridgeTimer
             }
         }
 
-        private bool _isMuted;
-
         public bool IsMuted
         {
-            get { return _isMuted; }
+            get { return _settings.IsMuted; }
             set
             {
-                if (value == _isMuted) return;
+                if (value == _settings.IsMuted) return;
                 notificators.ForEach(n => n.IsMuted = value);
                
-                _isMuted = value;
+                _settings.IsMuted = value;
+                _settings.Save();
                 OnPropertyChanged();
             }
         }
