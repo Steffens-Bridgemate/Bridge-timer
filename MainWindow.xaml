@@ -63,10 +63,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Viewbox Grid.Row="2" Stretch="Uniform" Margin="4,2,8,2">
-            <Grid Name="grdMessage">
+            <Grid Name="grdMessage" >
                 <TextBlock Text="{Binding ChangeMessage}"
-                       TextAlignment="Center"
-                       FontSize="20">
+                           TextAlignment="Center"
+                           FontSize="20">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
                     </TextBlock.Foreground>
@@ -84,10 +84,13 @@
             </Grid>
         </Viewbox>
 
-        <UniformGrid Rows="1" Grid.Row="0">
+        <UniformGrid x:Name="grdLogo" Rows="1" Grid.Row="0">
             <Viewbox x:Name="vbLogo" 
                  Stretch="Uniform" HorizontalAlignment="Left">
-                <Image Source="{Binding ElementName=txtFirstDigit,Path=Foreground.Color,Converter={StaticResource logoConverter}}"
+                <Image x:Name="imgLogo" 
+                       Source="{Binding ElementName=txtFirstDigit,
+                                        Path=Foreground.Color,
+                                        Converter={StaticResource logoConverter}}"
                    Margin="20,20,2,2"
                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
             </Viewbox>

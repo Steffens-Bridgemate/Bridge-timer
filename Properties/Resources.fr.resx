@@ -153,6 +153,12 @@
   <data name="Header_Timings" xml:space="preserve">
     <value>Temps</value>
   </data>
+  <data name="Label_ChangeMessage" xml:space="preserve">
+    <value>Annonce de changer sans numéro de marche:</value>
+  </data>
+  <data name="Label_ChangeMessageForRound" xml:space="preserve">
+    <value>Annonce pour marche no {0}:</value>
+  </data>
   <data name="Label_ChangeTime" xml:space="preserve">
     <value>Période de changement:</value>
   </data>
@@ -161,6 +167,9 @@
   </data>
   <data name="Label_ChangeTimeForeground" xml:space="preserve">
     <value>Changement chifres:</value>
+  </data>
+  <data name="Label_EndOfEventMessage" xml:space="preserve">
+    <value>Annonce après la marche dernière</value>
   </data>
   <data name="Label_NumberOfRounds" xml:space="preserve">
     <value>Nombre de manches:</value>

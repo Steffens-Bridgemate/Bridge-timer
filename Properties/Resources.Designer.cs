@@ -169,6 +169,24 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wisseltekst zonder rondeaanduiding:.
+        /// </summary>
+        public static string Label_ChangeMessage {
+            get {
+                return ResourceManager.GetString("Label_ChangeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wisseltekst voor ronde {0}:.
+        /// </summary>
+        public static string Label_ChangeMessageForRound {
+            get {
+                return ResourceManager.GetString("Label_ChangeMessageForRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wisseltijd:.
         /// </summary>
         public static string Label_ChangeTime {
@@ -192,6 +210,15 @@ namespace BridgeTimer.Properties {
         public static string Label_ChangeTimeForeground {
             get {
                 return ResourceManager.GetString("Label_ChangeTimeForeground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tekst na de laatste ronde:.
+        /// </summary>
+        public static string Label_EndOfEventMessage {
+            get {
+                return ResourceManager.GetString("Label_EndOfEventMessage", resourceCulture);
             }
         }
         

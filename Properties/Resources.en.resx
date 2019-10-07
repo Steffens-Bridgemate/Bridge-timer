@@ -153,6 +153,12 @@
   <data name="Header_Timings" xml:space="preserve">
     <value>Timings</value>
   </data>
+  <data name="Label_ChangeMessage" xml:space="preserve">
+    <value>Message to change withour round number:</value>
+  </data>
+  <data name="Label_ChangeMessageForRound" xml:space="preserve">
+    <value>Message to change for round {0}:</value>
+  </data>
   <data name="Label_ChangeTime" xml:space="preserve">
     <value>Change period:</value>
   </data>
@@ -161,6 +167,9 @@
   </data>
   <data name="Label_ChangeTimeForeground" xml:space="preserve">
     <value>Change period digits:</value>
+  </data>
+  <data name="Label_EndOfEventMessage" xml:space="preserve">
+    <value>Message after the last round:</value>
   </data>
   <data name="Label_NumberOfRounds" xml:space="preserve">
     <value>Number of rounds:</value>

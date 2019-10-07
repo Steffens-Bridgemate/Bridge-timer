@@ -1,4 +1,5 @@
-﻿using BridgeTimer.Settings;
+﻿using BridgeTimer.Extensions;
+using BridgeTimer.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,6 +22,8 @@ namespace BridgeTimer
             void Notify(CountDownTimer.ThresholdReached threshold);
             bool IsMuted { get; set; }
         }
+
+        public const int MaxChangeMessageLenght = 45;
 
         public event EventHandler<SettingsRequestedEventArgs>? SettingsRequested;
         public event EventHandler? CloseRequested;
@@ -335,7 +338,7 @@ namespace BridgeTimer
             }
             set
             {
-                _settings.CustomEndOfEventMessage = value;
+                _settings.CustomEndOfEventMessage = value.PadLeftAndRight(MaxChangeMessageLenght);
                 _settings.Save();
                 OnPropertyChanged();
             }
@@ -352,7 +355,7 @@ namespace BridgeTimer
             }
             set
             {
-                _settings.CustomChangeMessage = value;
+                _settings.CustomChangeMessage = value.PadLeftAndRight(MaxChangeMessageLenght);
                 _settings.Save();
                 OnPropertyChanged();
             }
@@ -377,7 +380,7 @@ namespace BridgeTimer
                 }
                 if (!value.Contains("{0}"))
                     value += " {0}";
-                _settings.CustomChangeMessageForRound = value;
+                _settings.CustomChangeMessageForRound = value.PadLeftAndRight(MaxChangeMessageLenght);
                 _settings.Save();
                 OnPropertyChanged();
             }

@@ -16,6 +16,7 @@
         Name="SettingsRoot">
     <Grid Margin="8">
         <Grid.Resources>
+            <local:TrimConverter x:Key="TrimConverter"/>
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="Margin" Value="4"/>
@@ -369,17 +370,17 @@
                             </Style>
                         </Grid.Resources>
                         <Label Grid.Row="0" Grid.Column="0"
-                               Content="Wisseltekst voor ronde {0}:"/>
+                               Content="{Binding Source={x:Static resx:Resources.Label_ChangeMessageForRound}}"/>
                         <TextBox Grid.Row="0" Grid.Column="1" MaxLength="52"
-                                 Text="{Binding CustomChangeTextForRound}"/>
+                                 Text="{Binding CustomChangeTextForRound,Converter={StaticResource TrimConverter}}"/>
                         <Label Grid.Row="1" Grid.Column="0"
-                               Content="Wisseltekst zonder rondeaanduiding:"/>
+                               Content="{Binding Source={x:Static resx:Resources.Label_ChangeMessage}}"/>
                         <TextBox Grid.Row="1" Grid.Column="1"
-                                 Text="{Binding CustomChangeText}"/>
+                                 Text="{Binding CustomChangeText,Converter={StaticResource TrimConverter}}"/>
                         <Label Grid.Row="2" Grid.Column="0"
-                               Content="Tekst na de laatste ronde:"/>
+                               Content="{Binding Source={x:Static resx:Resources.Label_EndOfEventMessage}}"/>
                         <TextBox Grid.Row="2" Grid.Column="1"
-                                 Text="{Binding CustomTextAfterLastRound}"/>
+                                 Text="{Binding CustomTextAfterLastRound,Converter={StaticResource TrimConverter}}"/>
                     </Grid>
                 </Grid>
 
