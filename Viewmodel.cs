@@ -336,6 +336,8 @@ namespace BridgeTimer
             set
             {
                 _settings.CustomEndOfEventMessage = value;
+                _settings.Save();
+                OnPropertyChanged();
             }
         }
 
@@ -351,6 +353,8 @@ namespace BridgeTimer
             set
             {
                 _settings.CustomChangeMessage = value;
+                _settings.Save();
+                OnPropertyChanged();
             }
         }
 

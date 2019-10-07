@@ -365,12 +365,12 @@
                                 <Setter Property="FontSize" Value="18"/>
                                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                                 <Setter Property="Padding" Value="4"/>
-                                <Setter Property="MaxLength" Value="50"/>
+                                <Setter Property="MaxLength" Value="55"/>
                             </Style>
                         </Grid.Resources>
                         <Label Grid.Row="0" Grid.Column="0"
                                Content="Wisseltekst voor ronde {0}:"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" 
+                        <TextBox Grid.Row="0" Grid.Column="1" MaxLength="52"
                                  Text="{Binding CustomChangeTextForRound}"/>
                         <Label Grid.Row="1" Grid.Column="0"
                                Content="Wisseltekst zonder rondeaanduiding:"/>
