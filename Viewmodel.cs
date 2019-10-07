@@ -60,6 +60,7 @@ namespace BridgeTimer
             ConfirmSettingsCommand = new RelayCommand<object>(HandleNewSettings);
             RestoreTimingDefaultsCommand = new RelayCommand<object>(RestoreTimingDefaults);
             RestoreColorDefaultsCommand = new RelayCommand<object>(RestoreColorDefaults);
+            RestoreTextDefaultsCommand = new RelayCommand<object>(RestoreTextDefaults);
 
             TimeLeft = "0:00";
 
@@ -305,10 +306,24 @@ namespace BridgeTimer
             OnPropertyChanged(nameof(ChangeTimeForeground));
             OnPropertyChanged(nameof(CurrentStage));
         }
+
+        public RelayCommand<object> RestoreTextDefaultsCommand { get; }
+
+        private void RestoreTextDefaults(object obj)
+        {
+            CustomChangeText = string.Empty;
+            CustomChangeTextForRound = string.Empty;
+            CustomTextAfterLastRound = string.Empty;
+
+            OnPropertyChanged(nameof(CustomChangeText));
+            OnPropertyChanged(nameof(CustomChangeTextForRound));
+            OnPropertyChanged(nameof(CustomTextAfterLastRound));
+        }
+
         #endregion
 
         #region Settings
-        
+
         public string CustomTextAfterLastRound
         {
             get
