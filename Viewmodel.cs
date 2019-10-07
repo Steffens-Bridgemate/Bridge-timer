@@ -49,7 +49,7 @@ namespace BridgeTimer
             timer.CurrentTime += OnCurrentTime;
             timer.Reinit();
 
-            controlPanelTimer = new Timer(7500);
+            controlPanelTimer = new Timer(6000);
             controlPanelTimer.Elapsed += ControlPanelTimer_Elapsed;
             controlPanelTimer.AutoReset=false;
 
@@ -192,6 +192,7 @@ namespace BridgeTimer
         public void ShowControlPanel()
         {
             HideControlPanel=false;
+            controlPanelTimer.Stop();
             controlPanelTimer.Start();
         }
 
