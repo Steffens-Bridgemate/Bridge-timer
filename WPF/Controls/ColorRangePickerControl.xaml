@@ -22,15 +22,23 @@
                Visibility="Collapsed"/>
         <ListBox Grid.Column="1"
                  SelectedItem="{Binding ElementName=RangePickerRoot,Path=SelectedColor,Mode=TwoWay}"
-                 ItemsSource="{Binding ElementName=RangePickerRoot,Path=Colors}">
+                 ItemsSource="{Binding ElementName=RangePickerRoot,Path=Colors}"
+                 FocusVisualStyle="{x:Null}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Visibility" Value="{Binding Converter={StaticResource colorToVisibilityConverter}}"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
+                    <UniformGrid Columns="7"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Rectangle Width="20" Height="20" Stroke="Black" StrokeThickness="1"
+                    <Rectangle Width="22" Height="22" Stroke="Black" StrokeThickness="1"
                                RadiusX="4" RadiusY="4"
                                Visibility="{Binding Converter={StaticResource colorToVisibilityConverter}}">
                         <Rectangle.Fill>
