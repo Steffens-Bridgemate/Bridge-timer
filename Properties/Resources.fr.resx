@@ -157,7 +157,7 @@
     <value>Changement chifres:</value>
   </data>
   <data name="Label_NumberOfRounds" xml:space="preserve">
-    <value>Nombre de tours:</value>
+    <value>Nombre de manches:</value>
   </data>
   <data name="Label_PlayingTimeHours" xml:space="preserve">
     <value>Jeux minutes:</value>
@@ -171,6 +171,9 @@
   <data name="Label_PlayTimeForeground" xml:space="preserve">
     <value>Jeux chifres:</value>
   </data>
+  <data name="Label_Round" xml:space="preserve">
+    <value>Manche</value>
+  </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Avertissement de fin de tour á:</value>
   </data>
@@ -181,13 +184,13 @@
     <value>Avertissement chifres:</value>
   </data>
   <data name="Message_EventEnded" xml:space="preserve">
-    <value>Ceci était le tour final</value>
+    <value>Ceci était la manche finale</value>
   </data>
   <data name="Message_TakeSeatsForRound" xml:space="preserve">
-    <value>Veuillez s'assoir pour tour {0}</value>
+    <value>Veuillez s'assoir pour manche {0}</value>
   </data>
   <data name="Message_TakeYourSeats" xml:space="preserve">
-    <value>Veuillez s'assoir pour le tour prochain</value>
+    <value>Veuillez s'assoir pour la manche prochaine</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Minuterie de Bridge</value>

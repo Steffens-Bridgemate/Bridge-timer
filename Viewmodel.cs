@@ -35,6 +35,7 @@ namespace BridgeTimer
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
             _isStopped = true;
+           
             notificators = new List<IThresholdNotification>();
 
             timer = new CountDownTimer(_settings.PlayTimeHours,
@@ -61,7 +62,9 @@ namespace BridgeTimer
             RestoreColorDefaultsCommand = new RelayCommand<object>(RestoreColorDefaults);
 
             TimeLeft = "0:00";
+
             notificators = thresholdNotificators.ToList();
+            notificators.ForEach(n => n.IsMuted = _settings.IsMuted);
 
             Hours = new ObservableCollection<int>(Enumerable.Range(0, 10));
             SelectedHours = _settings.PlayTimeHours;
@@ -112,8 +115,8 @@ namespace BridgeTimer
                     minutes = e.Minutes.ToString("00");
 
                 var hours = numberOfHours.ToString("00");
-                FirstDigit =hours[1];
-                SecondDigit = '-';
+                FirstDigit =char.MinValue;
+                SecondDigit =hours[1];
                 ThirdDigit = minutes[0];
                 FourthDigit = minutes[1];
             }
@@ -135,6 +138,7 @@ namespace BridgeTimer
                 _isStopped = true;
                 OnPropertyChanged(nameof(StartOrPauseCaption));
                 OnPropertyChanged(nameof(StopOrCloseCaption));
+                RoundDescription = $"{Properties.Resources.Label_Round} {e.CurrentRound}";
                 App.Current.Dispatcher.Invoke(() => CommandManager.InvalidateRequerySuggested());
                 return;
             }
@@ -149,7 +153,7 @@ namespace BridgeTimer
                 RoundDescription = timer.NumberOfRounds>0  && 
                                    e.CurrentRound<=timer.NumberOfRounds && 
                                    e.Threshold!= CountDownTimer.ThresholdReached.RoundEnded ? 
-                                        $"Ronde {e.CurrentRound}":
+                                        $"{Properties.Resources.Label_Round} {e.CurrentRound}":
                                         string.Empty;
 
                 if (e.CurrentRound <= 0)
@@ -284,6 +288,7 @@ namespace BridgeTimer
             OnPropertyChanged(nameof(SelectedMinutes));
             OnPropertyChanged(nameof(SelectedWarningMinutes));
             OnPropertyChanged(nameof(SelectedChangeMinutes));
+            OnPropertyChanged(nameof(SelectedNumberOfRounds));
         }
 
         public RelayCommand<object> RestoreColorDefaultsCommand { get; }
@@ -469,10 +474,6 @@ namespace BridgeTimer
             get { return _roundDescription; }
             set 
             { 
-                if(value==string.Empty)
-                {
-                    var x = 1;
-                }
                 _roundDescription = value;
                 OnPropertyChanged();
             }

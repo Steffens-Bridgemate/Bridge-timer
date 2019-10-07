@@ -223,6 +223,15 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ronde.
+        /// </summary>
+        public static string Label_Round {
+            get {
+                return ResourceManager.GetString("Label_Round", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waarschuwen voor einde ronde:.
         /// </summary>
         public static string Label_WarningMoment {

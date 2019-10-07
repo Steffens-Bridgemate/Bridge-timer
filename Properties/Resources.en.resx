@@ -171,6 +171,9 @@
   <data name="Label_PlayTimeForeground" xml:space="preserve">
     <value>Playing period digits:</value>
   </data>
+  <data name="Label_Round" xml:space="preserve">
+    <value>Round</value>
+  </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Warn for end of round at:</value>
   </data>

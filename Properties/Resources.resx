@@ -171,6 +171,9 @@
   <data name="Label_PlayTimeForeground" xml:space="preserve">
     <value>Speeltijd cijfers:</value>
   </data>
+  <data name="Label_Round" xml:space="preserve">
+    <value>Ronde</value>
+  </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Waarschuwen voor einde ronde:</value>
   </data>
