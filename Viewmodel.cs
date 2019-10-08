@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
@@ -167,7 +168,15 @@ namespace BridgeTimer
                     if (timer.CurrentRound > timer.NumberOfRounds)
                         ChangeMessage =CustomTextAfterLastRound;
                     else
-                        ChangeMessage = string.Format(CustomChangeTextForRound, e.CurrentRound);
+                        try
+                        {
+                            ChangeMessage = string.Format(CustomChangeTextForRound, e.CurrentRound);
+                        }
+                        catch (Exception)
+                        {
+                            ChangeMessage = CustomChangeText;
+                        }
+                      
                 }
                     
 
@@ -362,7 +371,6 @@ namespace BridgeTimer
             }
         }
 
-
         public string CustomChangeTextForRound
         {
             get 
@@ -381,6 +389,7 @@ namespace BridgeTimer
                 }
                 if (!value.Contains("{0}"))
                     value += " {0}";
+                value = Regex.Replace(value, @"{(?!0})|(?<!{0)}", string.Empty);
                 _settings.CustomChangeMessageForRound = value.PadLeftAndRight(MaxChangeMessageLenght);
                 _settings.Save();
                 OnPropertyChanged();
