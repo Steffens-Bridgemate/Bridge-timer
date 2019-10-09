@@ -69,18 +69,18 @@ namespace BridgeTimer.Settings
         public string? CustomChangeMessage { get; set; }
         public string? CustomEndOfEventMessage { get; set; }
        
-        public static string GetFullPath()
-        {
-            var appName = Assembly.GetExecutingAssembly().GetName().Name ?? 
-                          throw new NullReferenceException($"No name for the executing assembly found.");
-            var settingsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                                              appName);
+        //public static string GetFullPath()
+        //{
+        //    var appName = Assembly.GetExecutingAssembly().GetName().Name ?? 
+        //                  throw new NullReferenceException($"No name for the executing assembly found.");
+        //    var settingsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        //                                      appName);
          
-            var settingsFileName = $"{appName}.settings";
+        //    var settingsFileName = $"{appName}.settings";
 
-            return Path.Combine(settingsFolder,settingsFileName);
+        //    return Path.Combine(settingsFolder,settingsFileName);
 
-        }
+        //}
 
         public void RestoreTimingDefaults()
         {
@@ -103,7 +103,7 @@ namespace BridgeTimer.Settings
 
         public void Save()
         {
-            File.WriteAllText(GetFullPath(), JsonConvert.SerializeObject(new AppSettingsContainer(this)));
+            File.WriteAllText(App.GetFullAppDataPath(App.SettingsFilename), JsonConvert.SerializeObject(new AppSettingsContainer(this)));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Media;
 using System.Text;
 
@@ -18,15 +19,15 @@ namespace BridgeTimer
             switch(threshold)
             {
                 case CountDownTimer.ThresholdReached.RoundStarted:
-                    player.SoundLocation=(@"Sounds\roundstarted.wav");
+                    player.SoundLocation=(App.GetFullAppDataPath(App.RoundStartedSoundFile));
                     player.Play();
                     break;
                 case CountDownTimer.ThresholdReached.RoundEnded:
-                    player.SoundLocation = (@"Sounds\roundended.wav");
+                    player.SoundLocation = (App.GetFullAppDataPath(App.RoundEndedSoundFile));
                     player.Play();
                     break;
                 case CountDownTimer.ThresholdReached.EndOfRoundWarning:
-                    player.SoundLocation = (@"Sounds\warning.wav");
+                    player.SoundLocation = (App.GetFullAppDataPath(App.WarningSoundFile));
                     player.Play();
                     break;
             }

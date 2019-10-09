@@ -281,6 +281,7 @@ namespace BridgeTimer
         public RelayCommand<object> SettingsCommand { get; }
         private void EditSettings(object obj)
         {
+            CurrentStage = CountDownTimer.ThresholdReached.NotSet;
             SettingsRequested?.Invoke(this, new SettingsRequestedEventArgs());
             ShowControlPanel();
         }
@@ -288,8 +289,21 @@ namespace BridgeTimer
 
         private void HandleNewSettings(object parameter)
         {
-            timer.Reinit(SelectedHours, SelectedMinutes, SelectedWarningMinutes, SelectedChangeMinutes,SelectedNumberOfRounds);
-            OnPropertyChanged(nameof(CurrentStage));
+            var changer = new ColorChanger();
+           
+            changer.ChangeLogoColor(ColorChanger.Convert( PlayingTimeForeground), 
+                                    ColorChanger.Convert(PlayingTimeBackground),
+                                    App.RoundStartedLogoFile);
+            changer.ChangeLogoColor(ColorChanger.Convert(WarningTimeForeground),
+                                    ColorChanger.Convert(WarningTimeBackground),
+                                    App.WarningLogoFile);
+            changer.ChangeLogoColor(ColorChanger.Convert(ChangeTimeForeground),
+                                    ColorChanger.Convert(ChangeTimeBackground),
+                                    App.RoundEndedLogoFile);
+
+            timer.Reinit(SelectedHours, SelectedMinutes, SelectedWarningMinutes, SelectedChangeMinutes, SelectedNumberOfRounds);
+            CurrentStage= CountDownTimer.ThresholdReached.RoundStarted;
+            OnAllPropertiesChanged();
         }
 
         public RelayCommand<object> RestoreTimingDefaultsCommand { get; }
@@ -336,6 +350,47 @@ namespace BridgeTimer
         #endregion
 
         #region Settings
+
+        private string? _logoPath;
+
+        public string? LogoPath
+        {
+            get
+            {
+                switch(CurrentStage)
+                {
+                    case CountDownTimer.ThresholdReached.EndOfRoundWarning:
+                        return WarningLogoPath;
+                    case CountDownTimer.ThresholdReached.RoundStarted:
+                        return RoundStartedLogoPath;
+                    case CountDownTimer.ThresholdReached.RoundEnded:
+                        return RoundEndedLogoPath;
+                    default:
+                        return null; ;
+                }
+            }
+          
+        }
+
+
+
+        public string? RoundStartedLogoPath
+        {
+            get
+            {
+
+                return App.GetFullAppDataPath(App.RoundStartedLogoFile);
+                
+            }
+        }
+        public string RoundEndedLogoPath
+        {
+            get => App.GetFullAppDataPath(App.RoundEndedLogoFile);
+        }
+        public string WarningLogoPath
+        {
+            get => App.GetFullAppDataPath(App.WarningLogoFile);
+        }
 
         public string CustomTextAfterLastRound
         {
@@ -716,9 +771,8 @@ namespace BridgeTimer
                 if (value == _currentStage) return;
                 _currentStage = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(LogoPath));
             }
         }
-
-        
     }
 }

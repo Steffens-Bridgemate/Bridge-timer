@@ -31,6 +31,13 @@
                                                                      Path=DataContext.ChangeTimeForeground}"
                                          WarningGivenValue="{Binding Source={x:Reference Root},
                                                                      Path=DataContext.WarningTimeForeground}"/>
+        <local:ThresholdToStringConverter x:Key="logoPathConverter"
+                                          RoundStartedValue="{Binding Source={x:Reference Root},
+                                                                      Path=DataContext.RoundStartedLogoPath}"
+                                          RoundEndedValue="{Binding Source={x:Reference Root},
+                                                                    Path=DataContext.RoundEndedLogoPath}"
+                                          WarningGivenValue="{Binding Source={x:Reference Root},
+                                                                      Path=DataContext.WarningLogoPath}"/>
         <local:BoolToWindowStyleConverter x:Key="windowStyleConverter"
                                           TrueValue="None"
                                           FalseValue="ThreeDBorderWindow"/>
@@ -46,6 +53,8 @@
         <local:ColorToColorConverter x:Key="roundLabelConverter"
                                      TrueValue="Black"
                                      FalseValue="White"/>
+        <local:ImageConverter x:Key="imageConverter"/>
+        <local:ImageColorConverter x:Key="imageColorConverter"/>
     </Window.Resources>
     <Window.WindowStyle>
         <Binding Path="HideControlPanel" Converter="{StaticResource windowStyleConverter}"/>
@@ -85,20 +94,27 @@
         </Viewbox>
 
         <UniformGrid x:Name="grdLogo" Rows="1" Grid.Row="0">
+            <!--<Viewbox x:Name="vbLogo" 
+                 Stretch="Uniform" HorizontalAlignment="Left">
+                <Image x:Name="imgLogo" CacheMode="BitmapCache"
+                       Source="{Binding CurrentStage,
+                                        Converter={StaticResource logoPathConverter}}"
+                   Margin="20,20,2,2"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            </Viewbox>-->
             <Viewbox x:Name="vbLogo" 
                  Stretch="Uniform" HorizontalAlignment="Left">
                 <Image x:Name="imgLogo" 
-                       Source="{Binding ElementName=txtFirstDigit,
-                                        Path=Foreground.Color,
-                                        Converter={StaticResource logoConverter}}"
-                   Margin="20,20,2,2"
-                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                       Margin="20,20,2,2"
+                       VerticalAlignment="Top" HorizontalAlignment="Left"
+                       Source="{Binding LogoPath,Converter={StaticResource imageConverter}}">
+                   
+                </Image>
             </Viewbox>
             <Viewbox x:Name="vbRound" Stretch="Uniform" HorizontalAlignment="Right">
                 <TextBlock  Text="{Binding RoundDescription}" Margin="2,2,8,2">
                     <TextBlock.Foreground>
-                        <SolidColorBrush Color="{Binding ElementName=txtFirstDigit,Path=Foreground.Color, 
-                                                         Converter={StaticResource roundLabelConverter}}"/>
+                       <SolidColorBrush Color="{Binding CurrentStage,Converter={StaticResource foregroundConverter}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
             </Viewbox>

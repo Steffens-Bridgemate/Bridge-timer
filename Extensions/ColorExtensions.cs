@@ -7,6 +7,7 @@ namespace BridgeTimer
 {
     internal static class ColorExtensions
     {
+
         public static float GetBrightness(this Color color)
         {
             float num = ((float)color.R) / 255f;

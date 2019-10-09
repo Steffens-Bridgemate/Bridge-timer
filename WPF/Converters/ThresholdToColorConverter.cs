@@ -6,6 +6,10 @@ using System.Windows.Media;
 
 namespace BridgeTimer
 {
+
+    public class ThresholdToStringConverter:ThresholdConverter<string>
+    { }
+
     public class ThresholdToColorConverter:ThresholdConverter<Color>
     { }
 
