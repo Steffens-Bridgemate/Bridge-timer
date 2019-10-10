@@ -129,8 +129,14 @@
   <data name="Caption_Pause" xml:space="preserve">
     <value>Pauzeren</value>
   </data>
+  <data name="Caption_Play" xml:space="preserve">
+    <value>Afspelen</value>
+  </data>
   <data name="Caption_RestoreDefaults" xml:space="preserve">
     <value>Standaard</value>
+  </data>
+  <data name="Caption_Select" xml:space="preserve">
+    <value>Selecteren</value>
   </data>
   <data name="Caption_Settings" xml:space="preserve">
     <value>Instellen</value>
@@ -189,8 +195,17 @@
   <data name="Label_Round" xml:space="preserve">
     <value>Ronde</value>
   </data>
+  <data name="Label_RoundEndedSound" xml:space="preserve">
+    <value>Wisselsignaal:</value>
+  </data>
+  <data name="Label_RoundStartedSound" xml:space="preserve">
+    <value>Begin van de ronde signaal:</value>
+  </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Waarschuwen voor einde ronde:</value>
+  </data>
+  <data name="Label_WarningSound" xml:space="preserve">
+    <value>Waarschuwingssignaal:</value>
   </data>
   <data name="Label_WarningTimeBackground" xml:space="preserve">
     <value>Aflooptijd achtergrond:</value>
@@ -206,6 +221,12 @@
   </data>
   <data name="Message_TakeYourSeats" xml:space="preserve">
     <value>U kunt wisselen voor de volgende ronde</value>
+  </data>
+  <data name="Prompt_SelectSoundFile" xml:space="preserve">
+    <value>Selecteer een geluidsbestand</value>
+  </data>
+  <data name="SoundFile" xml:space="preserve">
+    <value>geluidsbestand</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Bridgeklok</value>

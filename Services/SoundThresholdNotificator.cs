@@ -20,17 +20,21 @@ namespace BridgeTimer
             {
                 case CountDownTimer.ThresholdReached.RoundStarted:
                     player.SoundLocation=(App.GetFullAppDataPath(App.RoundStartedSoundFile));
-                    player.Play();
                     break;
                 case CountDownTimer.ThresholdReached.RoundEnded:
                     player.SoundLocation = (App.GetFullAppDataPath(App.RoundEndedSoundFile));
-                    player.Play();
                     break;
                 case CountDownTimer.ThresholdReached.EndOfRoundWarning:
                     player.SoundLocation = (App.GetFullAppDataPath(App.WarningSoundFile));
-                    player.Play();
                     break;
             }
+
+            try
+            {
+                player.Play();
+            }
+            catch (Exception)
+            {}
         }
     }
 }

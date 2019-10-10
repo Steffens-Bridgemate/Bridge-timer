@@ -7,8 +7,8 @@
     <Description>Open source, free Bridge timer</Description>
     <ApplicationIcon>clock.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+    <FileVersion>1.0.0.3</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="appsettings.json" />
@@ -25,11 +25,20 @@
     <None Remove="Images\nosound2.ico" />
     <None Remove="Images\sound.ico" />
     <None Remove="Images\sound1.ico" />
+    <None Remove="Sounds\20065__euroblues__trainwhistle-sbb-re-420-euroblues.wav" />
+    <None Remove="Sounds\26385__roscoetoon__rr-cross5.wav" />
+    <None Remove="Sounds\324995__catspaw64__warning-signal.wav" />
+    <None Remove="Sounds\428631__satchdev__warning-sound.wav" />
+    <None Remove="Sounds\62588__benboncan__steel-bell.wav" />
     <None Remove="Sounds\62860__benboncan__bronze-bell-3.wav" />
     <None Remove="Sounds\66952__benboncan__boxing-bell-1.wav" />
+    <None Remove="Sounds\68999__guitarguy1985__airhorn-short.wav" />
     <None Remove="Sounds\69349__benboncan__stainless-steel-bowl-2.wav" />
     <None Remove="Sounds\69353__benboncan__stainless-steel-lid-1.wav" />
     <None Remove="Sounds\69354__benboncan__stainless-steel-lid-2.wav" />
+    <None Remove="Sounds\75252__benboncan__glass-lid-revisited.wav" />
+    <None Remove="Sounds\76925__benboncan__bingbong.wav" />
+    <None Remove="Sounds\80578__benboncan__nepalese-singing-bowl.wav" />
     <None Remove="Sounds\bronzebell1.wav" />
     <None Remove="Sounds\bronzebell2.wav" />
     <None Remove="Sounds\eightbells.wav" />
@@ -50,6 +59,33 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Bridgemate_logo_white.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\20065__euroblues__trainwhistle-sbb-re-420-euroblues.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\26385__roscoetoon__rr-cross5.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\324995__catspaw64__warning-signal.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\428631__satchdev__warning-sound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\62588__benboncan__steel-bell.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\68999__guitarguy1985__airhorn-short.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\75252__benboncan__glass-lid-revisited.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\76925__benboncan__bingbong.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\80578__benboncan__nepalese-singing-bowl.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Fonts\DS-DIGI-Regular.TTF">
@@ -94,11 +130,21 @@
     <Content Include="Sounds\warning.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Sounds\62860__benboncan__bronze-bell-3.wav" />
-    <Resource Include="Sounds\66952__benboncan__boxing-bell-1.wav" />
-    <Resource Include="Sounds\69349__benboncan__stainless-steel-bowl-2.wav" />
-    <Resource Include="Sounds\69353__benboncan__stainless-steel-lid-1.wav" />
-    <Resource Include="Sounds\69354__benboncan__stainless-steel-lid-2.wav" />
+    <Content Include="Sounds\62860__benboncan__bronze-bell-3.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\66952__benboncan__boxing-bell-1.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\69349__benboncan__stainless-steel-bowl-2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\69353__benboncan__stainless-steel-lid-1.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\69354__benboncan__stainless-steel-lid-2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Sounds\eightbells.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -125,6 +171,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
+    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

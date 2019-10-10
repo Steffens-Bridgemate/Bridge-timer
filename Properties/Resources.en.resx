@@ -129,8 +129,14 @@
   <data name="Caption_Pause" xml:space="preserve">
     <value>Pause</value>
   </data>
+  <data name="Caption_Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
   <data name="Caption_RestoreDefaults" xml:space="preserve">
     <value>Default</value>
+  </data>
+  <data name="Caption_Select" xml:space="preserve">
+    <value>Select</value>
   </data>
   <data name="Caption_Settings" xml:space="preserve">
     <value>Settings</value>
@@ -189,8 +195,17 @@
   <data name="Label_Round" xml:space="preserve">
     <value>Round</value>
   </data>
+  <data name="Label_RoundEndedSound" xml:space="preserve">
+    <value>Take your seats signal:</value>
+  </data>
+  <data name="Label_RoundStartedSound" xml:space="preserve">
+    <value>Start of round signal:</value>
+  </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Warn for end of round at:</value>
+  </data>
+  <data name="Label_WarningSound" xml:space="preserve">
+    <value>Warning signal:</value>
   </data>
   <data name="Label_WarningTimeBackground" xml:space="preserve">
     <value>Warning period background:</value>
@@ -206,6 +221,12 @@
   </data>
   <data name="Message_TakeYourSeats" xml:space="preserve">
     <value>Please be seated for the next round</value>
+  </data>
+  <data name="Prompt_SelectSoundFile" xml:space="preserve">
+    <value>Select a sound file</value>
+  </data>
+  <data name="SoundFile" xml:space="preserve">
+    <value>sound file</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Bridge timer</value>

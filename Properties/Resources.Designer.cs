@@ -97,11 +97,29 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Afspelen.
+        /// </summary>
+        public static string Caption_Play {
+            get {
+                return ResourceManager.GetString("Caption_Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Standaard.
         /// </summary>
         public static string Caption_RestoreDefaults {
             get {
                 return ResourceManager.GetString("Caption_RestoreDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecteren.
+        /// </summary>
+        public static string Caption_Select {
+            get {
+                return ResourceManager.GetString("Caption_Select", resourceCulture);
             }
         }
         
@@ -277,11 +295,38 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wisselsignaal:.
+        /// </summary>
+        public static string Label_RoundEndedSound {
+            get {
+                return ResourceManager.GetString("Label_RoundEndedSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Begin van de ronde signaal:.
+        /// </summary>
+        public static string Label_RoundStartedSound {
+            get {
+                return ResourceManager.GetString("Label_RoundStartedSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waarschuwen voor einde ronde:.
         /// </summary>
         public static string Label_WarningMoment {
             get {
                 return ResourceManager.GetString("Label_WarningMoment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waarschuwingssignaal:.
+        /// </summary>
+        public static string Label_WarningSound {
+            get {
+                return ResourceManager.GetString("Label_WarningSound", resourceCulture);
             }
         }
         
@@ -327,6 +372,24 @@ namespace BridgeTimer.Properties {
         public static string Message_TakeYourSeats {
             get {
                 return ResourceManager.GetString("Message_TakeYourSeats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecteer een geluidsbestand.
+        /// </summary>
+        public static string Prompt_SelectSoundFile {
+            get {
+                return ResourceManager.GetString("Prompt_SelectSoundFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to geluidsbestand.
+        /// </summary>
+        public static string SoundFile {
+            get {
+                return ResourceManager.GetString("SoundFile", resourceCulture);
             }
         }
         

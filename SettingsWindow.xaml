@@ -396,7 +396,6 @@
                     </Grid.RowDefinitions>
                     <Button Content="{Binding Source={x:Static resx:Resources.Caption_RestoreDefaults}}"
                             Command="{Binding RestoreSoundDefaultsCommand}"
-                            IsEnabled="False"
                             HorizontalAlignment="Left"/>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -411,15 +410,36 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock FontSize="20" TextWrapping="Wrap" Margin="4">
-                            <Run Text="U kunt de geluiden in het programma wijzigen door in de 'Sounds' map van de programmamap onderstaande bestanden te wijzigen:"/>
-                            <LineBreak/>
-                            <Run Text="roundstarted.wav"/>
-                            <LineBreak/>
-                            <Run Text="warning.wav"/>
-                            <LineBreak/>
-                            <Run Text="roundended.wav"/>
-                        </TextBlock>
+                        <UniformGrid Columns="2">
+                            <Label  Content="{Binding Source={x:Static resx:Resources.Label_RoundStartedSound}}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="{Binding Source={x:Static resx:Resources.Caption_Play}}"
+                                        Command="{Binding PlaySoundCommand}"
+                                        CommandParameter="{x:Static local:App.RoundStartedSoundFile}"/>
+                                <Button Content="{Binding Source={x:Static resx:Resources.Caption_Select}}"
+                                        Command="{Binding SelectSoundCommand}"
+                                        CommandParameter="{x:Static local:App.RoundStartedSoundFile}"/>
+                            </StackPanel>
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_WarningSound}}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="{Binding Source={x:Static resx:Resources.Caption_Play}}"
+                                        Command="{Binding PlaySoundCommand}"
+                                        CommandParameter="{x:Static local:App.WarningSoundFile}"/>
+                                <Button Content="{Binding Source={x:Static resx:Resources.Caption_Select}}"
+                                        Command="{Binding SelectSoundCommand}"
+                                        CommandParameter="{x:Static local:App.WarningSoundFile}"/>
+                            </StackPanel>
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_RoundEndedSound}}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="{Binding Source={x:Static resx:Resources.Caption_Play}}"
+                                        Command="{Binding PlaySoundCommand}"
+                                        CommandParameter="{x:Static local:App.RoundEndedSoundFile}"/>
+                                <Button Content="{Binding Source={x:Static resx:Resources.Caption_Select}}"
+                                        Command="{Binding SelectSoundCommand}"
+                                        CommandParameter="{x:Static local:App.RoundEndedSoundFile}"/>
+                            </StackPanel>
+                        </UniformGrid>
+                       
 
                     </Grid>
                 </Grid>

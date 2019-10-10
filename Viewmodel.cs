@@ -3,7 +3,9 @@ using BridgeTimer.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -54,17 +56,23 @@ namespace BridgeTimer
             controlPanelTimer.Elapsed += ControlPanelTimer_Elapsed;
             controlPanelTimer.AutoReset=false;
 
+            //Control panel
             ToggleSoundCommand = new RelayCommand<object>(ToggleSound);
             StartOrPauseCommand = new RelayCommand<object>(ToggleTimer);
             StopOrCloseCommand = new RelayCommand<object>(StopOrClose,
                                     (x) =>timer.RunningState!= CountDownTimer.State.Started);
             IncreasePlaytimeCommand = new RelayCommand<string>(IncreasePlaytime,s=>timer.RunningState!= CountDownTimer.State.Stopped);
             DecreasePlaytimeCommand = new RelayCommand<string>(DecreasePlaytime, s => timer.RunningState != CountDownTimer.State.Stopped);
+         
+            //Settings
             SettingsCommand = new RelayCommand<object>(EditSettings, obj => timer.RunningState == CountDownTimer.State.Stopped);
             ConfirmSettingsCommand = new RelayCommand<object>(HandleNewSettings);
             RestoreTimingDefaultsCommand = new RelayCommand<object>(RestoreTimingDefaults);
             RestoreColorDefaultsCommand = new RelayCommand<object>(RestoreColorDefaults);
             RestoreTextDefaultsCommand = new RelayCommand<object>(RestoreTextDefaults);
+            RestoreSoundDefaultsCommand = new RelayCommand<object?>(RestoreSoundDefaults);
+            PlaySoundCommand = new RelayCommand<string>(PlaySound);
+            SelectSoundCommand = new RelayCommand<string>(SelectSound);
 
             TimeLeft = "0:00";
 
@@ -209,14 +217,8 @@ namespace BridgeTimer
 
         #region Commands
 
-        public RelayCommand<object?> DoNothingCommand
-        {
-            get
-            {
-                return new RelayCommand<object?>((x) => x = null);
-            }
-        }
-    
+        #region  ControlPanel
+
         public RelayCommand<string> IncreasePlaytimeCommand { get; }
 
         private void  IncreasePlaytime(string seconds)
@@ -285,6 +287,11 @@ namespace BridgeTimer
             SettingsRequested?.Invoke(this, new SettingsRequestedEventArgs());
             ShowControlPanel();
         }
+
+        #endregion
+
+        #region Settings
+
         public RelayCommand<object> ConfirmSettingsCommand { get; }
 
         private void HandleNewSettings(object parameter)
@@ -305,6 +312,58 @@ namespace BridgeTimer
             CurrentStage= CountDownTimer.ThresholdReached.RoundStarted;
             OnAllPropertiesChanged();
         }
+
+        #region Sounds
+
+        public RelayCommand<object?> RestoreSoundDefaultsCommand { get; }
+        
+        private void RestoreSoundDefaults(object? obj)
+        {
+            App.CopyDefaultSoundFiles(overwrite: true);
+        }
+
+        public RelayCommand<string> PlaySoundCommand { get; }
+     
+        private void PlaySound(string soundFile)
+        {
+            if (!App.SoundFiles.Contains(soundFile))
+                return;
+
+            using var player = new SoundPlayer();
+           
+            player.SoundLocation =App.GetFullAppDataPath( soundFile);
+            try
+            {
+                player.Play();
+            }
+            catch (Exception)
+            {} 
+            
+        }
+
+        public RelayCommand<string> SelectSoundCommand { get; }
+
+        private void SelectSound(string soundFile)
+        {
+            if (!App.SoundFiles.Contains(soundFile))
+                return;
+
+            var newSoundFile = IO.IOUtil.GetFile(Properties.Resources.Prompt_SelectSoundFile,
+                                                 ".wav", IO.IOUtil.CreateFilter(".wav",
+                                                 Properties.Resources.SoundFile),
+                                                 defaultFolder:Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            if (newSoundFile == null || !File.Exists(newSoundFile))
+                return;
+
+            File.Copy(newSoundFile, App.GetFullAppDataPath(soundFile),overwrite:true);
+
+            PlaySound(soundFile);
+        }
+
+
+
+
+        #endregion
 
         public RelayCommand<object> RestoreTimingDefaultsCommand { get; }
 
@@ -349,9 +408,9 @@ namespace BridgeTimer
 
         #endregion
 
-        #region Settings
+        #endregion
 
-        private string? _logoPath;
+        #region Settings
 
         public string? LogoPath
         {

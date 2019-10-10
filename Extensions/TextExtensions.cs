@@ -22,5 +22,17 @@ namespace BridgeTimer.Extensions
 
             return $"{new string(' ', padLeft)}{text}{new string(' ', padRight)}";
         }
+
+        public static bool IsNullOrEmpty(this string text)
+        {
+            return string.IsNullOrEmpty(text);
+        }
+
+        public static bool IsNullOrWhiteSpace(this string text)
+        {
+            return string.IsNullOrWhiteSpace(text);
+        }
     }
+
+  
 }

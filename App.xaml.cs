@@ -36,6 +36,8 @@ namespace BridgeTimer
         public const string RoundEndedLogoFile = "roundended.png";
         public const string WarningLogoFile = "warning.png";
 
+        public static readonly List<string> SoundFiles = new List<string>(new[] { RoundStartedSoundFile, WarningSoundFile, RoundEndedSoundFile });
+
         public static string GetFullAppDataPath(string? fileName=null)
         {
             var appName = Assembly.GetExecutingAssembly().GetName().Name ??
@@ -49,6 +51,17 @@ namespace BridgeTimer
 
             return Path.Combine(settingsFolder, fileName);
 
+        }
+
+        public static void CopyDefaultSoundFiles(bool overwrite)
+        {
+            var settingsFolder = GetFullAppDataPath();
+
+            foreach (var soundfile in new[] { RoundStartedSoundFile, WarningSoundFile, RoundEndedSoundFile })
+            {
+                if (overwrite || !File.Exists(Path.Combine(settingsFolder, soundfile)))
+                    File.Copy(Path.Combine(SoundsFolder, soundfile), App.GetFullAppDataPath(soundfile),overwrite);
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -95,14 +108,7 @@ namespace BridgeTimer
                                              logoFileName);
             }
 
-
-
-
-            foreach (var soundfile in new[] {RoundStartedSoundFile,WarningSoundFile,RoundEndedSoundFile })
-            {
-                if (!File.Exists(Path.Combine(settingsFolder, soundfile)))
-                    File.Copy(Path.Combine(SoundsFolder,soundfile), App.GetFullAppDataPath(soundfile));
-            }
+            CopyDefaultSoundFiles(overwrite: false);
 
             var builder = new ConfigurationBuilder()
                .SetBasePath(settingsFolder)
