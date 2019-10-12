@@ -22,25 +22,29 @@ namespace BridgeTimer.Settings
     {
         public static AppSettings Default()
         {
-            return new AppSettings() 
-            { 
-                PlayTimeHours=DefaultTimings.hours,
+            return new AppSettings()
+            {
+                PlayTimeHours = DefaultTimings.hours,
                 PlayTimeMinutes = DefaultTimings.minutes,
                 WarningTime = DefaultTimings.warn,
                 ChangeTime = DefaultTimings.change,
-                NumberOfRounds=DefaultNumberOfRounds,
+                NumberOfRounds = DefaultNumberOfRounds,
                 PlayingTimeBackground = DefaultBackgrounds.total,
                 WarningTimeBackground = DefaultBackgrounds.warn,
                 ChangeTimeBackground = DefaultBackgrounds.change,
                 PlayingTimeForeground = DefaultForegrounds.total,
                 WarningTimeForeground = DefaultForegrounds.warn,
-                ChangeTimeForeground = DefaultForegrounds.change 
+                ChangeTimeForeground = DefaultForegrounds.change
             };
         }
 
-        public static (int hours, int minutes, int warn, int change) DefaultTimings => (0,30, 5, 2);
+        public static (int hours, int minutes, int warn, int change) DefaultTimings => (0, 30, 5, 2);
 
         public static int DefaultNumberOfRounds = 6;
+        private int warningTime;
+        private int playTimeMinutes;
+        private int changeTime;
+        private int playTimeHours;
 
         public static (Color total, Color warn, Color change) DefaultBackgrounds => (Colors.DarkGreen,
                                                                                     (Color)ColorConverter.ConvertFromString("#EB9605"),
@@ -48,13 +52,47 @@ namespace BridgeTimer.Settings
         public static (Color total, Color warn, Color change) DefaultForegrounds => (Colors.White,
                                                                                      Colors.White,
                                                                                      Colors.White);
-        public int PlayTimeHours { get; set; }
+        public int PlayTimeHours 
+        { 
+            get => playTimeHours;
+            set
+            {
+                playTimeHours = value;
+                WarningTime = warningTime;
+            }
+        }
 
-        public int PlayTimeMinutes { get; set; }
+        public int PlayTimeMinutes
+        {
+            get => playTimeMinutes;
+            set
+            {
+                if (PlayTimeHours <= 0)
+                    playTimeMinutes = Math.Max(2, value);
+                else
+                    playTimeMinutes = value;
+                WarningTime = warningTime;
+            }
+        }
 
-        public int WarningTime { get; set; }
 
-        public int ChangeTime { get; set; }
+        public int WarningTime
+        {
+            get => warningTime;
+            set
+            {
+                warningTime = Math.Min(PlayTimeHours * 60 + PlayTimeMinutes - 1, value);
+            }
+        }
+
+        public int ChangeTime
+        {
+            get => changeTime;
+            set
+            {
+                changeTime = Math.Min(1, value);
+            }
+        }
 
         public int NumberOfRounds { get; set; }
 
@@ -68,14 +106,14 @@ namespace BridgeTimer.Settings
         public string? CustomChangeMessageForRound { get; set; }
         public string? CustomChangeMessage { get; set; }
         public string? CustomEndOfEventMessage { get; set; }
-       
+
         //public static string GetFullPath()
         //{
         //    var appName = Assembly.GetExecutingAssembly().GetName().Name ?? 
         //                  throw new NullReferenceException($"No name for the executing assembly found.");
         //    var settingsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         //                                      appName);
-         
+
         //    var settingsFileName = $"{appName}.settings";
 
         //    return Path.Combine(settingsFolder,settingsFileName);

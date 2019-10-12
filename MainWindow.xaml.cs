@@ -32,6 +32,7 @@ namespace BridgeTimer
             viewmodel.SettingsRequested += EditSettings;
             viewmodel.CloseRequested +=(s,e)=> this.Close();
             this.DataContext = viewmodel;
+            viewmodel.SettingsCommand.Execute(null);
         }
 
         private void EditSettings(object? sender, Viewmodel.SettingsRequestedEventArgs e)

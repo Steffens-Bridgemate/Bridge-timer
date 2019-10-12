@@ -92,7 +92,6 @@ namespace BridgeTimer
 
             ChangeMessage = "Hello World!";
             HideMessage = true;
-          
         }
 
         private void ControlPanelTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -281,7 +280,7 @@ namespace BridgeTimer
         }
 
         public RelayCommand<object> SettingsCommand { get; }
-        private void EditSettings(object obj)
+        private void EditSettings(object? obj)
         {
             CurrentStage = CountDownTimer.ThresholdReached.NotSet;
             SettingsRequested?.Invoke(this, new SettingsRequestedEventArgs());
@@ -610,6 +609,7 @@ namespace BridgeTimer
                 _settings.PlayTimeHours = value;
                 _settings.Save();
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedWarningMinutes));
             }
         }
 
@@ -624,6 +624,7 @@ namespace BridgeTimer
                 _settings.PlayTimeMinutes = value;
                 _settings.Save();
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedWarningMinutes));
             }
         }
 

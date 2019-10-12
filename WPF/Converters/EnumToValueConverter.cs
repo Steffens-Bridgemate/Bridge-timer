@@ -41,7 +41,7 @@ namespace BridgeTimer
             DependencyProperty.Register(nameof(DefaultValue),
                                         typeof(TValue),
                                         typeof(EnumToValueConverter<TEnum,TValue>),
-                                        new PropertyMetadata(default(TValue)));
+                                        new PropertyMetadata(default(TValue)!));
 
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

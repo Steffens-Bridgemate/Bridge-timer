@@ -10,7 +10,7 @@ namespace BridgeTimer
     public class ImageConverter : IValueConverter
     {
         public object Convert(
-            object value, Type targetType, object parameter, CultureInfo culture)
+            object? value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return new BitmapImage();
 
@@ -18,7 +18,11 @@ namespace BridgeTimer
             bitmap.BeginInit();
             bitmap.CacheOption = BitmapCacheOption.OnLoad;
             bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+
+#nullable disable
             bitmap.UriSource = new Uri(value.ToString());
+#nullable enable
+
             bitmap.EndInit();
 
             return bitmap;

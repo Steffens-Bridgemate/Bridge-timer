@@ -82,21 +82,39 @@ namespace BridgeTimer
             return appSettings;
         }
 
-        public static void InitializeNumberOfRoundsFromStartupParameters(AppSettings appSettings)
+        public static void InitializeSettingsFromStartupParameters(AppSettings appSettings)
         {
             if (appSettings == null) throw new ArgumentNullException(nameof(appSettings));
 
             var args =Environment.GetCommandLineArgs();
 
-            var x = Parser.Default.ParseArguments<StartupOptions>(args);
-
             var options= Parser.Default.ParseArguments<StartupOptions>(args).WithParsed<StartupOptions>(opt=>
                 {
+                    bool doSave = false;
                     if(opt.NumberOfRounds.HasValue)
                     {
                         appSettings.NumberOfRounds = opt.NumberOfRounds.Value;
-                        appSettings.Save();
+                        doSave=true;
                     }
+                    if(opt.PlayTime.HasValue)
+                    {
+                        var totalTime = TimeSpan.FromMinutes(opt.PlayTime.Value);
+                        appSettings.PlayTimeHours = totalTime.Hours;
+                        appSettings.PlayTimeMinutes = totalTime.Minutes;
+
+                        if(opt.WarningTime.HasValue)
+                        {
+                            appSettings.WarningTime = opt.WarningTime.Value;
+                        }
+                        doSave=true;
+                    }
+                    if(opt.ChangeTime.HasValue)
+                    {
+                        appSettings.ChangeTime = opt.ChangeTime.Value;
+                        doSave=true;
+                    }
+
+                    if (doSave) appSettings.Save();
                 });
             
         }
@@ -151,7 +169,7 @@ namespace BridgeTimer
 
             var appSettings = GetAppSettings(settingsFolder);
 
-            InitializeNumberOfRoundsFromStartupParameters(appSettings);
+            InitializeSettingsFromStartupParameters(appSettings);
 
             InitializeLogo(appSettings, settingsFolder);
            
