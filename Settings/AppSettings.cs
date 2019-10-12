@@ -58,6 +58,7 @@ namespace BridgeTimer.Settings
             set
             {
                 playTimeHours = value;
+                PlayTimeMinutes = playTimeMinutes;
                 WarningTime = warningTime;
             }
         }

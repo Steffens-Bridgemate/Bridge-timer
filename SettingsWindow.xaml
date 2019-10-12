@@ -84,16 +84,16 @@
                     <UniformGrid Columns="2" Grid.Row="1">
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayingTimeHours}}"/>
                         <ComboBox ItemsSource="{Binding Hours}"
-                                  SelectedItem="{Binding SelectedHours}"/>
+                                  SelectedItem="{Binding SelectedHours,Mode=TwoWay}"/>
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayingTimeMinutes}}"/>
                         <ComboBox ItemsSource="{Binding Minutes}"
-                                  SelectedItem="{Binding SelectedMinutes}"/>
+                                  SelectedItem="{Binding SelectedMinutes,Mode=TwoWay}"/>
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_WarningMoment}}"/>
                         <ComboBox ItemsSource="{Binding WarningMinutes}"
-                                  SelectedItem="{Binding SelectedWarningMinutes}"/>
+                                  SelectedItem="{Binding SelectedWarningMinutes,Mode=TwoWay}"/>
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_ChangeTime}}"/>
                         <ComboBox ItemsSource="{Binding ChangeMinutes}"
-                                  SelectedItem="{Binding SelectedChangeMinutes}"/>
+                                  SelectedItem="{Binding SelectedChangeMinutes,Mode=TwoWay}"/>
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_NumberOfRounds}}"/>
                         <ComboBox ItemsSource="{Binding NumbersOfRounds}"
                                   SelectedItem="{Binding SelectedNumberOfRounds}"/>

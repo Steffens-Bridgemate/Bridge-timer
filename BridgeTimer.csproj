@@ -7,8 +7,9 @@
     <Description>Open source, free Bridge timer</Description>
     <ApplicationIcon>clock.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <FileVersion>1.0.0.3</FileVersion>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
+    <FileVersion>1.0.0.4</FileVersion>
+    <Copyright />
   </PropertyGroup>
   <ItemGroup>
     <None Remove="appsettings.json" />

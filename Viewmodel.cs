@@ -609,6 +609,7 @@ namespace BridgeTimer
                 _settings.PlayTimeHours = value;
                 _settings.Save();
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedMinutes));
                 OnPropertyChanged(nameof(SelectedWarningMinutes));
             }
         }
