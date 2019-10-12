@@ -1,7 +1,9 @@
 Welcome to the installation application for the Bridgemate Timer.
 
 This program does as its title says: it can be used to help bridge players to finish their boards against an opponent on time.
+The program is highly configurable. Extra sound files will be copied to the My Document\Bridge Timer folder.
 
 If you think the application can be improved there are two ways open to you:
 1. Improve the code yourself by downloading the sources from https://github.com/Steffens-Bridgemate/Bridge-timer
+
 2. Make a suggestion to the author: steffens@bridgemate.nl

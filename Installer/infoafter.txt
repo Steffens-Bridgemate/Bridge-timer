@@ -1,2 +1,4 @@
 Bridge Timer has been succesfully installed on your computer.
 May its use bring you great satisfaction!
+
+Reminder: extra sound files have been copied to the My Documents\Bridge Timer folder.
