@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <Authors>André Steffens</Authors>
     <Description>Open source, free Bridge timer</Description>
-    <ApplicationIcon>clock.ico</ApplicationIcon>
+    <ApplicationIcon>bridge timer.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <AssemblyVersion>1.0.0.4</AssemblyVersion>
     <FileVersion>1.0.0.4</FileVersion>
