@@ -165,6 +165,8 @@ namespace BridgeTimer
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
             var settingsFolder = GetSettingsFolder();
 
             var appSettings = GetAppSettings(settingsFolder);
