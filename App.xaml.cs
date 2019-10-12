@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using CommandLine;
 
 namespace BridgeTimer
 {
@@ -53,42 +54,66 @@ namespace BridgeTimer
 
         }
 
-        public static void CopyDefaultSoundFiles(bool overwrite)
+        public static string GetSettingsFolder()
         {
-            var settingsFolder = GetFullAppDataPath();
-
-            foreach (var soundfile in new[] { RoundStartedSoundFile, WarningSoundFile, RoundEndedSoundFile })
-            {
-                if (overwrite || !File.Exists(Path.Combine(settingsFolder, soundfile)))
-                    File.Copy(Path.Combine(SoundsFolder, soundfile), App.GetFullAppDataPath(soundfile),overwrite);
-            }
-        }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-         
             var settingsFolder = App.GetFullAppDataPath() ?? throw new NullReferenceException("No path for the settings file was defined.");
 
             if (!Directory.Exists(settingsFolder))
                 Directory.CreateDirectory(settingsFolder);
 
-            var settingsFile = Path.Combine(settingsFolder,SettingsFilename);
-            if(!File.Exists(settingsFile))
+            return settingsFolder;
+        }
+
+        public static AppSettings GetAppSettings(string settingsFolder)
+        {
+            if (!Directory.Exists(settingsFolder))
+                throw new DirectoryNotFoundException(settingsFolder);
+
+            var settingsFile = Path.Combine(settingsFolder, SettingsFilename);
+            if (!File.Exists(settingsFile))
             {
-                var settings =new AppSettingsContainer( AppSettings.Default());
-                File.WriteAllText(settingsFile, JsonConvert.SerializeObject(settings,Formatting.Indented));
+                var settings = new AppSettingsContainer(AppSettings.Default());
+                File.WriteAllText(settingsFile, JsonConvert.SerializeObject(settings, Formatting.Indented));
             }
 
             var settingLines = File.ReadAllText(settingsFile);
             var container = JsonConvert.DeserializeObject<AppSettingsContainer>(settingLines);
             var appSettings = container.AppSettings;
-            var colorChanger = new ColorChanger();
+            return appSettings;
+        }
 
+        public static void InitializeNumberOfRoundsFromStartupParameters(AppSettings appSettings)
+        {
+            if (appSettings == null) throw new ArgumentNullException(nameof(appSettings));
+
+            var args =Environment.GetCommandLineArgs();
+
+            var x = Parser.Default.ParseArguments<StartupOptions>(args);
+
+            var options= Parser.Default.ParseArguments<StartupOptions>(args).WithParsed<StartupOptions>(opt=>
+                {
+                    if(opt.NumberOfRounds.HasValue)
+                    {
+                        appSettings.NumberOfRounds = opt.NumberOfRounds.Value;
+                        appSettings.Save();
+                    }
+                });
+            
+        }
+
+        public static void InitializeLogo(AppSettings appSettings, string settingsFolder)
+        {
+            if (appSettings == null)
+                throw new ArgumentNullException(nameof(appSettings));
+            if (!Directory.Exists(settingsFolder))
+                throw new DirectoryNotFoundException(settingsFolder);
+
+            var colorChanger = new ColorChanger();
             var logoFileName = Path.Combine(settingsFolder, RoundStartedLogoFile);
             if (!File.Exists(logoFileName))
             {
-                colorChanger.ChangeLogoColor(ColorChanger.Convert( appSettings.PlayingTimeForeground),
-                                             ColorChanger.Convert( appSettings.PlayingTimeBackground), 
+                colorChanger.ChangeLogoColor(ColorChanger.Convert(appSettings.PlayingTimeForeground),
+                                             ColorChanger.Convert(appSettings.PlayingTimeBackground),
                                              logoFileName);
             }
 
@@ -107,7 +132,29 @@ namespace BridgeTimer
                                              ColorChanger.Convert(appSettings.ChangeTimeBackground),
                                              logoFileName);
             }
+        }
 
+        public static void CopyDefaultSoundFiles(bool overwrite)
+        {
+            var settingsFolder = GetFullAppDataPath();
+
+            foreach (var soundfile in new[] { RoundStartedSoundFile, WarningSoundFile, RoundEndedSoundFile })
+            {
+                if (overwrite || !File.Exists(Path.Combine(settingsFolder, soundfile)))
+                    File.Copy(Path.Combine(SoundsFolder, soundfile), App.GetFullAppDataPath(soundfile),overwrite);
+            }
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var settingsFolder = GetSettingsFolder();
+
+            var appSettings = GetAppSettings(settingsFolder);
+
+            InitializeNumberOfRoundsFromStartupParameters(appSettings);
+
+            InitializeLogo(appSettings, settingsFolder);
+           
             CopyDefaultSoundFiles(overwrite: false);
 
             var builder = new ConfigurationBuilder()
