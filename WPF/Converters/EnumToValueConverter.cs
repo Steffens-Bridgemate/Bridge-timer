@@ -28,6 +28,21 @@ namespace BridgeTimer
                                         new PropertyMetadata(defaultValue:new Dictionary<TEnum,TValue>()));
 
 
+
+
+        public TValue DefaultValue
+        {
+            get { return (TValue)GetValue(DefaultValueProperty); }
+            set { SetValue(DefaultValueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DefaultValue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DefaultValueProperty =
+            DependencyProperty.Register(nameof(DefaultValue),
+                                        typeof(TValue),
+                                        typeof(EnumToValueConverter<TEnum,TValue>),
+                                        new PropertyMetadata(default(TValue)));
+
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!typeof(TEnum).IsEnum)
@@ -35,7 +50,7 @@ namespace BridgeTimer
             
             var key = (TEnum) value;
 
-            return Conversions.SafeGet(key);
+            return Conversions.SafeGet(key,DefaultValue);
 
         }
 

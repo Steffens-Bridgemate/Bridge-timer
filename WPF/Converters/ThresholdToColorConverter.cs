@@ -40,8 +40,6 @@ namespace BridgeTimer
 
         }
 
-
-
         public TValue WarningGivenValue
         {
             get { return (TValue)GetValue(WarningGivenValueProperty); }

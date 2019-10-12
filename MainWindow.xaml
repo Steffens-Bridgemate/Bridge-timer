@@ -23,7 +23,8 @@
                                          RoundEndedValue="{Binding Source={x:Reference Root},
                                                                      Path=DataContext.ChangeTimeBackground}"
                                          WarningGivenValue="{Binding Source={x:Reference Root},
-                                                                     Path=DataContext.WarningTimeBackground}"/>
+                                                                     Path=DataContext.WarningTimeBackground}"
+                                         DefaultValue="LightGray"/>
         <local:ThresholdToColorConverter x:Key="foregroundConverter"
                                          RoundStartedValue="{Binding Source={x:Reference Root},
                                                                      Path=DataContext.PlayingTimeForeground}"

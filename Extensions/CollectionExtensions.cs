@@ -6,11 +6,13 @@ namespace BridgeTimer
 {
     public static class CollectionExtensions
     {
-        public static TValue SafeGet<TKey,TValue>(this IDictionary<TKey,TValue> dictionary, TKey key)
+        public static TValue SafeGet<TKey,TValue>(this IDictionary<TKey,TValue> dictionary,
+                                                  TKey key,
+                                                  TValue defaultValue=default(TValue))
             where TKey:notnull  
         {
             if (!dictionary.ContainsKey(key))
-                return default(TValue)!;
+                return defaultValue;
             else
                 return dictionary[key];
         }
