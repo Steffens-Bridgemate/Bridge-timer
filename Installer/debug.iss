@@ -1,25 +1,28 @@
 ; BEGIN ISPPBUILTINS.ISS
 
 
+
+
 ; END ISPPBUILTINS.ISS
 
 ; This script was created by ISTool
 ; http://www.lerstad.com/istool/                                                                  
 
 ;Comment the line below to get an installer that is unsigned.
-;#define Sign
 
 [_ISTool]
 UseAbsolutePaths=false
 
 [Setup]
+ SignTool=DigicertSHA1 $f
+ SignTool=DigicertSHA256 $f
 AppID=BridgeTimer 
 AppName=Bridge Timer
 AppVerName= 1.0.0.3
 AppCopyright=
 UsePreviousAppDir=False
 DefaultDirName={commonpf}\Bridge Timer
-DefaultGroupName={commonpf}\Bridge Timer
+DefaultGroupName=Bridge Timer
 ExtraDiskSpaceRequired=10000000
 AppPublisherURL=www.bridgemate.com
 OutputDir=Installer
@@ -57,6 +60,7 @@ Name: {app}\Images
 
 [Files]
 Source: ..\bin\Release\netcoreapp3.0\publish\winx64\*.*; DestDir: {app}; Flags:recursesubdirs
+Source: ..\bin\Release\netcoreapp3.0\publish\winx64\BridgeTimer.exe; DestDir:{app}; Flags:sign
 Source: InstallerSounds\*.*;DestDir:{userdocs}\Bridge Timer
 
 [Icons]  

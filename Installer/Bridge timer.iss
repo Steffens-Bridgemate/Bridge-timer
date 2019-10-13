@@ -23,7 +23,7 @@ AppVerName= 1.0.0.3
 AppCopyright=
 UsePreviousAppDir=False
 DefaultDirName={commonpf}\{#Name}
-DefaultGroupName={commonpf}\{#Name}
+DefaultGroupName={#Name}
 ExtraDiskSpaceRequired=10000000
 AppPublisherURL=www.bridgemate.com
 OutputDir=Installer
@@ -61,6 +61,7 @@ Name: {app}\Images
 
 [Files]
 Source: ..\bin\Release\netcoreapp3.0\publish\winx64\*.*; DestDir: {app}; Flags:recursesubdirs
+Source: ..\bin\Release\netcoreapp3.0\publish\winx64\BridgeTimer.exe; DestDir:{app}; Flags:sign
 Source: InstallerSounds\*.*;DestDir:{userdocs}\{#Name}
 
 [Icons]  
