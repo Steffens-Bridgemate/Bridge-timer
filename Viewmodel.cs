@@ -17,6 +17,8 @@ namespace BridgeTimer
 {
     public class Viewmodel : NotifyingObject
     {
+        private static NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public class SettingsRequestedEventArgs : EventArgs
         { }
 
@@ -344,19 +346,28 @@ namespace BridgeTimer
 
         private void SelectSound(string soundFile)
         {
-            if (!App.SoundFiles.Contains(soundFile))
-                return;
+            try
+            {
+                if (!App.SoundFiles.Contains(soundFile))
+                    return;
 
-            var newSoundFile = IO.IOUtil.GetFile(Properties.Resources.Prompt_SelectSoundFile,
-                                                 ".wav", IO.IOUtil.CreateFilter(".wav",
-                                                 Properties.Resources.SoundFile),
-                                                 defaultFolder:Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-            if (newSoundFile == null || !File.Exists(newSoundFile))
-                return;
+                var newSoundFile = IO.IOUtil.GetFile(Properties.Resources.Prompt_SelectSoundFile,
+                                                     ".wav", IO.IOUtil.CreateFilter(".wav",
+                                                     Properties.Resources.SoundFile),
+                                                     defaultFolder: Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                if (newSoundFile == null || !File.Exists(newSoundFile))
+                    return;
 
-            File.Copy(newSoundFile, App.GetFullAppDataPath(soundFile),overwrite:true);
+                File.Copy(newSoundFile, App.GetFullAppDataPath(soundFile), overwrite: true);
 
-            PlaySound(soundFile);
+                PlaySound(soundFile);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                
+            }
+           
         }
 
 

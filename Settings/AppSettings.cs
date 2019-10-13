@@ -10,6 +10,9 @@ namespace BridgeTimer.Settings
 {
     public class AppSettingsContainer
     {
+
+        private static NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public AppSettingsContainer(AppSettings settings)
         {
             AppSettings = settings;
@@ -20,6 +23,8 @@ namespace BridgeTimer.Settings
 
     public class AppSettings
     {
+        private static NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public static AppSettings Default()
         {
             return new AppSettings()
@@ -108,19 +113,6 @@ namespace BridgeTimer.Settings
         public string? CustomChangeMessage { get; set; }
         public string? CustomEndOfEventMessage { get; set; }
 
-        //public static string GetFullPath()
-        //{
-        //    var appName = Assembly.GetExecutingAssembly().GetName().Name ?? 
-        //                  throw new NullReferenceException($"No name for the executing assembly found.");
-        //    var settingsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        //                                      appName);
-
-        //    var settingsFileName = $"{appName}.settings";
-
-        //    return Path.Combine(settingsFolder,settingsFileName);
-
-        //}
-
         public void RestoreTimingDefaults()
         {
             PlayTimeHours = DefaultTimings.hours;
@@ -142,7 +134,17 @@ namespace BridgeTimer.Settings
 
         public void Save()
         {
-            File.WriteAllText(App.GetFullAppDataPath(App.SettingsFilename), JsonConvert.SerializeObject(new AppSettingsContainer(this)));
+            try
+            {
+                File.WriteAllText(App.GetFullAppDataPath(App.SettingsFilename), 
+                                  JsonConvert.SerializeObject(new AppSettingsContainer(this)));
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                throw;
+            }
+            
         }
     }
 }

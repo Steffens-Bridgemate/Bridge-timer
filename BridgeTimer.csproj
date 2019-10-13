@@ -27,6 +27,7 @@
     <None Remove="Images\nosound2.ico" />
     <None Remove="Images\sound.ico" />
     <None Remove="Images\sound1.ico" />
+    <None Remove="NLog.config" />
     <None Remove="Sounds\20065__euroblues__trainwhistle-sbb-re-420-euroblues.wav" />
     <None Remove="Sounds\26385__roscoetoon__rr-cross5.wav" />
     <None Remove="Sounds\324995__catspaw64__warning-signal.wav" />
@@ -64,6 +65,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="clock.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Fonts\DS-DIGI-Regular.TTF">
@@ -110,6 +114,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="NLog" Version="4.6.7" />
     <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
     <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>

@@ -37,6 +37,7 @@ namespace BridgeTimer
         public const string RoundEndedLogoFile = "roundended.png";
         public const string WarningLogoFile = "warning.png";
 
+        public static readonly string Path = AppDomain.CurrentDomain.BaseDirectory?? string.Empty;
         public static readonly List<string> SoundFiles = new List<string>(new[] { RoundStartedSoundFile, WarningSoundFile, RoundEndedSoundFile });
 
         public static string GetFullAppDataPath(string? fileName=null)
@@ -44,13 +45,13 @@ namespace BridgeTimer
             var appName = Assembly.GetExecutingAssembly().GetName().Name ??
                           throw new NullReferenceException($"No name for the executing assembly found.");
 
-            var settingsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            var settingsFolder =System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                                               appName);
 
             if (fileName == null)
                 return settingsFolder;
 
-            return Path.Combine(settingsFolder, fileName);
+            return System.IO.Path.Combine(settingsFolder, fileName);
 
         }
 
@@ -69,7 +70,7 @@ namespace BridgeTimer
             if (!Directory.Exists(settingsFolder))
                 throw new DirectoryNotFoundException(settingsFolder);
 
-            var settingsFile = Path.Combine(settingsFolder, SettingsFilename);
+            var settingsFile =System.IO.Path.Combine(settingsFolder, SettingsFilename);
             if (!File.Exists(settingsFile))
             {
                 var settings = new AppSettingsContainer(AppSettings.Default());
@@ -127,7 +128,7 @@ namespace BridgeTimer
                 throw new DirectoryNotFoundException(settingsFolder);
 
             var colorChanger = new ColorChanger();
-            var logoFileName = Path.Combine(settingsFolder, RoundStartedLogoFile);
+            var logoFileName =System.IO.Path.Combine(settingsFolder, RoundStartedLogoFile);
             if (!File.Exists(logoFileName))
             {
                 colorChanger.ChangeLogoColor(ColorChanger.Convert(appSettings.PlayingTimeForeground),
@@ -135,7 +136,7 @@ namespace BridgeTimer
                                              logoFileName);
             }
 
-            logoFileName = Path.Combine(settingsFolder, WarningLogoFile);
+            logoFileName =System.IO.Path.Combine(settingsFolder, WarningLogoFile);
             if (!File.Exists(logoFileName))
             {
                 colorChanger.ChangeLogoColor(ColorChanger.Convert(appSettings.WarningTimeForeground),
@@ -143,7 +144,7 @@ namespace BridgeTimer
                                              logoFileName);
             }
 
-            logoFileName = Path.Combine(settingsFolder, RoundEndedLogoFile);
+            logoFileName =System.IO.Path.Combine(settingsFolder, RoundEndedLogoFile);
             if (!File.Exists(logoFileName))
             {
                 colorChanger.ChangeLogoColor(ColorChanger.Convert(appSettings.ChangeTimeForeground),
@@ -158,8 +159,8 @@ namespace BridgeTimer
 
             foreach (var soundfile in new[] { RoundStartedSoundFile, WarningSoundFile, RoundEndedSoundFile })
             {
-                if (overwrite || !File.Exists(Path.Combine(settingsFolder, soundfile)))
-                    File.Copy(Path.Combine(SoundsFolder, soundfile), App.GetFullAppDataPath(soundfile),overwrite);
+                if (overwrite || !File.Exists(System.IO.Path.Combine(settingsFolder, soundfile)))
+                    File.Copy(System.IO.Path.Combine(SoundsFolder, soundfile), App.GetFullAppDataPath(soundfile),overwrite);
             }
         }
 
