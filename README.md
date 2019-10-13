@@ -5,4 +5,4 @@ Beware of the French translations! S'il y a un confrère qui soit disposé(e) á
 
 # Inno setup installation script
 An Inno setup installation script is present in the Installer folder.
-In the Installer\Installer folder a compiled installer is present, currently unsigned.
+In the Installer\Installer folder a compiled installer can be found.
