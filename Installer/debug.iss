@@ -16,7 +16,7 @@ UseAbsolutePaths=false
 [Setup]
  SignTool=DigicertSHA1 $f
  SignTool=DigicertSHA256 $f
-AppID=BridgeTimer 
+AppID=BridgeTimer
 AppName=Bridge Timer
 AppVerName= 1.0.0.5
 AppCopyright=
@@ -34,7 +34,7 @@ WindowVisible=false
 DisableStartupPrompt=false
 FlatComponentsList=true
 UsePreviousSetupType=true
-OutputBaseFilename=Bridge Timer Setup
+OutputBaseFilename=BridgeTimerSetup
 Compression=zip/9
 MinVersion=0,6.0.6001
 ShowLanguageDialog=yes

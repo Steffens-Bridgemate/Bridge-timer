@@ -3,7 +3,7 @@
 
 ;Comment the line below to get an installer that is unsigned.
 ;#define Sign
-#define AppID "BridgeTimer "
+#define AppID "BridgeTimer"
 #define Name="Bridge Timer"
 #define ExeName "BridgeTimer.exe"
 #define Version "1.0.0.5"
@@ -35,7 +35,7 @@ WindowVisible=false
 DisableStartupPrompt=false
 FlatComponentsList=true
 UsePreviousSetupType=true
-OutputBaseFilename={#Name} Setup
+OutputBaseFilename=BridgeTimerSetup
 Compression=zip/9
 MinVersion=0,6.0.6001
 ShowLanguageDialog=yes
