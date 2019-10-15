@@ -2,11 +2,11 @@
 ; http://www.lerstad.com/istool/                                                                  
 
 ;Comment the line below to get an installer that is unsigned.
-;#define Sign
+#define Sign
 #define AppID "BridgeTimer"
 #define Name="Bridge Timer"
 #define ExeName "BridgeTimer.exe"
-#define Version "1.0.0.5"
+#define Version "1.0.0.6"
 #define Publisher "Bridge Systems BV"
 
 [_ISTool]
@@ -19,7 +19,7 @@ UseAbsolutePaths=false
 #endif
 AppID={#AppID}
 AppName={#Name}
-AppVerName= 1.0.0.5
+AppVerName= 1.0.0.6
 AppCopyright=
 UsePreviousAppDir=False
 DefaultDirName={commonpf}\{#Name}
