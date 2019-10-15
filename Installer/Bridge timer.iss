@@ -6,7 +6,7 @@
 #define AppID "BridgeTimer "
 #define Name="Bridge Timer"
 #define ExeName "BridgeTimer.exe"
-#define Version "1.0.0.3"
+#define Version "1.0.0.5"
 #define Publisher "Bridge Systems BV"
 
 [_ISTool]
@@ -19,7 +19,7 @@ UseAbsolutePaths=false
 #endif
 AppID={#AppID}
 AppName={#Name}
-AppVerName= 1.0.0.3
+AppVerName= 1.0.0.5
 AppCopyright=
 UsePreviousAppDir=False
 DefaultDirName={commonpf}\{#Name}
