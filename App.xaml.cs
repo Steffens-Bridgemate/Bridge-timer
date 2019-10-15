@@ -160,7 +160,7 @@ namespace BridgeTimer
             foreach (var soundfile in new[] { RoundStartedSoundFile, WarningSoundFile, RoundEndedSoundFile })
             {
                 if (overwrite || !File.Exists(System.IO.Path.Combine(settingsFolder, soundfile)))
-                    File.Copy(System.IO.Path.Combine(SoundsFolder, soundfile), App.GetFullAppDataPath(soundfile),overwrite);
+                    File.Copy(System.IO.Path.Combine(App.Path, SoundsFolder, soundfile), App.GetFullAppDataPath(soundfile),overwrite);
             }
         }
 
