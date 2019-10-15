@@ -96,7 +96,7 @@ namespace BridgeTimer.Settings
             get => changeTime;
             set
             {
-                changeTime = Math.Min(1, value);
+                changeTime = Math.Max(1, value);
             }
         }
 
