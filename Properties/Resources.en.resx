@@ -198,6 +198,9 @@
   <data name="Label_RoundEndedSound" xml:space="preserve">
     <value>Take your seats signal:</value>
   </data>
+  <data name="Label_RoundNr" xml:space="preserve">
+    <value>Ronde:</value>
+  </data>
   <data name="Label_RoundStartedSound" xml:space="preserve">
     <value>Start of round signal:</value>
   </data>

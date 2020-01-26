@@ -304,6 +304,15 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ronde:.
+        /// </summary>
+        public static string Label_RoundNr {
+            get {
+                return ResourceManager.GetString("Label_RoundNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Begin van de ronde signaal:.
         /// </summary>
         public static string Label_RoundStartedSound {

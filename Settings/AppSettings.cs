@@ -23,6 +23,8 @@ namespace BridgeTimer.Settings
 
     public class AppSettings
     {
+        #region Static methods
+
         private static NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public static AppSettings Default()
@@ -57,6 +59,15 @@ namespace BridgeTimer.Settings
         public static (Color total, Color warn, Color change) DefaultForegrounds => (Colors.White,
                                                                                      Colors.White,
                                                                                      Colors.White);
+        #endregion
+
+        public AppSettings()
+        {
+            ExtraBreaks = new List<ExtraBreak>();
+        }
+
+        #region Settings
+
         public int PlayTimeHours 
         { 
             get => playTimeHours;
@@ -97,10 +108,21 @@ namespace BridgeTimer.Settings
             set
             {
                 changeTime = Math.Max(1, value);
+                UpdateExtraBreaks();
+                
             }
         }
 
-        public int NumberOfRounds { get; set; }
+        private int numberOfRounds;
+        public int NumberOfRounds
+        {
+            get => numberOfRounds;
+            set
+            {
+                numberOfRounds = value;
+                UpdateExtraBreaks();
+            }
+        }
 
         public Color WarningTimeForeground { get; set; }
         public Color PlayingTimeForeground { get; set; }
@@ -112,6 +134,11 @@ namespace BridgeTimer.Settings
         public string? CustomChangeMessageForRound { get; set; }
         public string? CustomChangeMessage { get; set; }
         public string? CustomEndOfEventMessage { get; set; }
+        public List<ExtraBreak> ExtraBreaks { get; set; }
+
+        #endregion
+
+        #region public methods
 
         public void RestoreTimingDefaults()
         {
@@ -146,5 +173,32 @@ namespace BridgeTimer.Settings
             }
             
         }
+
+        #endregion
+
+        #region Private Methods
+        private void UpdateExtraBreaks()
+        {
+            ExtraBreaks = new List<ExtraBreak>();
+            for (var i = 1; i <= NumberOfRounds; i++)
+            {
+                ExtraBreaks.Add(new ExtraBreak() { RoundNumber = i, BreakTime = changeTime, Description = "" });
+            }
+        }
+        #endregion
+
+        public class ExtraBreak
+        {
+            public ExtraBreak()
+            {
+                Description = string.Empty;
+            }
+
+            public int RoundNumber { get; set; }
+            public int BreakTime { get; set; }
+
+            public string Description { get; set; }
+        }
+
     }
 }

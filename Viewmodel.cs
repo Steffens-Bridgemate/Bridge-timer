@@ -665,6 +665,11 @@ namespace BridgeTimer
             }
         }
 
+        public List<AppSettings.ExtraBreak> ExtraBreaks
+        {
+            get => _settings.ExtraBreaks;
+        }
+
         public ObservableCollection<int> NumbersOfRounds { get; set; }
 
         public int SelectedNumberOfRounds
