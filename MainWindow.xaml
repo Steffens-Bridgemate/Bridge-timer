@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BridgeTimer"
+        xmlns:converters="clr-namespace:BridgeTimer.Converters"
         xmlns:resx="clr-namespace:BridgeTimer.Properties"
         mc:Ignorable="d"
         Title="{Binding Source={x:Static resx:Resources.Title}}"
@@ -45,7 +46,7 @@
         <local:BoolToCursorConverter x:Key="cursorConverter"
                                      TrueValue="None"
                                      FalseValue="Arrow"/>
-        <local:BoolToStringConverter x:Key="soundIconUriConverter"
+        <converters:BoolToStringConverter x:Key="soundIconUriConverter"
                                      TrueValue="Images\nosound1.ico"
                                      FalseValue="Images\sound1.ico"/>
        
