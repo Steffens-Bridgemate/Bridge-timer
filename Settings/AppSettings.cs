@@ -5,6 +5,8 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 using System.Windows.Media;
+using System.Runtime.Serialization;
+using System.Linq;
 
 namespace BridgeTimer.Settings
 {
@@ -63,7 +65,7 @@ namespace BridgeTimer.Settings
 
         public AppSettings()
         {
-            ExtraBreaks = new List<ExtraBreak>();
+            CustomBreaks = new List<CustomBreak>();
         }
 
         #region Settings
@@ -107,8 +109,9 @@ namespace BridgeTimer.Settings
             get => changeTime;
             set
             {
+                var initializing = changeTime == 0;
                 changeTime = Math.Max(1, value);
-                UpdateExtraBreaks();
+                if(!initializing) UpdateCustomBreaks();
                 
             }
         }
@@ -119,8 +122,9 @@ namespace BridgeTimer.Settings
             get => numberOfRounds;
             set
             {
+                var initializing = numberOfRounds == 0;
                 numberOfRounds = value;
-                UpdateExtraBreaks();
+                if(!initializing) UpdateCustomBreaks();
             }
         }
 
@@ -134,7 +138,7 @@ namespace BridgeTimer.Settings
         public string? CustomChangeMessageForRound { get; set; }
         public string? CustomChangeMessage { get; set; }
         public string? CustomEndOfEventMessage { get; set; }
-        public List<ExtraBreak> ExtraBreaks { get; set; }
+        public List<CustomBreak> CustomBreaks { get; set; }
 
         #endregion
 
@@ -177,19 +181,29 @@ namespace BridgeTimer.Settings
         #endregion
 
         #region Private Methods
-        private void UpdateExtraBreaks()
+        private void UpdateCustomBreaks()
         {
-            ExtraBreaks = new List<ExtraBreak>();
-            for (var i = 1; i <= NumberOfRounds; i++)
+            CustomBreaks = new List<CustomBreak>();
+            for (var i = 1; i <= numberOfRounds; i++)
             {
-                ExtraBreaks.Add(new ExtraBreak() { RoundNumber = i, BreakTime = changeTime, Description = "" });
+                CustomBreaks.Add(new CustomBreak() { RoundNumber = i, BreakTime = changeTime, Description = "" });
+            }
+        }
+
+        [OnDeserialized]
+        internal void OnDeserializedMethod(StreamingContext context)
+        {
+            if (!CustomBreaks.Any())
+            {
+                UpdateCustomBreaks();
+                Save(); 
             }
         }
         #endregion
 
-        public class ExtraBreak
+        public class CustomBreak
         {
-            public ExtraBreak()
+            public CustomBreak()
             {
                 Description = string.Empty;
             }

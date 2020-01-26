@@ -662,12 +662,31 @@ namespace BridgeTimer
                 _settings.ChangeTime = value;
                 _settings.Save();
                 OnPropertyChanged();
+                ResetCustomBreaks();
             }
         }
 
-        public List<AppSettings.ExtraBreak> ExtraBreaks
+        private List<CustomBreakViewmodel>? _customBreaks;
+        public List<CustomBreakViewmodel> CustomBreaks
         {
-            get => _settings.ExtraBreaks;
+            get 
+            {
+                if(_customBreaks==null)
+                {
+                    _customBreaks = _settings.CustomBreaks.Select(cb => new CustomBreakViewmodel(cb)).ToList();
+                    foreach (var cb in _customBreaks)
+                        cb.PropertyChanged += (s,e) => _settings.Save();
+                    
+                }
+                return _customBreaks;
+
+            }
+        }
+
+        private void ResetCustomBreaks()
+        {
+            _customBreaks = null;
+            OnPropertyChanged(nameof(CustomBreaks));
         }
 
         public ObservableCollection<int> NumbersOfRounds { get; set; }
@@ -681,6 +700,7 @@ namespace BridgeTimer
                 _settings.NumberOfRounds = value;
                 _settings.Save();
                 OnPropertyChanged();
+                ResetCustomBreaks();
             }
         }
 
@@ -851,5 +871,44 @@ namespace BridgeTimer
                 OnPropertyChanged(nameof(LogoPath));
             }
         }
+    }
+
+    public class CustomBreakViewmodel:NotifyingObject
+    {
+        private AppSettings.CustomBreak _customBreak;
+
+        public CustomBreakViewmodel(AppSettings.CustomBreak customBreak)
+        {
+            _customBreak = customBreak ?? throw new ArgumentNullException(nameof(customBreak));
+            ChangeMinutes = Enumerable.Range(1, 60).ToList();
+        }
+
+        public int RoundNumber => _customBreak.RoundNumber;
+
+        public List<int> ChangeMinutes { get; }
+
+        public int SelectedChangeMinutes
+        {
+            get => _customBreak.BreakTime;
+            set
+            {
+                if (value == _customBreak.BreakTime) return;
+                _customBreak.BreakTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Description
+        {
+            get => _customBreak.Description;
+            set
+            {
+                if (value == _customBreak.Description) return;
+                _customBreak.Description = value;
+                OnPropertyChanged();
+
+            }
+        }
+
     }
 }

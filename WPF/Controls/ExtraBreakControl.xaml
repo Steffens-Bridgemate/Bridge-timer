@@ -13,17 +13,18 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="4*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             <Label Content="{Binding Source={x:Static resx:Resources.Label_RoundNr}}"/>
-                            <Label Content=" "/>
                             <Label Content="{Binding RoundNumber}"/>
                         </StackPanel>
-                        <TextBlock Grid.Column="1" Text="{Binding BreakTime}"/>
-                        <TextBlock Grid.Column="2" Text="{Binding BreakText}"/>
+                        <ComboBox Grid.Column="1" 
+                                  ItemsSource="{Binding ChangeMinutes}"
+                                  SelectedItem="{Binding SelectedChangeMinutes}"/>
+                        <Label Grid.Column="2" Content="{Binding BreakText}"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

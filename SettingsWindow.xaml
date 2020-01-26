@@ -106,7 +106,7 @@
                                   SelectedItem="{Binding SelectedNumberOfRounds}"/>
                     </UniformGrid>
                     <controls:ExtraBreakControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
-                                                DataContext="{Binding ExtraBreaks}"/>
+                                                DataContext="{Binding CustomBreaks}"/>
                 </Grid>
              
             </TabItem>
