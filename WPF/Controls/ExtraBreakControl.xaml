@@ -8,22 +8,30 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ItemsControl ItemsSource="{Binding}">
+        <ItemsControl ItemsSource="{Binding}" Grid.IsSharedSizeScope="True"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="A"/>
+                            <ColumnDefinition SharedSizeGroup="B"/>
                             <ColumnDefinition Width="4*"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             <Label Content="{Binding Source={x:Static resx:Resources.Label_RoundNr}}"/>
                             <Label Content="{Binding RoundNumber}"/>
                         </StackPanel>
-                        <ComboBox Grid.Column="1" 
+                        <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+                                  HorizontalContentAlignment="Right"
                                   ItemsSource="{Binding ChangeMinutes}"
-                                  SelectedItem="{Binding SelectedChangeMinutes}"/>
+                                  SelectedItem="{Binding SelectedChangeMinutes}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Margin="4" Content="{Binding}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                         <Label Grid.Column="2" Content="{Binding BreakText}"/>
                     </Grid>
                 </DataTemplate>

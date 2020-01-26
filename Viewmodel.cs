@@ -70,6 +70,7 @@ namespace BridgeTimer
             SettingsCommand = new RelayCommand<object>(EditSettings, obj => timer.RunningState == CountDownTimer.State.Stopped);
             ConfirmSettingsCommand = new RelayCommand<object>(HandleNewSettings);
             RestoreTimingDefaultsCommand = new RelayCommand<object>(RestoreTimingDefaults);
+            ToggleCustomBreakTimesCommand = new RelayCommand<object>(ShowCustomBreakTimes);
             RestoreColorDefaultsCommand = new RelayCommand<object>(RestoreColorDefaults);
             RestoreTextDefaultsCommand = new RelayCommand<object>(RestoreTextDefaults);
             RestoreSoundDefaultsCommand = new RelayCommand<object?>(RestoreSoundDefaults);
@@ -375,6 +376,7 @@ namespace BridgeTimer
 
         #endregion
 
+        #region Timings
         public RelayCommand<object> RestoreTimingDefaultsCommand { get; }
 
         private void RestoreTimingDefaults(object obj)
@@ -386,7 +388,19 @@ namespace BridgeTimer
             OnPropertyChanged(nameof(SelectedWarningMinutes));
             OnPropertyChanged(nameof(SelectedChangeMinutes));
             OnPropertyChanged(nameof(SelectedNumberOfRounds));
+            ResetCustomBreaks();
         }
+
+        public RelayCommand<object> ToggleCustomBreakTimesCommand { get; }
+
+        private void ShowCustomBreakTimes(object show)
+        {
+            ShowCustomBreaks=!ShowCustomBreaks;
+        }
+
+        #endregion
+
+        #region Colors
 
         public RelayCommand<object> RestoreColorDefaultsCommand { get; }
 
@@ -403,6 +417,10 @@ namespace BridgeTimer
             OnPropertyChanged(nameof(CurrentStage));
         }
 
+        #endregion
+
+        #region Texts
+
         public RelayCommand<object> RestoreTextDefaultsCommand { get; }
 
         private void RestoreTextDefaults(object obj)
@@ -415,6 +433,8 @@ namespace BridgeTimer
             OnPropertyChanged(nameof(CustomChangeTextForRound));
             OnPropertyChanged(nameof(CustomTextAfterLastRound));
         }
+
+        #endregion
 
         #endregion
 
@@ -663,6 +683,18 @@ namespace BridgeTimer
                 _settings.Save();
                 OnPropertyChanged();
                 ResetCustomBreaks();
+            }
+        }
+
+        private bool _showCustomBreaks;
+        public bool ShowCustomBreaks
+        {
+            get => _showCustomBreaks;
+            set
+            {
+                if (value == _showCustomBreaks) return;
+                _showCustomBreaks = value;
+                OnPropertyChanged();
             }
         }
 
