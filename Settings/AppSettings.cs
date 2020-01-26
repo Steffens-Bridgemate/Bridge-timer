@@ -184,14 +184,20 @@ namespace BridgeTimer.Settings
         private void UpdateCustomBreaks()
         {
             CustomBreaks = new List<CustomBreak>();
-            for (var i = 1; i <= numberOfRounds; i++)
+            for (var i = 1; i <= numberOfRounds-1; i++)
             {
                 CustomBreaks.Add(new CustomBreak() { RoundNumber = i, 
                                                      BreakTime = changeTime, 
                                                      Description = string.IsNullOrEmpty( CustomChangeMessage) ?
-                                                                        Properties.Resources.Message_TakeYourSeats:
+                                                                        string.Format( Properties.Resources.Message_TakeSeatsForRound,i+1):
                                                                         CustomChangeMessage});
             }
+            CustomBreaks.Add(new CustomBreak()
+            {
+                RoundNumber = numberOfRounds,
+                BreakTime = changeTime,
+                Description = Properties.Resources.Message_EventEnded
+            });
         }
 
         [OnDeserialized]

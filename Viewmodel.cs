@@ -49,6 +49,7 @@ namespace BridgeTimer
             timer = new CountDownTimer(_settings.PlayTimeHours,
                                        _settings.PlayTimeMinutes,
                                        _settings.WarningTime,
+                                       _settings.CustomBreaks.Select(cb=>(cb.RoundNumber,cb.BreakTime)).ToList(),
                                        _settings.ChangeTime,
                                        _settings.NumberOfRounds);
             timer.CurrentTime += OnCurrentTime;
@@ -180,7 +181,10 @@ namespace BridgeTimer
                     else
                         try
                         {
-                            ChangeMessage = string.Format(CustomChangeTextForRound, e.CurrentRound);
+                            //ChangeMessage = string.Format(CustomChangeTextForRound, e.CurrentRound);
+                            ChangeMessage = CustomBreaks.Where(cb => cb.RoundNumber == e.CurrentRound-1)
+                                                       .Select(cb => cb.Description)
+                                                       .DefaultIfEmpty(string.Format(CustomChangeTextForRound, e.CurrentRound)).Single();
                         }
                         catch (Exception)
                         {
@@ -936,7 +940,7 @@ namespace BridgeTimer
             set
             {
                 if (value == _customBreak.Description) return;
-                _customBreak.Description = value;
+                _customBreak.Description = value.PadLeft(12).PadRight(24);
                 OnPropertyChanged();
 
             }

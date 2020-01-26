@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Timers;
 
@@ -49,13 +50,19 @@ namespace BridgeTimer
 
         private Timer timer;
         private TimeSpan totalTime;
-        private TimeSpan changeTime;
+        private TimeSpan customChangeTime;
         private bool warningGiven;
         private bool endOfRoundGiven;
         private bool startOfRoundGiven;
-        public CountDownTimer(int playTimeHours, int playTimeMinutes, int warningMoment, int changeTime, int numberOfRounds)
+        public CountDownTimer(int playTimeHours,
+                              int playTimeMinutes,
+                              int warningMoment,
+                              List<(int roundNumber,int changeTime)> changeTimes,
+                              int defaultChangeTime,
+                              int numberOfRounds)
         {
-            Init(playTimeHours, playTimeMinutes, warningMoment, changeTime,numberOfRounds);
+            ChangeTimes = new List<(int roundNumber, int changeTime)>();
+            Init(playTimeHours, playTimeMinutes, warningMoment,changeTimes, defaultChangeTime,numberOfRounds);
 #if(DEBUG)
             timer = new Timer(100);
 #else
@@ -66,11 +73,17 @@ namespace BridgeTimer
             RunningState = State.Stopped;
         }
 
-        private void Init(int playTimeHours, int playTimeMinutes, int warningMoment, int changeTime, int numberOfRounds)
+        private void Init(int playTimeHours,
+                          int playTimeMinutes,
+                          int warningMoment,
+                          List<(int roundNumber,int changeTime)> changeTimes,
+                          int defaultChangeTime,
+                          int numberOfRounds)
         {
             this.TotalPlayTime = playTimeHours * 60 + playTimeMinutes;
             this.WarningMoment = warningMoment;
-            this.ChangeTime = changeTime;
+            this.ChangeTimes = changeTimes.ToList();
+            this.DefaultChangeTime = defaultChangeTime;
             this.NumberOfRounds = numberOfRounds;
             this.CurrentRound = NumberOfRounds == 0 ? 0 : 1;
         }
@@ -82,7 +95,7 @@ namespace BridgeTimer
         public void Reinit(int playTimeHours, int playTimeMinutes, int warningMoment, int changeTime,int numberOfRounds)
         {
 
-            Init(playTimeHours, playTimeMinutes, warningMoment, changeTime, numberOfRounds);
+            Init(playTimeHours, playTimeMinutes, warningMoment,ChangeTimes, changeTime, numberOfRounds);
             Reinit();
             
         }
@@ -105,10 +118,10 @@ namespace BridgeTimer
                 else
                     threshold = ThresholdReached.NotSet;
             }
-            else if (changeTime.TotalMilliseconds > 0)
+            else if (customChangeTime.TotalMilliseconds > 0)
             {
-                changeTime= changeTime.Add(duration);
-                timeToPublish = changeTime;
+                customChangeTime= customChangeTime.Add(duration);
+                timeToPublish = customChangeTime;
             }
             else
                 return;
@@ -140,9 +153,9 @@ namespace BridgeTimer
             }
             else 
             {
-                if (duration > changeTime) duration = changeTime;
-                changeTime = changeTime.Subtract(duration);
-                timeToPublish = changeTime;
+                if (duration > customChangeTime) duration = customChangeTime;
+                customChangeTime = customChangeTime.Subtract(duration);
+                timeToPublish = customChangeTime;
             }
             
 
@@ -160,7 +173,11 @@ namespace BridgeTimer
             endOfRoundGiven = false;
             warningGiven = false;
             totalTime = TimeSpan.FromMinutes(this.TotalPlayTime);
-            this.changeTime = TimeSpan.FromMinutes(this.ChangeTime);
+            this.customChangeTime = TimeSpan.FromMinutes(ChangeTimes.Where(ct=>ct.roundNumber==CurrentRound)
+                                                                    .Select(ct=>ct.changeTime)
+                                                                    .DefaultIfEmpty( this.DefaultChangeTime)
+                                                                    .Single());
+
             CurrentTime?.Invoke(this, new CurrentTimeArgs(totalTime.Hours, 
                                                           totalTime.Minutes, 
                                                           totalTime.Seconds,
@@ -177,7 +194,8 @@ namespace BridgeTimer
         /// The number of minutes before the end of the total time when a warning should be given.
         /// </summary>
         public int WarningMoment { get; private set; }
-        public int ChangeTime { get; private set; }
+        public int DefaultChangeTime { get; private set; }
+        public List<(int roundNumber,int changeTime)> ChangeTimes { get; private set; }
         public int NumberOfRounds { get; private set; }
         public int CurrentRound { get; private set; }
 
@@ -246,8 +264,8 @@ namespace BridgeTimer
             ThresholdReached threshold = ThresholdReached.NotSet;
             if (totalTime.AddMinute().Minutes <= 0 && !hoursInUse)
             {
-                changeTime = changeTime.SubtractSecond();
-                if (changeTime.AddMinute().Minutes <= 0)
+                customChangeTime = customChangeTime.SubtractSecond();
+                if (customChangeTime.AddMinute().Minutes <= 0)
                 {
                     InitializeTimeSpans(eventEnded? ThresholdReached.EventEnded:ThresholdReached.RoundStarted);
                     if (!eventEnded)
@@ -264,7 +282,7 @@ namespace BridgeTimer
                     timeToPublish = totalTime;
                 }
                 else
-                    timeToPublish = changeTime;
+                    timeToPublish = customChangeTime;
             }
             else
             {

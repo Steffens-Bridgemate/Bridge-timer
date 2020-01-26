@@ -91,9 +91,6 @@
                     <Button Content="{Binding Source={x:Static resx:Resources.Caption_RestoreDefaults}}"
                             Command="{Binding RestoreTimingDefaultsCommand}"
                             HorizontalAlignment="Left"/>
-                    <Button Content="Extra..."
-                            Command="{Binding ShowExtraBreaks}"
-                            HorizontalAlignment="Right"/>
                     <UniformGrid Columns="2" Grid.Row="1">
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_PlayingTimeHours}}"/>
                         <ComboBox ItemsSource="{Binding Hours}"

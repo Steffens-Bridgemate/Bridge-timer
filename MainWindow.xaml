@@ -119,26 +119,6 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Grid.Resources>
-                <!--<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding HideControlPanel}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard x:Name="hideControlPanel">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:.2"
-                                                         To="0"
-                                                         Storyboard.TargetProperty="(Button.Height)"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <StopStoryboard BeginStoryboardName="hideControlPanel"/>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>-->
-            </Grid.Resources>
             <Button Grid.Column="0" 
                     Content="{Binding Source={x:Static resx:Resources.Caption_Settings}}" 
                     Command="{Binding SettingsCommand}"/>
