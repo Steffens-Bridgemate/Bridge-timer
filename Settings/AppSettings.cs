@@ -186,7 +186,11 @@ namespace BridgeTimer.Settings
             CustomBreaks = new List<CustomBreak>();
             for (var i = 1; i <= numberOfRounds; i++)
             {
-                CustomBreaks.Add(new CustomBreak() { RoundNumber = i, BreakTime = changeTime, Description = "" });
+                CustomBreaks.Add(new CustomBreak() { RoundNumber = i, 
+                                                     BreakTime = changeTime, 
+                                                     Description = string.IsNullOrEmpty( CustomChangeMessage) ?
+                                                                        Properties.Resources.Message_TakeYourSeats:
+                                                                        CustomChangeMessage});
             }
         }
 

@@ -118,38 +118,52 @@
                                    PlacementTarget="{Binding ElementName=cmdShowCustomBreaks}" 
                                    Placement="Left"
                                    IsOpen="{Binding ShowCustomBreaks}">
-                                <ScrollViewer BorderBrush="Black"
-                                              BorderThickness="1">
-                                    <ItemsControl ItemsSource="{Binding CustomBreaks}" Grid.IsSharedSizeScope="True"
-                                              Background="White">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" SharedSizeGroup="A"/>
-                                                        <ColumnDefinition SharedSizeGroup="B"/>
-                                                        <ColumnDefinition Width="4*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                                        <Label Content="{Binding Source={x:Static resx:Resources.Label_RoundNr}}"/>
-                                                        <Label Content="{Binding RoundNumber}"/>
-                                                    </StackPanel>
-                                                    <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
-                                                          HorizontalContentAlignment="Right"
-                                                          ItemsSource="{Binding ChangeMinutes}"
-                                                          SelectedItem="{Binding SelectedChangeMinutes}">
-                                                        <ComboBox.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <Label Margin="4" Content="{Binding}"/>
-                                                            </DataTemplate>
-                                                        </ComboBox.ItemTemplate>
-                                                    </ComboBox>
-                                                    <Label Grid.Column="2" Content="{Binding BreakText}"/>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </ScrollViewer>
+                                <Popup.Resources>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                        <Setter Property="Padding" Value="3"/>
+                                        <Setter Property="Margin" Value="1,1,4,1"/>
+                                        <Setter Property="MaxLength" Value="55"/>
+                                    </Style>
+                                </Popup.Resources>
+                                <Border BorderBrush="Black" BorderThickness="1"
+                                        Padding="2"
+                                        Background="Gainsboro">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl ItemsSource="{Binding CustomBreaks}" Grid.IsSharedSizeScope="True"
+                                              Background="Transparent">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" SharedSizeGroup="A"/>
+                                                            <ColumnDefinition SharedSizeGroup="B"/>
+                                                            <ColumnDefinition Width="4*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                            <Label Content="{Binding Source={x:Static resx:Resources.Label_RoundNr}}"/>
+                                                            <Label Content="{Binding RoundNumber}"/>
+                                                        </StackPanel>
+                                                        <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+                                                              HorizontalContentAlignment="Right"
+                                                              ItemsSource="{Binding ChangeMinutes}"
+                                                              SelectedItem="{Binding SelectedChangeMinutes}">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Label Margin="4" Content="{Binding}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                        <TextBox Grid.Column="2" Text="{Binding Description}"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Border>
+                            
                             </Popup>
                         </Grid>
                         <ComboBox ItemsSource="{Binding ChangeMinutes}"
