@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop;Microsoft.NET.Sdk.Publish">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <Authors>André Steffens</Authors>
     <Description>Open source, free Bridge timer</Description>
     <ApplicationIcon>bridge timer.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>1.0.0.7</AssemblyVersion>
-    <FileVersion>1.0.0.7</FileVersion>
+    <AssemblyVersion>1.0.0.8</AssemblyVersion>
+    <FileVersion>1.0.0.8</FileVersion>
     <Copyright />
   </PropertyGroup>
   <ItemGroup>
