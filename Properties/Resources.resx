@@ -198,6 +198,9 @@
   <data name="Label_RoundEndedSound" xml:space="preserve">
     <value>Wisselsignaal:</value>
   </data>
+  <data name="Label_RoundNr" xml:space="preserve">
+    <value>Ronde:</value>
+  </data>
   <data name="Label_RoundStartedSound" xml:space="preserve">
     <value>Begin van de ronde signaal:</value>
   </data>

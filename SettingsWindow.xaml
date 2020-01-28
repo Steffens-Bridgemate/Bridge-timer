@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BridgeTimer"
         xmlns:controls="clr-namespace:BridgeTimer.WPF.Controls"
+        xmlns:converters="clr-namespace:BridgeTimer.Converters"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Background="LightGray"
@@ -70,6 +71,11 @@
         </Grid>
         <TabControl Grid.Row="1">
             <TabItem>
+                <TabItem.Resources>
+                    <converters:BoolToStringConverter x:Key="BoolToStringConverter"
+                                                      TrueValue="-"
+                                                      FalseValue="+"/>
+                </TabItem.Resources>
                 <TabItem.Header>
                     <Label Content="{Binding Source={x:Static resx:Resources.Header_Timings}}"/>
                 </TabItem.Header>
@@ -78,6 +84,10 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
                     <Button Content="{Binding Source={x:Static resx:Resources.Caption_RestoreDefaults}}"
                             Command="{Binding RestoreTimingDefaultsCommand}"
                             HorizontalAlignment="Left"/>
@@ -91,7 +101,68 @@
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_WarningMoment}}"/>
                         <ComboBox ItemsSource="{Binding WarningMinutes}"
                                   SelectedItem="{Binding SelectedWarningMinutes,Mode=TwoWay}"/>
-                        <Label Content="{Binding Source={x:Static resx:Resources.Label_ChangeTime}}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Source={x:Static resx:Resources.Label_ChangeTime}}"/>
+                            <Button Grid.Column="1" Height="50" Name="cmdShowCustomBreaks"  Width="50" 
+                                    Content="{Binding ShowCustomBreaks, Converter={StaticResource BoolToStringConverter}}"
+                                    Command="{Binding ToggleCustomBreakTimesCommand}"/>
+                            <Popup Grid.Column="2"
+                                   PlacementTarget="{Binding ElementName=cmdShowCustomBreaks}" 
+                                   Placement="Left"
+                                   IsOpen="{Binding ShowCustomBreaks}">
+                                <Popup.Resources>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                        <Setter Property="Padding" Value="3"/>
+                                        <Setter Property="Margin" Value="1,1,4,1"/>
+                                        <Setter Property="MaxLength" Value="55"/>
+                                    </Style>
+                                </Popup.Resources>
+                                <Border BorderBrush="Black" BorderThickness="1"
+                                        Padding="2"
+                                        Background="Gainsboro">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl ItemsSource="{Binding CustomBreaks}" Grid.IsSharedSizeScope="True"
+                                              Background="Transparent">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" SharedSizeGroup="A"/>
+                                                            <ColumnDefinition SharedSizeGroup="B"/>
+                                                            <ColumnDefinition Width="4*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                            <Label Content="{Binding Source={x:Static resx:Resources.Label_RoundNr}}"/>
+                                                            <Label Content="{Binding RoundNumber}"/>
+                                                        </StackPanel>
+                                                        <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+                                                              HorizontalContentAlignment="Right"
+                                                              ItemsSource="{Binding ChangeMinutes}"
+                                                              SelectedItem="{Binding SelectedChangeMinutes}">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Label Margin="4" Content="{Binding}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                        <TextBox Grid.Column="2" Text="{Binding Description}"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Border>
+                            
+                            </Popup>
+                        </Grid>
                         <ComboBox ItemsSource="{Binding ChangeMinutes}"
                                   SelectedItem="{Binding SelectedChangeMinutes,Mode=TwoWay}"/>
                         <Label Content="{Binding Source={x:Static resx:Resources.Label_NumberOfRounds}}"/>

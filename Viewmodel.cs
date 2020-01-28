@@ -49,6 +49,7 @@ namespace BridgeTimer
             timer = new CountDownTimer(_settings.PlayTimeHours,
                                        _settings.PlayTimeMinutes,
                                        _settings.WarningTime,
+                                       _settings.CustomBreaks.Select(cb=>(cb.RoundNumber,cb.BreakTime)).ToList(),
                                        _settings.ChangeTime,
                                        _settings.NumberOfRounds);
             timer.CurrentTime += OnCurrentTime;
@@ -70,6 +71,7 @@ namespace BridgeTimer
             SettingsCommand = new RelayCommand<object>(EditSettings, obj => timer.RunningState == CountDownTimer.State.Stopped);
             ConfirmSettingsCommand = new RelayCommand<object>(HandleNewSettings);
             RestoreTimingDefaultsCommand = new RelayCommand<object>(RestoreTimingDefaults);
+            ToggleCustomBreakTimesCommand = new RelayCommand<object>(ShowCustomBreakTimes);
             RestoreColorDefaultsCommand = new RelayCommand<object>(RestoreColorDefaults);
             RestoreTextDefaultsCommand = new RelayCommand<object>(RestoreTextDefaults);
             RestoreSoundDefaultsCommand = new RelayCommand<object?>(RestoreSoundDefaults);
@@ -179,7 +181,10 @@ namespace BridgeTimer
                     else
                         try
                         {
-                            ChangeMessage = string.Format(CustomChangeTextForRound, e.CurrentRound);
+                            //ChangeMessage = string.Format(CustomChangeTextForRound, e.CurrentRound);
+                            ChangeMessage = CustomBreaks.Where(cb => cb.RoundNumber == e.CurrentRound-1)
+                                                       .Select(cb => cb.Description)
+                                                       .DefaultIfEmpty(string.Format(CustomChangeTextForRound, e.CurrentRound)).Single();
                         }
                         catch (Exception)
                         {
@@ -375,6 +380,7 @@ namespace BridgeTimer
 
         #endregion
 
+        #region Timings
         public RelayCommand<object> RestoreTimingDefaultsCommand { get; }
 
         private void RestoreTimingDefaults(object obj)
@@ -386,7 +392,19 @@ namespace BridgeTimer
             OnPropertyChanged(nameof(SelectedWarningMinutes));
             OnPropertyChanged(nameof(SelectedChangeMinutes));
             OnPropertyChanged(nameof(SelectedNumberOfRounds));
+            ResetCustomBreaks();
         }
+
+        public RelayCommand<object> ToggleCustomBreakTimesCommand { get; }
+
+        private void ShowCustomBreakTimes(object show)
+        {
+            ShowCustomBreaks=!ShowCustomBreaks;
+        }
+
+        #endregion
+
+        #region Colors
 
         public RelayCommand<object> RestoreColorDefaultsCommand { get; }
 
@@ -403,6 +421,10 @@ namespace BridgeTimer
             OnPropertyChanged(nameof(CurrentStage));
         }
 
+        #endregion
+
+        #region Texts
+
         public RelayCommand<object> RestoreTextDefaultsCommand { get; }
 
         private void RestoreTextDefaults(object obj)
@@ -415,6 +437,8 @@ namespace BridgeTimer
             OnPropertyChanged(nameof(CustomChangeTextForRound));
             OnPropertyChanged(nameof(CustomTextAfterLastRound));
         }
+
+        #endregion
 
         #endregion
 
@@ -662,7 +686,43 @@ namespace BridgeTimer
                 _settings.ChangeTime = value;
                 _settings.Save();
                 OnPropertyChanged();
+                ResetCustomBreaks();
             }
+        }
+
+        private bool _showCustomBreaks;
+        public bool ShowCustomBreaks
+        {
+            get => _showCustomBreaks;
+            set
+            {
+                if (value == _showCustomBreaks) return;
+                _showCustomBreaks = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<CustomBreakViewmodel>? _customBreaks;
+        public List<CustomBreakViewmodel> CustomBreaks
+        {
+            get 
+            {
+                if(_customBreaks==null)
+                {
+                    _customBreaks = _settings.CustomBreaks.Select(cb => new CustomBreakViewmodel(cb)).ToList();
+                    foreach (var cb in _customBreaks)
+                        cb.PropertyChanged += (s,e) => _settings.Save();
+                    
+                }
+                return _customBreaks;
+
+            }
+        }
+
+        private void ResetCustomBreaks()
+        {
+            _customBreaks = null;
+            OnPropertyChanged(nameof(CustomBreaks));
         }
 
         public ObservableCollection<int> NumbersOfRounds { get; set; }
@@ -676,6 +736,7 @@ namespace BridgeTimer
                 _settings.NumberOfRounds = value;
                 _settings.Save();
                 OnPropertyChanged();
+                ResetCustomBreaks();
             }
         }
 
@@ -846,5 +907,44 @@ namespace BridgeTimer
                 OnPropertyChanged(nameof(LogoPath));
             }
         }
+    }
+
+    public class CustomBreakViewmodel:NotifyingObject
+    {
+        private AppSettings.CustomBreak _customBreak;
+
+        public CustomBreakViewmodel(AppSettings.CustomBreak customBreak)
+        {
+            _customBreak = customBreak ?? throw new ArgumentNullException(nameof(customBreak));
+            ChangeMinutes = Enumerable.Range(1, 60).ToList();
+        }
+
+        public int RoundNumber => _customBreak.RoundNumber;
+
+        public List<int> ChangeMinutes { get; }
+
+        public int SelectedChangeMinutes
+        {
+            get => _customBreak.BreakTime;
+            set
+            {
+                if (value == _customBreak.BreakTime) return;
+                _customBreak.BreakTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Description
+        {
+            get => _customBreak.Description;
+            set
+            {
+                if (value == _customBreak.Description) return;
+                _customBreak.Description = value.PadLeft(12).PadRight(24);
+                OnPropertyChanged();
+
+            }
+        }
+
     }
 }

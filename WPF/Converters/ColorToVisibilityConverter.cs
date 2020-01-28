@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace BridgeTimer
+namespace BridgeTimer.Converters
 {
     public class ColorToVisibilityConverter:BoolToVisibilityConverter
     {
