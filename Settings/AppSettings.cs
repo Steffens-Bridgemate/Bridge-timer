@@ -109,6 +109,7 @@ namespace BridgeTimer.Settings
             get => changeTime;
             set
             {
+                if (value == changeTime) return;
                 var initializing = changeTime == 0;
                 changeTime = Math.Max(1, value);
                 if(!initializing) UpdateCustomBreaks();
@@ -122,6 +123,7 @@ namespace BridgeTimer.Settings
             get => numberOfRounds;
             set
             {
+                if (value == numberOfRounds) return;
                 var initializing = numberOfRounds == 0;
                 numberOfRounds = value;
                 if(!initializing) UpdateCustomBreaks();

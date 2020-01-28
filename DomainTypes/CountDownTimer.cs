@@ -92,10 +92,15 @@ namespace BridgeTimer
         {
             InitializeTimeSpans();
         }
-        public void Reinit(int playTimeHours, int playTimeMinutes, int warningMoment, int changeTime,int numberOfRounds)
+        public void Reinit(int playTimeHours,
+                           int playTimeMinutes,
+                           int warningMoment,
+                           List<(int roundNumber,int changeTime)> changeTimes,
+                           int defaultChangeTime,
+                           int numberOfRounds)
         {
 
-            Init(playTimeHours, playTimeMinutes, warningMoment,ChangeTimes, changeTime, numberOfRounds);
+            Init(playTimeHours, playTimeMinutes, warningMoment,changeTimes, defaultChangeTime, numberOfRounds);
             Reinit();
             
         }

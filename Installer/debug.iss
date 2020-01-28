@@ -18,7 +18,7 @@ UseAbsolutePaths=false
  SignTool=DigicertSHA256 $f
 AppID=BridgeTimer
 AppName=Bridge Timer
-AppVerName= 1.0.0.7
+AppVerName= Bridge Timer
 AppCopyright=
 UsePreviousAppDir=False
 DefaultDirName={commonpf}\Bridge Timer
@@ -28,13 +28,13 @@ AppPublisherURL=www.bridgemate.com
 OutputDir=Installer
 AppPublisher=André Steffens
 EnableDirDoesntExistWarning=true
-AppVersion=1.0.0.7
+AppVersion=1.0.0.8
 UninstallDisplayName=Bridge Timer
 WindowVisible=false
 DisableStartupPrompt=false
 FlatComponentsList=true
 UsePreviousSetupType=true
-OutputBaseFilename=BridgeTimerSetup32
+OutputBaseFilename=BridgeTimerSetup64
 Compression=zip/9
 MinVersion=0,6.0.6001
 ShowLanguageDialog=yes
@@ -42,8 +42,9 @@ LicenseFile=licence.txt
 InfoBeforeFile=infobefore.txt
 InfoAfterFile=infoafter.txt
 DirExistsWarning=no
-VersionInfoVersion=1.0.0.7
+VersionInfoVersion=1.0.0.8
 VersionInfoCompany=Bridge Systems BV
+ArchitecturesInstallIn64BitMode=x64
 VersionInfoDescription=Bridge Timer installer
 AppendDefaultDirName=false
 WizardImageFile=Bridge timer.bmp
@@ -58,8 +59,8 @@ Name: {app}\Sounds
 Name: {app}\Images
 
 [Files]
-Source: ..\bin\Release\netcoreapp3.0\publish\winx86\*.*; DestDir: {app}; Flags:recursesubdirs
-Source: ..\bin\Release\netcoreapp3.0\publish\winx86\BridgeTimer.exe; DestDir:{app}; Flags:sign
+Source: ..\bin\Release\netcoreapp3.0\publish\winx64\*.*; DestDir: {app}; Flags:recursesubdirs
+Source: ..\bin\Release\netcoreapp3.0\publish\winx64\BridgeTimer.exe; DestDir:{app}; Flags:sign
 Source: InstallerSounds\*.*;DestDir:{userdocs}\Bridge Timer
 
 [Icons]  

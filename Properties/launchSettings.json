@@ -1,7 +1,8 @@
 {
   "profiles": {
     "BridgeTimer": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "-r6 -p2"
     }
   }
 }

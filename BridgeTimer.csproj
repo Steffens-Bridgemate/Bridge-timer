@@ -7,8 +7,8 @@
     <Description>Open source, free Bridge timer</Description>
     <ApplicationIcon>bridge timer.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>1.0.0.8</AssemblyVersion>
-    <FileVersion>1.0.0.8</FileVersion>
+    <AssemblyVersion>1.0.0.9</AssemblyVersion>
+    <FileVersion>1.0.0.9</FileVersion>
     <Copyright />
   </PropertyGroup>
   <ItemGroup>

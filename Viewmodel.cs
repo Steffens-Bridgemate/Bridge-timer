@@ -314,7 +314,14 @@ namespace BridgeTimer
                                     ColorChanger.Convert(ChangeTimeBackground),
                                     App.RoundEndedLogoFile);
 
-            timer.Reinit(SelectedHours, SelectedMinutes, SelectedWarningMinutes, SelectedChangeMinutes, SelectedNumberOfRounds);
+            _settings.Save();
+            ResetCustomBreaks();
+            timer.Reinit(SelectedHours,
+                         SelectedMinutes,
+                         SelectedWarningMinutes,
+                         CustomBreaks.Select(cb=>(cb.RoundNumber,cb.SelectedChangeMinutes)).ToList(),
+                         SelectedChangeMinutes,
+                         SelectedNumberOfRounds);
             CurrentStage= CountDownTimer.ThresholdReached.RoundStarted;
             OnAllPropertiesChanged();
         }
