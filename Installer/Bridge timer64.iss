@@ -6,7 +6,7 @@
 #define AppID "BridgeTimer"
 #define Name="Bridge Timer"
 #define ExeName "BridgeTimer.exe"
-#define Version "1.0.0.8"
+#define Version "1.0.0.10"
 #define Publisher "Bridge Systems BV"
 
 [_ISTool]

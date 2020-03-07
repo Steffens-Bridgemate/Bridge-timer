@@ -105,7 +105,6 @@ namespace BridgeTimer
 
         private void OnCurrentTime(object? sender, CountDownTimer.CurrentTimeArgs e)
         {
-           
             TimeLeft = $"{e.Minutes}:{e.Seconds}";
             var moreThan60Minutes = e.Hours > 0;
 

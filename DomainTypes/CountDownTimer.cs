@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BridgeTimer.DomainTypes;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Timers;
@@ -48,7 +50,7 @@ namespace BridgeTimer
 
         public event EventHandler<CurrentTimeArgs>? CurrentTime;
 
-        private Timer timer;
+        private IntervalCountingTimer timer;
         private TimeSpan totalTime;
         private TimeSpan customChangeTime;
         private bool warningGiven;
@@ -64,9 +66,9 @@ namespace BridgeTimer
             ChangeTimes = new List<(int roundNumber, int changeTime)>();
             Init(playTimeHours, playTimeMinutes, warningMoment,changeTimes, defaultChangeTime,numberOfRounds);
 #if(DEBUG)
-            timer = new Timer(100);
+            timer = new IntervalCountingTimer(100);
 #else
-            timer = new Timer(1000);
+            timer = new IntervalCountingTimer(1000);
 #endif
             timer.Elapsed += OnTimerTick;
             InitializeTimeSpans(ThresholdReached.NotSet);
@@ -261,7 +263,10 @@ namespace BridgeTimer
 
         private void OnTimerTick(object sender, ElapsedEventArgs e)
         {
-            totalTime= totalTime.SubtractSecond();
+            timer.Pause();
+            var interval = timer.GetInterval();
+            Debug.Print(interval.ToString());
+            totalTime= totalTime.SubstractMilliSeconds(interval);
             TimeSpan timeToPublish;
             var hoursInUse = totalTime.AddMinute().Hours >0;
             var eventEnded = CurrentRound > NumberOfRounds;
@@ -269,7 +274,7 @@ namespace BridgeTimer
             ThresholdReached threshold = ThresholdReached.NotSet;
             if (totalTime.AddMinute().Minutes <= 0 && !hoursInUse)
             {
-                customChangeTime = customChangeTime.SubtractSecond();
+                customChangeTime = customChangeTime.SubstractMilliSeconds(interval);
                 if (customChangeTime.AddMinute().Minutes <= 0)
                 {
                     InitializeTimeSpans(eventEnded? ThresholdReached.EventEnded:ThresholdReached.RoundStarted);
@@ -317,6 +322,8 @@ namespace BridgeTimer
                                                           timeToPublish.Seconds,
                                                           CurrentRound,
                                                           threshold));
+
+            timer.Resume();
 
         }
     }

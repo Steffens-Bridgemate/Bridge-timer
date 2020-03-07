@@ -11,9 +11,15 @@ namespace BridgeTimer
             return span.Add(TimeSpan.FromMinutes(1));
         }
 
-        public static TimeSpan SubtractSecond(this TimeSpan span)
+        //public static TimeSpan SubtractSecond(this TimeSpan span)
+        //{
+        //    return span.Subtract(TimeSpan.FromSeconds(1));
+        //}
+
+        public static TimeSpan SubstractMilliSeconds(this TimeSpan span, long milliSeconds)
         {
-            return span.Subtract(TimeSpan.FromSeconds(1));
+            var substract = TimeSpan.FromMilliseconds(milliSeconds);
+            return span.Subtract(substract);
         }
     }
 }
