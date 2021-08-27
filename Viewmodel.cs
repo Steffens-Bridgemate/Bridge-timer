@@ -452,6 +452,20 @@ namespace BridgeTimer
 
         #region Settings
 
+        public bool StartMaximized
+        {
+            get => _settings.StartMaximized;
+            set
+            {
+                if (value == _settings.StartMaximized)
+                    return;
+
+                _settings.StartMaximized = value;
+                _settings.Save();
+                OnPropertyChanged();
+            }
+        }
+
         public string? LogoPath
         {
             get
@@ -470,8 +484,6 @@ namespace BridgeTimer
             }
           
         }
-
-
 
         public string? RoundStartedLogoPath
         {
@@ -749,7 +761,6 @@ namespace BridgeTimer
         #endregion
 
         private string? _roundDescription;
-
         public string? RoundDescription
         {
             get { return _roundDescription; }
@@ -761,7 +772,6 @@ namespace BridgeTimer
         }
 
         private bool _hideControlPanel;
-
         public bool HideControlPanel
         {
             get { return _hideControlPanel; }

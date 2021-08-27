@@ -18,5 +18,8 @@ namespace BridgeTimer.Settings
 
         [Option('c', "change", Required = false,HelpText ="The time allotted to find the new table.")]
         public int? ChangeTime { get; set; }
+
+        [Option('m', "maximized", Required = false, HelpText = "Start the application maximized.")]
+        public bool? StartMaximized { get; set; }
     }
 }

@@ -7,9 +7,10 @@
     <Description>Open source, free Bridge timer</Description>
     <ApplicationIcon>bridge timer.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>1.0.0.10</AssemblyVersion>
-    <FileVersion>1.0.0.10</FileVersion>
+    <AssemblyVersion>1.0.0.11</AssemblyVersion>
+    <FileVersion>1.0.0.11</FileVersion>
     <Copyright />
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="appsettings.json" />
@@ -108,7 +109,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.6.0" />
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />

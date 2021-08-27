@@ -160,6 +160,15 @@ namespace BridgeTimer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overig.
+        /// </summary>
+        public static string Header_Misc {
+            get {
+                return ResourceManager.GetString("Header_Misc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Geluiden.
         /// </summary>
         public static string Header_Sounds {
@@ -318,6 +327,15 @@ namespace BridgeTimer.Properties {
         public static string Label_RoundStartedSound {
             get {
                 return ResourceManager.GetString("Label_RoundStartedSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starten met volledig scherm.
+        /// </summary>
+        public static string Label_StartMaximized {
+            get {
+                return ResourceManager.GetString("Label_StartMaximized", resourceCulture);
             }
         }
         

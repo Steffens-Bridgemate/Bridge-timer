@@ -150,6 +150,9 @@
   <data name="Header_Colors" xml:space="preserve">
     <value>Colors</value>
   </data>
+  <data name="Header_Misc" xml:space="preserve">
+    <value>Other</value>
+  </data>
   <data name="Header_Sounds" xml:space="preserve">
     <value>Sounds</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="Label_RoundStartedSound" xml:space="preserve">
     <value>Start of round signal:</value>
+  </data>
+  <data name="Label_StartMaximized" xml:space="preserve">
+    <value>Start maximized</value>
   </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Warn for end of round at:</value>

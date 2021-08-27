@@ -150,6 +150,9 @@
   <data name="Header_Colors" xml:space="preserve">
     <value>Couleurs</value>
   </data>
+  <data name="Header_Misc" xml:space="preserve">
+    <value>Divers</value>
+  </data>
   <data name="Header_Sounds" xml:space="preserve">
     <value>Sons</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="Label_RoundStartedSound" xml:space="preserve">
     <value>Signal de commencement:</value>
+  </data>
+  <data name="Label_StartMaximized" xml:space="preserve">
+    <value>Commencer avec plein écran</value>
   </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Avertissement de fin de tour á:</value>

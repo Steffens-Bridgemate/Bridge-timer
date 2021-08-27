@@ -141,6 +141,7 @@ namespace BridgeTimer.Settings
         public string? CustomChangeMessage { get; set; }
         public string? CustomEndOfEventMessage { get; set; }
         public List<CustomBreak> CustomBreaks { get; set; }
+        public bool StartMaximized { get; set; }
 
         #endregion
 
