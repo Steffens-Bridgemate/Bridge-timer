@@ -516,6 +516,21 @@
                 </Grid>
 
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="{Binding Source={x:Static resx:Resources.Header_Misc }}"/>
+                </TabItem.Header>
+                <UniformGrid Columns="1" Rows="5">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding StartMaximized}" VerticalContentAlignment="Center">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2.5" ScaleY="2.5"/>
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+                        <Label Content="{Binding Source={x:Static resx:Resources.Label_StartMaximized}}"/>
+                    </StackPanel>
+                </UniformGrid>
+            </TabItem>
         </TabControl>
     
     </Grid>

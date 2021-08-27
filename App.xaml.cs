@@ -114,6 +114,11 @@ namespace BridgeTimer
                         appSettings.ChangeTime = opt.ChangeTime.Value;
                         doSave=true;
                     }
+                    if(opt.StartMaximized.HasValue)
+                    {
+                        appSettings.StartMaximized = opt.StartMaximized.Value;
+                        doSave = true;
+                    }
 
                     if (doSave) appSettings.Save();
                 });

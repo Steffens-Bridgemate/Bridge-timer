@@ -150,6 +150,9 @@
   <data name="Header_Colors" xml:space="preserve">
     <value>Kleuren</value>
   </data>
+  <data name="Header_Misc" xml:space="preserve">
+    <value>Overig</value>
+  </data>
   <data name="Header_Sounds" xml:space="preserve">
     <value>Geluiden</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="Label_RoundStartedSound" xml:space="preserve">
     <value>Begin van de ronde signaal:</value>
+  </data>
+  <data name="Label_StartMaximized" xml:space="preserve">
+    <value>Starten met volledig scherm</value>
   </data>
   <data name="Label_WarningMoment" xml:space="preserve">
     <value>Waarschuwen voor einde ronde:</value>

@@ -8,7 +8,6 @@
         xmlns:resx="clr-namespace:BridgeTimer.Properties"
         mc:Ignorable="d"
         Title="{Binding Source={x:Static resx:Resources.Title}}"
-        WindowState="Normal"
         MouseDown="Window_MouseDown"
         KeyDown="Window_KeyDown"
         Name="Root"
@@ -43,16 +42,21 @@
         <local:BoolToWindowStyleConverter x:Key="windowStyleConverter"
                                           TrueValue="None"
                                           FalseValue="ThreeDBorderWindow"/>
+        <local:BoolToWindowStateConverter x:Key="windowStateConverter"
+                                          TrueValue="Maximized"
+                                          FalseValue="Normal"/>
         <local:BoolToCursorConverter x:Key="cursorConverter"
                                      TrueValue="None"
                                      FalseValue="Arrow"/>
         <converters:BoolToStringConverter x:Key="soundIconUriConverter"
                                      TrueValue="Images\nosound1.ico"
                                      FalseValue="Images\sound1.ico"/>
-       
+
         <local:ImageConverter x:Key="imageConverter"/>
-       
     </Window.Resources>
+    <Window.WindowState>
+        <Binding Path="StartMaximized" Converter="{StaticResource windowStateConverter}"/> 
+    </Window.WindowState>
     <Window.WindowStyle>
         <Binding Path="HideControlPanel" Converter="{StaticResource windowStyleConverter}"/>
     </Window.WindowStyle>
