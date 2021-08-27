@@ -60,8 +60,8 @@ Name: {app}\Sounds
 Name: {app}\Images
 
 [Files]
-Source: ..\bin\Release\netcoreapp3.0\publish\winx64\*.*; DestDir: {app}; Flags:recursesubdirs
-Source: ..\bin\Release\netcoreapp3.0\publish\winx64\BridgeTimer.exe; DestDir:{app}; Flags:sign
+Source: ..\bin\Release\netcoreapp3.1\publish\x64\*.*; DestDir: {app}; Flags:recursesubdirs
+Source: ..\bin\Release\netcoreapp3.1\publish\x64\BridgeTimer.exe; DestDir:{app}; Flags:sign
 Source: InstallerSounds\*.*;DestDir:{userdocs}\{#Name}
 
 [Icons]  
