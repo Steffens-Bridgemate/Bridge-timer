@@ -11,10 +11,10 @@
         MouseDown="Window_MouseDown"
         KeyDown="Window_KeyDown"
         Name="Root"
-        MinWidth="910"
         Width="910"
-        MinHeight="600"
+        MinWidth="300"
         Height="600"
+        MinHeight="200"
         >
     <Window.Resources>
         <local:ThresholdToColorConverter x:Key="backgroundConverter"
@@ -112,8 +112,9 @@
                 </TextBlock>
             </Viewbox>
         </UniformGrid>
-        
-        <Grid Grid.Row="2" Name="grdControlPanel"
+
+        <Viewbox Grid.Row="2">
+            <Grid Grid.Row="2" Name="grdControlPanel"
               Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -123,24 +124,37 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" 
-                    Content="{Binding Source={x:Static resx:Resources.Caption_Settings}}" 
+                <Grid.Resources>
+                    <Style TargetType="Button" x:Key="IconButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="FontSize" Value="36"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+                    </Style>
+                </Grid.Resources>
+                <Button Grid.Column="0"  Style="{StaticResource IconButtonStyle}"
+                    ToolTip="{Binding Source={x:Static resx:Resources.Caption_Settings}}"
+                        Content="&#xe713;"
                     Command="{Binding SettingsCommand}"/>
-            <Button Grid.Column="1"
-                    Content="{Binding StartOrPauseCaption}"
+                <Button Grid.Column="1"  Style="{StaticResource IconButtonStyle}"
+                        Content="{Binding StartOrPauseGlyph}"
+                    ToolTip="{Binding StartOrPauseCaption}"
                     Command="{Binding StartOrPauseCommand}"/>
             <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="+30s" Command="{Binding IncreasePlaytimeCommand}" CommandParameter="30"/>
-                <Button Content="-30s" Command="{Binding DecreasePlaytimeCommand}" CommandParameter="30"/>
+                <Button Content="+30s" Command="{Binding IncreasePlaytimeCommand}" CommandParameter="30"
+                        FontSize="32" FontWeight="Bold"/>
+                <Button Content="-30s" Command="{Binding DecreasePlaytimeCommand}" CommandParameter="30"
+                        FontSize="32" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Grid.Column="5" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Command="{Binding ToggleSoundCommand}">
-                    <Button.Content>
-                        <Image Source="{Binding IsMuted,
-                               Converter={StaticResource soundIconUriConverter}}"/>
-                    </Button.Content>
+                <Button Command="{Binding ToggleSoundCommand}"   Style="{StaticResource IconButtonStyle}"
+                        Content="{Binding SoundGlyph}">
+                    <!--<Button.Content>
+                        
+                        --><!--<Image Source="{Binding IsMuted,
+                               Converter={StaticResource soundIconUriConverter}}"/>--><!--
+                    </Button.Content>-->
                 </Button>
-                <Button Content="{Binding StopOrCloseCaption}"
+                    <Button Content="{Binding StopOrCloseGlyph}"   Style="{StaticResource IconButtonStyle}"
                         Command="{Binding StopOrCloseCommand}"/>
             </StackPanel>
             <Grid.Style>
@@ -154,7 +168,8 @@
                 </Style>
             </Grid.Style>
         </Grid>
-       
+        </Viewbox>
+
         <Viewbox x:Name="vbDigits" Stretch="Uniform"  Margin="0" Grid.Row="1" >
             <Grid>
                 <Grid.ColumnDefinitions>

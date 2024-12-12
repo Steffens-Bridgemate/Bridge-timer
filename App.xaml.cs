@@ -1,19 +1,14 @@
-﻿using BridgeTimer.Services;
-using BridgeTimer.Settings;
+﻿using BridgeTimer.Settings;
+using CommandLine;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using CommandLine;
+using TimeProvider = BridgeTimer.Services.TimeProvider;
 
 namespace BridgeTimer
 {

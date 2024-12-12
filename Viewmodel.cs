@@ -153,6 +153,8 @@ namespace BridgeTimer
                 _isStopped = true;
                 OnPropertyChanged(nameof(StartOrPauseCaption));
                 OnPropertyChanged(nameof(StopOrCloseCaption));
+                OnPropertyChanged(nameof(StartOrPauseGlyph));
+                OnPropertyChanged(nameof(StopOrCloseGlyph));
                 RoundDescription = $"{Properties.Resources.Label_Round} {e.CurrentRound}";
                 App.Current.Dispatcher.Invoke(() => CommandManager.InvalidateRequerySuggested());
                 return;
@@ -263,6 +265,8 @@ namespace BridgeTimer
 
             OnPropertyChanged(nameof(StartOrPauseCaption));
             OnPropertyChanged(nameof(StopOrCloseCaption));
+            OnPropertyChanged(nameof(StartOrPauseGlyph));
+            OnPropertyChanged(nameof(StopOrCloseGlyph));
             ShowControlPanel();
         }
 
@@ -282,6 +286,8 @@ namespace BridgeTimer
             HideControlPanel = false;
             OnPropertyChanged(nameof(StartOrPauseCaption));
             OnPropertyChanged(nameof(StopOrCloseCaption));
+            OnPropertyChanged(nameof(StartOrPauseGlyph));
+            OnPropertyChanged(nameof(StopOrCloseGlyph));
             ShowControlPanel();
         }
 
@@ -795,6 +801,7 @@ namespace BridgeTimer
                 _settings.IsMuted = value;
                 _settings.Save();
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SoundGlyph));
             }
         }
 
@@ -818,9 +825,24 @@ namespace BridgeTimer
             get => timer.RunningState == CountDownTimer.State.Started ? Properties.Resources.Caption_Pause : Properties.Resources.Caption_Start;
         }
 
+        public string StartOrPauseGlyph
+        {
+            get => timer.RunningState == CountDownTimer.State.Started ? "\ue769" : "\ue768";
+        }
+
+        public string SoundGlyph
+        {
+            get => IsMuted ? "\ue7ed" : "\uea8f";
+        }
+
         public string StopOrCloseCaption
         {
             get => _isStopped ? Properties.Resources.Caption_Close : Properties.Resources.Caption_Stop;
+        }
+
+        public string StopOrCloseGlyph
+        {
+            get => _isStopped ? "\ue894" : "\ue71a";
         }
 
         private string? timeLeft;
