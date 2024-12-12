@@ -146,14 +146,9 @@
                         FontSize="32" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Grid.Column="5" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Command="{Binding ToggleSoundCommand}"   Style="{StaticResource IconButtonStyle}"
+                    <Button Command="{Binding ToggleSoundCommand}"   Style="{StaticResource IconButtonStyle}"
                         Content="{Binding SoundGlyph}">
-                    <!--<Button.Content>
-                        
-                        --><!--<Image Source="{Binding IsMuted,
-                               Converter={StaticResource soundIconUriConverter}}"/>--><!--
-                    </Button.Content>-->
-                </Button>
+                    </Button>
                     <Button Content="{Binding StopOrCloseGlyph}"   Style="{StaticResource IconButtonStyle}"
                         Command="{Binding StopOrCloseCommand}"/>
             </StackPanel>

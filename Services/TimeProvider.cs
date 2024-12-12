@@ -6,6 +6,7 @@ namespace BridgeTimer.Services
     {
         public string GetCurrentTime()
         {
+            return System.TimeProvider.System.GetUtcNow().ToString();
             return DateTime.Now.ToLongTimeString();
         }
     }
